@@ -1,0 +1,23 @@
+JFDML JFormDesigner: "5.1.0.2.64" Java: "1.6.0_27" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :::p, par l {comp progressTxtLabel::::376:x, comp progressBar::l::376:x}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :p:28:p, comp progressTxtLabel:::p::p, space s:::p, comp progressBar:::p::p, space ::32:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "progressTxtLabel"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JProgressBar" ) {
+				name: "progressBar"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 130 )
+		} )
+	}
+}

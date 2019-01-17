@@ -1,0 +1,9 @@
+org.jlab.coda.cedit.cooldesktop
+org.jlab.coda.cedit.forms.simple
+org.jlab.coda.cedit.forms.util
+org.jlab.coda.cedit.parsers.coolparser
+org.jlab.coda.cedit.parsers.extconfig
+org.jlab.coda.cedit.system
+org.jlab.coda.cedit.system.vthread
+org.jlab.coda.cedit.test
+org.jlab.coda.cedit.util
