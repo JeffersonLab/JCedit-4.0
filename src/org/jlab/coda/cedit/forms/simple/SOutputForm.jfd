@@ -13,7 +13,7 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq l {space :::p, par l {seq {comp panel1:::::x, space :::p}, seq t {space :0:352:x, comp okButton:::p::p, space :::p, comp clearButton:::p::p, space :::p, comp cancelButton:::p::p, space :p:4:p}, seq l {space :p:8:p, comp separator1::::533:x, space :::p}, seq t {comp panel3:::::x, space :::p}, comp panel2::l:::x}}}</string>
+        <string>par l {seq l {space :::p, par l {seq {comp panel3:::::x, space :::p}, seq {comp panel1:::::x, space :::p}, seq t {space :0:357:x, comp okButton:::p::p, space :::p, comp clearButton:::p::p, space :::p, comp cancelButton:::p::p, space :p:4:p}, seq l {space :p:8:p, comp separator1::::538:x, space :::p}, comp panel2::l:::x}}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
@@ -31,11 +31,11 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq {par l {seq {space :::p, par l {seq t {comp label1:::p::p, space :::p, comp nameTextField::::335:x, space s:::p, comp label2:::p::p, space :::p, comp transportClassComboBox:::p:87:p}, seq l {comp label3:::p::p, space :0:447:x}}}, seq {space :p:42:p, comp scrollPane1::::481:x}}, space :::p}}</string>
+          <string>par l {seq {par l {seq {space :::p, par l {seq t {comp label1:::p::p, space :::p, comp nameTextField::::340:x, space s:::p, comp label2:::p::p, space :::p, comp transportClassComboBox:::p:87:p}, seq l {comp label3:::p::p, space :0:452:x}}}, seq {space :p:42:p, comp scrollPane1::::486:x}}, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq l {par b {comp transportClassComboBox::b:p::p, comp label2::b:p::p, comp label1::b:p::p, comp nameTextField::b:p::p}, space :::p, comp label3:::p::p, space :::p, comp scrollPane1::::26:x, space :::p}}</string>
+          <string>par l {seq l {par b {comp transportClassComboBox::b:p::p, comp label2::b:p::p, comp label1::b:p::p, comp nameTextField::b:p::p}, space :::p, comp label3:::p::p, space :::p, comp scrollPane1::::23:x, space :::p}}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -344,11 +344,11 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq {space :::p, par t {comp fileNameLabel:::p::p, comp FileTypeLabel:::p::p}, space :::p, par l {seq t {comp fileTypeComboBox:::p:91:p, space ::66:x, comp fileInternalBuffer:::p:84:p, space :p:28:p, comp fileSplitLabel:::p::p, space :::p, comp fileSplitSpinner:::p:106:p}, comp fileNameTextField::l::476:x}, space :::p}}</string>
+          <string>par l {seq {space :::p, comp fileNameLabel:::p::p, space :::p, par l {seq {par l {comp fileTypeComboBox::l:p:91:p, comp FileTypeLabel::l:p::p}, space :p:89:p, par l:::p {comp FileTypeLabel2:::::x, comp fileInternalBuffer:::::x}, space ::72:x, par l {comp fileSplitSpinner:::p:106:p, comp fileSplitLabel:::p::p}}, comp fileNameTextField::::481:x}, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq l {par b {comp fileNameLabel::b:p::p, comp fileNameTextField::b:p::p}, par l {seq {space s:::p, par b {comp fileSplitSpinner::b:p::p, comp fileSplitLabel::b:p::p}}, seq l {space :p:8:p, par b {comp fileTypeComboBox::b:p::p, comp FileTypeLabel::b:p::p}}, seq l {space :p:8:p, comp fileInternalBuffer:::p::p}}, space :::x}}</string>
+          <string>par l {seq l {par b {comp fileNameLabel::b:p::p, comp fileNameTextField::b:p::p}, space ::14:x, par l {seq t {comp fileSplitLabel:::p::p, space :::p, comp fileSplitSpinner:::p::p}, seq t {comp FileTypeLabel:::p::p, space :::p, comp fileTypeComboBox:::p::p}, seq t {comp FileTypeLabel2:::p::p, space :::p, comp fileInternalBuffer:::p::p}}, space :::p}}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -385,7 +385,7 @@
           <string>javax.swing.JLabel</string>
           <void method="setProperty">
            <string>text</string>
-           <string>Split x 10MByte</string>
+           <string>Split x 10MB</string>
           </void>
           <void property="name">
            <string>fileSplitLabel</string>
@@ -477,6 +477,18 @@
           </void>
          </object>
         </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JLabel</string>
+          <void method="setProperty">
+           <string>text</string>
+           <string>Internal Buffer [MB]</string>
+          </void>
+          <void property="name">
+           <string>FileTypeLabel2</string>
+          </void>
+         </object>
+        </void>
        </object>
       </void>
       <void method="add">
@@ -549,8 +561,8 @@
       <void method="setProperty">
        <string>size</string>
        <object class="java.awt.Dimension">
-        <int>555</int>
-        <int>445</int>
+        <int>560</int>
+        <int>460</int>
        </object>
       </void>
      </object>

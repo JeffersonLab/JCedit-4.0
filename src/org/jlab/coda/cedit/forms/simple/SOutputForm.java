@@ -76,6 +76,7 @@ public class SOutputForm extends JFrame {
             fileNameTextField.setEnabled(false);
             fileTypeComboBox.setEnabled(false);
             fileSplitSpinner.setEnabled(false);
+            fileInternalBuffer.setEnabled(false);
             okButton.setEnabled(false);
             clearButton.setEnabled(false);
         }
@@ -107,6 +108,7 @@ public class SOutputForm extends JFrame {
             fileNameTextField.setEnabled(false);
             fileTypeComboBox.setEnabled(false);
             fileSplitSpinner.setEnabled(false);
+            fileInternalBuffer.setEnabled(false);
             okButton.setEnabled(false);
             clearButton.setEnabled(false);
         }
@@ -162,6 +164,7 @@ public class SOutputForm extends JFrame {
         else {
         fileSplitSpinner.setValue((int)(gt.getFileSplit()/10000000));
         }
+        fileInternalBuffer.setSelectedItem(gt.getFileInternalBuffer());
         fileTypeComboBox.setSelectedItem(gt.getFileType());
 
         checkTrClass();
@@ -206,6 +209,7 @@ public class SOutputForm extends JFrame {
             fileNameTextField.setEnabled(false);
             fileNameLabel.setForeground(Color.lightGray);
             fileSplitSpinner.setEnabled(false);
+            fileInternalBuffer.setEnabled(false);
             fileSplitLabel.setForeground(Color.lightGray);
             fileTypeComboBox.setEnabled(false);
             FileTypeLabel.setForeground(Color.lightGray);
@@ -229,6 +233,7 @@ public class SOutputForm extends JFrame {
             fileNameTextField.setEnabled(true);
             fileNameLabel.setForeground(Color.black);
             fileSplitSpinner.setEnabled(true);
+            fileInternalBuffer.setEnabled(true);
             fileSplitLabel.setForeground(Color.black);
             fileTypeComboBox.setEnabled(true);
             FileTypeLabel.setForeground(Color.black);
@@ -252,6 +257,7 @@ public class SOutputForm extends JFrame {
             fileNameTextField.setEnabled(false);
             fileNameLabel.setForeground(Color.lightGray);
             fileSplitSpinner.setEnabled(false);
+            fileInternalBuffer.setEnabled(false);
             fileSplitLabel.setForeground(Color.lightGray);
             fileTypeComboBox.setEnabled(false);
             FileTypeLabel.setForeground(Color.lightGray);
@@ -291,6 +297,7 @@ public class SOutputForm extends JFrame {
         FileTypeLabel = new JLabel();
         fileTypeComboBox = new JComboBox<>();
         fileInternalBuffer = new JComboBox<>();
+        FileTypeLabel2 = new JLabel();
         separator1 = new JSeparator();
         cancelButton = new JButton();
         clearButton = new JButton();
@@ -344,17 +351,17 @@ public class SOutputForm extends JFrame {
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                                         .addComponent(label1)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(label2)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(transportClassComboBox, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
                                     .addGroup(panel1Layout.createSequentialGroup()
                                         .addComponent(label3)
-                                        .addGap(0, 447, Short.MAX_VALUE))))
+                                        .addGap(0, 452, Short.MAX_VALUE))))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)))
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)))
                         .addContainerGap())
             );
             panel1Layout.setVerticalGroup(
@@ -368,7 +375,7 @@ public class SOutputForm extends JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label3)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -480,7 +487,7 @@ public class SOutputForm extends JFrame {
             fileNameLabel.setText("Name");
 
             //---- fileSplitLabel ----
-            fileSplitLabel.setText("Split x 10MByte");
+            fileSplitLabel.setText("Split x 10MB");
 
             //---- fileSplitSpinner ----
             fileSplitSpinner.setModel(new SpinnerNumberModel(200, 0, 1000000, 1));
@@ -504,26 +511,31 @@ public class SOutputForm extends JFrame {
                 "6000"
             }));
 
+            //---- FileTypeLabel2 ----
+            FileTypeLabel2.setText("Internal Buffer [MB]");
+
             GroupLayout panel3Layout = new GroupLayout(panel3);
             panel3.setLayout(panel3Layout);
             panel3Layout.setHorizontalGroup(
                 panel3Layout.createParallelGroup()
                     .addGroup(panel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(fileNameLabel)
-                            .addComponent(FileTypeLabel))
+                        .addComponent(fileNameLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel3Layout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                .addComponent(fileInternalBuffer, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(fileSplitLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(fileNameTextField, GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addGroup(panel3Layout.createParallelGroup()
+                                    .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FileTypeLabel))
+                                .addGap(89, 89, 89)
+                                .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(FileTypeLabel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(fileInternalBuffer))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                                .addGroup(panel3Layout.createParallelGroup()
+                                    .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fileSplitLabel)))
+                            .addComponent(fileNameTextField, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
                         .addContainerGap())
             );
             panel3Layout.setVerticalGroup(
@@ -532,21 +544,21 @@ public class SOutputForm extends JFrame {
                         .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(fileNameLabel)
                             .addComponent(fileNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addGroup(panel3Layout.createParallelGroup()
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fileSplitLabel)))
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FileTypeLabel)))
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                                .addComponent(fileSplitLabel)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                                .addComponent(FileTypeLabel)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                                .addComponent(FileTypeLabel2)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(fileInternalBuffer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
             );
         }
 
@@ -568,10 +580,13 @@ public class SOutputForm extends JFrame {
                     .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
+                            .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addContainerGap())
+                        .addGroup(contentPaneLayout.createSequentialGroup()
                             .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addContainerGap())
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 352, Short.MAX_VALUE)
+                            .addGap(0, 357, Short.MAX_VALUE)
                             .addComponent(okButton)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(clearButton)
@@ -580,10 +595,7 @@ public class SOutputForm extends JFrame {
                             .addGap(4, 4, 4))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(8, 8, 8)
-                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                            .addContainerGap())
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                             .addContainerGap())
                         .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -641,6 +653,7 @@ public class SOutputForm extends JFrame {
     private JLabel FileTypeLabel;
     private JComboBox<String> fileTypeComboBox;
     private JComboBox<String> fileInternalBuffer;
+    private JLabel FileTypeLabel2;
     private JSeparator separator1;
     private JButton cancelButton;
     private JButton clearButton;
@@ -744,6 +757,7 @@ public class SOutputForm extends JFrame {
                 int d =  (Integer)fileSplitSpinner.getValue();
                 gt.setFileSplit(d*10000000L);
 
+                gt.setFileInternalBuffer(Integer.parseInt(fileInternalBuffer.getSelectedItem().toString()));
                 gt.setFileType((String) fileTypeComboBox.getSelectedItem());
                 gt.setNoLink(true);
 
@@ -817,6 +831,7 @@ public class SOutputForm extends JFrame {
 
             fileNameTextField.setText("");
             fileSplitSpinner.setValue(200);
+            fileInternalBuffer.setSelectedItem("100");
             fileTypeComboBox.setSelectedItem("coda");
         }
     }

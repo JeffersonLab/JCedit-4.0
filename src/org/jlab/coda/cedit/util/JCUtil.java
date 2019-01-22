@@ -77,6 +77,7 @@ public class JCUtil {
         sourceTransport.setEtWait(t.getEtWait());
         sourceTransport.setFileName(t.getFileName());
         sourceTransport.setFileSplit(t.getFileSplit());
+        sourceTransport.setFileInternalBuffer(t.getFileInternalBuffer());
         sourceTransport.setFileType(t.getFileType());
         sourceTransport.setmAddress(t.getmAddress());
         sourceTransport.setNoLink(t.isNoLink());

@@ -62,6 +62,7 @@ public class JCGTransport {
     private String  fileName    = "undefined";
     private String  fileType    = "coda";
     private long    fileSplit   = 20000000000l;
+    private int fileInternalBuffer = 100;
 
     private boolean noLink = false;
 
@@ -74,7 +75,7 @@ public class JCGTransport {
                         String etMethodCon, String etHostName, String etSubNet, String destinationEtCreate, int emuDirectPort,
                         int emuMaxBuffer, int emuWait, String emuSubNet, boolean emuFatPipe, String cMsgHost, int cMsgPort,
                         String cMsgNameSpace, String cMsgSubject, String cMsgType, String fileName,
-                        String fileType, long fileSplit, boolean noLink) {
+                        String fileType, long fileSplit, int fileInternalBuffer, boolean noLink) {
         this.name = name;
         this.transClass = transClass;
         this.etName = etName;
@@ -108,6 +109,7 @@ public class JCGTransport {
         this.fileName = fileName;
         this.fileType = fileType;
         this.fileSplit = fileSplit;
+        this.fileInternalBuffer = fileInternalBuffer;
         this.noLink = noLink;
     }
 
@@ -213,6 +215,14 @@ public class JCGTransport {
 
     public void setFileSplit(long fileSplit) {
         this.fileSplit = fileSplit;
+    }
+
+    public int getFileInternalBuffer() {
+        return fileInternalBuffer;
+    }
+
+    public void setFileInternalBuffer(int fileInternalBuffer) {
+        this.fileInternalBuffer = fileInternalBuffer;
     }
 
     public String getEtHostName() {
@@ -421,6 +431,7 @@ public class JCGTransport {
         if (!cMsgType.equals(getcMsgType())) return false;
 
         if (fileSplit != that.getFileSplit()) return false;
+        if (fileInternalBuffer != that.getFileInternalBuffer()) return false;
         if (noLink != that.isNoLink()) return false;
         if (fileName != null ? !fileName.equals(that.getFileName()) : that.getFileName() != null) return false;
         if (fileType != null ? !fileType.equals(that.getFileType()) : that.getFileType() != null) return false;
@@ -452,7 +463,8 @@ public class JCGTransport {
                 ", \ndestinationEtCreate='" + destinationEtCreate + '\'' +
                 ", \nfileName='" + fileName + '\'' +
                 ", \nfileType='" + fileType + '\'' +
-                ", f\nileSplit=" + fileSplit +
+                ", \nfileSplit=" + fileSplit +
+                ", \nfileInternalBf=" + fileInternalBuffer +
                 ", \nnoLink=" + noLink +
                 '}';
     }
