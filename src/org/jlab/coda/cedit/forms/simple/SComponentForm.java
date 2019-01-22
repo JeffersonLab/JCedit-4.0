@@ -757,7 +757,7 @@ public class SComponentForm extends JFrame {
                 masterRocCheckBox.setEnabled(false);
 
                 //---- buildTreadsSpinner ----
-                buildTreadsSpinner.setModel(new SpinnerNumberModel(1, 1, 3, 1));
+                buildTreadsSpinner.setModel(new SpinnerNumberModel(1, 1, 4, 1));
                 buildTreadsSpinner.addChangeListener(e -> buildThreadsSpinnerStateChanged(e));
 
                 //---- label6 ----

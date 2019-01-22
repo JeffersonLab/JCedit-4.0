@@ -264,7 +264,7 @@ public class SOutputForm extends JFrame {
         // Generated using JFormDesigner non-commercial license
         panel1 = new JPanel();
         label2 = new JLabel();
-        transportClassComboBox = new JComboBox();
+        transportClassComboBox = new JComboBox<>();
         label1 = new JLabel();
         nameTextField = new JTextField();
         label3 = new JLabel();
@@ -278,7 +278,7 @@ public class SOutputForm extends JFrame {
         etTcpPortLabel = new JLabel();
         etUdpPortLabel = new JLabel();
         etConnectionMethodLabel = new JLabel();
-        connectionMethodComboBox = new JComboBox();
+        connectionMethodComboBox = new JComboBox<>();
         etMAddressLabel = new JLabel();
         mAddressTextField = new JTextField();
         etTcpPortSpinner = new JSpinner();
@@ -289,7 +289,8 @@ public class SOutputForm extends JFrame {
         fileSplitLabel = new JLabel();
         fileSplitSpinner = new JSpinner();
         FileTypeLabel = new JLabel();
-        fileTypeComboBox = new JComboBox();
+        fileTypeComboBox = new JComboBox<>();
+        fileInternalBuffer = new JComboBox<>();
         separator1 = new JSeparator();
         cancelButton = new JButton();
         clearButton = new JButton();
@@ -312,7 +313,7 @@ public class SOutputForm extends JFrame {
             label2.setText("Type");
 
             //---- transportClassComboBox ----
-            transportClassComboBox.setModel(new DefaultComboBoxModel(new String[] {
+            transportClassComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                 "Et",
                 "File",
                 "Debug",
@@ -343,7 +344,7 @@ public class SOutputForm extends JFrame {
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                                         .addComponent(label1)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(label2)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -353,7 +354,7 @@ public class SOutputForm extends JFrame {
                                         .addGap(0, 447, Short.MAX_VALUE))))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)))
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)))
                         .addContainerGap())
             );
             panel1Layout.setVerticalGroup(
@@ -367,7 +368,7 @@ public class SOutputForm extends JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label3)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -395,7 +396,7 @@ public class SOutputForm extends JFrame {
             etConnectionMethodLabel.setText("Method");
 
             //---- connectionMethodComboBox ----
-            connectionMethodComboBox.setModel(new DefaultComboBoxModel(new String[] {
+            connectionMethodComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                 "direct",
                 "mcast"
             }));
@@ -488,10 +489,19 @@ public class SOutputForm extends JFrame {
             FileTypeLabel.setText("Type");
 
             //---- fileTypeComboBox ----
-            fileTypeComboBox.setModel(new DefaultComboBoxModel(new String[] {
+            fileTypeComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
                 "coda",
                 "binary",
                 "ascii"
+            }));
+
+            //---- fileInternalBuffer ----
+            fileInternalBuffer.setModel(new DefaultComboBoxModel<>(new String[] {
+                "100",
+                "600",
+                "1800",
+                "3000",
+                "6000"
             }));
 
             GroupLayout panel3Layout = new GroupLayout(panel3);
@@ -507,11 +517,13 @@ public class SOutputForm extends JFrame {
                         .addGroup(panel3Layout.createParallelGroup()
                             .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                                 .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addComponent(fileInternalBuffer, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
                                 .addComponent(fileSplitLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(fileNameTextField, GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                            .addComponent(fileNameTextField, GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
                         .addContainerGap())
             );
             panel3Layout.setVerticalGroup(
@@ -530,7 +542,10 @@ public class SOutputForm extends JFrame {
                                 .addGap(8, 8, 8)
                                 .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FileTypeLabel))))
+                                    .addComponent(FileTypeLabel)))
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(fileInternalBuffer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
@@ -556,7 +571,7 @@ public class SOutputForm extends JFrame {
                             .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addContainerGap())
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 370, Short.MAX_VALUE)
+                            .addGap(0, 352, Short.MAX_VALUE)
                             .addComponent(okButton)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(clearButton)
@@ -565,7 +580,7 @@ public class SOutputForm extends JFrame {
                             .addGap(4, 4, 4))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(8, 8, 8)
-                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                             .addContainerGap())
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
                             .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -599,7 +614,7 @@ public class SOutputForm extends JFrame {
     // Generated using JFormDesigner non-commercial license
     private JPanel panel1;
     private JLabel label2;
-    private JComboBox transportClassComboBox;
+    private JComboBox<String> transportClassComboBox;
     private JLabel label1;
     private JTextField nameTextField;
     private JLabel label3;
@@ -613,7 +628,7 @@ public class SOutputForm extends JFrame {
     private JLabel etTcpPortLabel;
     private JLabel etUdpPortLabel;
     private JLabel etConnectionMethodLabel;
-    private JComboBox connectionMethodComboBox;
+    private JComboBox<String> connectionMethodComboBox;
     private JLabel etMAddressLabel;
     private JTextField mAddressTextField;
     private JSpinner etTcpPortSpinner;
@@ -624,7 +639,8 @@ public class SOutputForm extends JFrame {
     private JLabel fileSplitLabel;
     private JSpinner fileSplitSpinner;
     private JLabel FileTypeLabel;
-    private JComboBox fileTypeComboBox;
+    private JComboBox<String> fileTypeComboBox;
+    private JComboBox<String> fileInternalBuffer;
     private JSeparator separator1;
     private JButton cancelButton;
     private JButton clearButton;

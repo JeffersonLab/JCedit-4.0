@@ -572,7 +572,7 @@
              <object class="javax.swing.SpinnerNumberModel">
               <object idref="Integer1"/>
               <object idref="Integer1"/>
-              <int>3</int>
+              <int>4</int>
               <object idref="Integer1"/>
              </object>
             </void>
