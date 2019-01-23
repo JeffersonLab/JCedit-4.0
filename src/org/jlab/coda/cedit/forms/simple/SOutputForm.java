@@ -164,7 +164,7 @@ public class SOutputForm extends JFrame {
         else {
         fileSplitSpinner.setValue((int)(gt.getFileSplit()/10000000));
         }
-        fileInternalBuffer.setSelectedItem(gt.getFileInternalBuffer());
+        fileInternalBuffer.setSelectedItem(String.valueOf(gt.getFileInternalBuffer()));
         fileTypeComboBox.setSelectedItem(gt.getFileType());
 
         checkTrClass();
