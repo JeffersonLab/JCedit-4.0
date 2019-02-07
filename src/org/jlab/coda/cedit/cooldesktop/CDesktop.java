@@ -1892,6 +1892,7 @@ public class CDesktop extends JFrame {
         // update component with the possible user edits of the configuration files ( .dat and .xml files)
         // roc configure updates .dat file
         if(type.equals(ACodaType.ROC.name()) ||
+                type.equals(ACodaType.USR.name()) ||
                 type.equals(ACodaType.TS.name()) ||
                 type.equals(ACodaType.GT.name())){
             RocConfigReader rd = new RocConfigReader(runType, com.getName());

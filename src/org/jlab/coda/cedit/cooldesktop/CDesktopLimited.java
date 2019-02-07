@@ -30,7 +30,6 @@ import org.jlab.coda.cedit.system.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -122,6 +121,7 @@ public class CDesktopLimited extends JFrame {
         // update component with the possible user edits of the configuration files ( .dat and .xml files)
         // roc configure updates .dat file
         if(type.equals(ACodaType.ROC.name()) ||
+                type.equals(ACodaType.USR.name()) ||
                 type.equals(ACodaType.TS.name()) ||
                 type.equals(ACodaType.GT.name())){
             RocConfigReader rd = new RocConfigReader(runType, com.getName());

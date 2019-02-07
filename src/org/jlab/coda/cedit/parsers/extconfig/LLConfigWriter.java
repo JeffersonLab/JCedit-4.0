@@ -177,6 +177,7 @@ public class LLConfigWriter {
                 fileName = filePath + ec.getName() + ".xml";
 
                 if (ec.getType().equals(ACodaType.ROC.name()) ||
+                        ec.getType().equals(ACodaType.USR.name()) ||
                         ec.getType().equals(ACodaType.GT.name()) ||
                         ec.getType().equals(ACodaType.TS.name())) {
                     createRocConfigFile(ec.getName());
