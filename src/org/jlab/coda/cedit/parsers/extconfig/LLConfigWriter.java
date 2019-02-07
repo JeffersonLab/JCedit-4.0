@@ -347,6 +347,7 @@ public class LLConfigWriter {
         return out.toString();
     }
 
+
     private String writeModule(JCGComponent cmp) {
         StringBuilder out = new StringBuilder();
         JCGModule md;
