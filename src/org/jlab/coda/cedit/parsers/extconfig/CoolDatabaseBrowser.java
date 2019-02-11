@@ -492,6 +492,7 @@ public class CoolDatabaseBrowser {
                     opout.write("   <cool:hasName>" + gc.getName() + "_option</cool:hasName>\n");
 
                     if (gc.getType().equals(ACodaType.ROC.name()) ||
+                            gc.getType().equals(ACodaType.USR.name()) ||
                             gc.getType().equals(ACodaType.GT.name()) ||
                             gc.getType().equals(ACodaType.TS.name())) {
                         opout.write("   <cool:hasConfigFile>" + gc.getName() + ".dat</cool:hasConfigFile>\n");
