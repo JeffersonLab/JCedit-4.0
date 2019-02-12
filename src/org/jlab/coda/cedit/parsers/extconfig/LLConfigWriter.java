@@ -554,7 +554,6 @@ public class LLConfigWriter {
 
                 int group = 0;
 
-
                 out.write("name                  = " + cmp.getName() + "\n");
                 out.write("type                  = " + cmp.getType() + "\n");
                 out.write("priority              = " + cmp.getPriority() + "\n");
@@ -568,14 +567,12 @@ public class LLConfigWriter {
                 } else {
                     for (JCGLink l : cmp.getLnks()) {
 
-                        System.out.println("DDD " + cmp.getName() + " " + l.getName());
-//                    for(JCGTransport tt:DrawingCanvas.getComp(l.getDestinationComponentName()).getTrnsports()) {
-                        if (l.getDestinationComponentName() != null && _compMap.get(l.getDestinationComponentName()).getTrnsports() != null) {
+                        if (l.getDestinationComponentName() != null &&
+                                _compMap.get(l.getDestinationComponentName()).getTrnsports() != null) {
 
                             for (JCGChannel ch : _compDat.get(l.getSourceComponentName()).getoChannels().values()) {
                                 group = ch.getGroup();
                             }
-
 
                             for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTrnsports()) {
                                 if (tt.getName().equals(l.getDestinationTransportName())) {
@@ -616,11 +613,8 @@ public class LLConfigWriter {
                         if (breakFlag) break;
                     }
                 }
+
             } else if (cmp.getType().equals(ACodaType.USR.name()))
-
-
-                /////////////////////////////
-
                 for (ExternalConfig ec : _compDat.values()) {
                     if (ec.getName().equals(cmp.getName())) {
                         int nl = ec.getiChannels().size();
@@ -641,42 +635,19 @@ public class LLConfigWriter {
                                     out.write("subnet                = " + tr.getEtSubNet() + "\n");
                                     out.write("wait                 = " + tr.getEtWait() + "\n");
                                 } else if (tr.getTransClass().equals("EmuSocket")) {
-                                    if (tr.getName().equals((cName + "_transport"))) {
-                                        out.append("     <client name=\"" + tr.getName() + "\" " +
-                                                "class=\"Emu\" " +
-                                                "port=\"" + tr.getEmuDirectPort() + "\" " +
-                                                "/>\n\n");
-                                    } else {
-                                        out.append("     <server name=\"" + tr.getName() + "\" " +
-                                                "class=\"Emu\" " +
-                                                "/>\n\n");
-                                    }
-                                } else if (tr.getTransClass().equals("cMsg")) {
-                                    String udl = "platform";
-                                    if (!tr.getcMsgHost().equals("platform")) {
-                                        udl = "cMsg://" + tr.getcMsgHost() + ":" + tr.getcMsgPort() + "/cMsg/" + tr.getcMsgNameSpace();
-                                    }
-                                    out.append("     <server name=\"" + tr.getName() + "\" " +
-                                            "class=\"Cmsg\" " +
-                                            "udl=\"" + udl + "\" " +
-                                            "/>\n\n");
+                                    out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
+                                    out.write("emuNet                = " + tr.getEmuSubNet() + "\n");
+                                    out.write("emuMaxBufferSize      = " + tr.getEmuMaxBuffer() + "\n");
+                                    out.write("emuTimeOut            = " + tr.getEmuWait() + "\n");
                                 } else if (tr.getTransClass().equals("File")) {
-
-                                    out.append("     <server name=\"" + tr.getName() + "\" " +
-                                            "class=\"File\" " +
-                                            "/>\n\n");
+                                    out.write("dataFile              = " + tr.getFileName() + "\n");
+                                    out.write("fileType              = " + tr.getFileType() + "\n");
                                 }
                                 tpNames.add(tName);
                             }
                         }
-
-
                     }
                 }
-
-
-/////////////////////////////
-
 
             out.close();
 
