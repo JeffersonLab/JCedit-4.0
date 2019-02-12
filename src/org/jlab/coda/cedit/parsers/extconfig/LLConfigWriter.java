@@ -545,75 +545,178 @@ public class LLConfigWriter {
                 break;
             }
         }
-
         if(cmp==null)  return false;
-
-        int group = 0;
-
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
 
-            out.write("name                  = " + cmp.getName() + "\n");
-            out.write("type                  = " + cmp.getType() + "\n");
-            out.write("priority              = " + cmp.getPriority() + "\n");
-            out.write("code                  = " + cmp.createCode() + "\n");
-            out.write("isMaster              = " + cmp.isMaster() + "\n");
-            boolean breakFlag = false;
-            if (cmp.getLnks().isEmpty()) {
-                out.write("output                = None \n");
+        BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
 
-            } else {
-                for (JCGLink l : cmp.getLnks()) {
+            if (cmp.getType().equals(ACodaType.ROC.name())) {
 
+                int group = 0;
+
+
+
+                out.write("name                  = " + cmp.getName() + "\n");
+                out.write("type                  = " + cmp.getType() + "\n");
+                out.write("priority              = " + cmp.getPriority() + "\n");
+                out.write("code                  = " + cmp.createCode() + "\n");
+                out.write("isMaster              = " + cmp.isMaster() + "\n");
+                boolean breakFlag = false;
+
+                if (cmp.getLnks().isEmpty()) {
+                    out.write("output                = None \n");
+
+                } else {
+                    for (JCGLink l : cmp.getLnks()) {
+
+                        System.out.println("DDD " + cmp.getName() + " " + l.getName());
 //                    for(JCGTransport tt:DrawingCanvas.getComp(l.getDestinationComponentName()).getTrnsports()) {
-                    if (l.getDestinationComponentName() != null && _compMap.get(l.getDestinationComponentName()).getTrnsports() != null) {
+                        if (l.getDestinationComponentName() != null && _compMap.get(l.getDestinationComponentName()).getTrnsports() != null) {
 
-                        for (JCGChannel ch : _compDat.get(l.getSourceComponentName()).getoChannels().values()) {
-                          group = ch.getGroup();
-                        }
+                            for (JCGChannel ch : _compDat.get(l.getSourceComponentName()).getoChannels().values()) {
+                                group = ch.getGroup();
+                            }
 
 
-                        for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTrnsports()) {
-                            if (tt.getName().equals(l.getDestinationTransportName())) {
-                                out.write("output                = " + tt.getTransClass() + "\n");
+                            for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTrnsports()) {
+                                if (tt.getName().equals(l.getDestinationTransportName())) {
+                                    out.write("output                = " + tt.getTransClass() + "\n");
 
-                                if (tt.getTransClass().equals("Et")) {
-                                    out.write("emuName               = " + l.getDestinationComponentName() + "\n");
-                                    out.write("etName                = " + tt.getEtName() + "\n");
-                                    if (tt.getEtMethodCon().equals("direct")) {
-                                        out.write("etHost                = " + tt.getEtHostName() + "\n");
-                                        out.write("etPort                = " + tt.getEtTcpPort() + "\n");
-                                        out.write("etGroup               = " + group + "\n");
-                                    } else if (tt.getEtMethodCon().equals("mcast")) {
-                                        out.write("etHost                = " + tt.getmAddress() + "\n");
-                                        out.write("etPort                = " + tt.getEtUdpPort() + "\n");
-                                        out.write("etGroup               = " + group + "\n");
+                                    if (tt.getTransClass().equals("Et")) {
+                                        out.write("emuName               = " + l.getDestinationComponentName() + "\n");
+                                        out.write("etName                = " + tt.getEtName() + "\n");
+                                        if (tt.getEtMethodCon().equals("direct")) {
+                                            out.write("etHost                = " + tt.getEtHostName() + "\n");
+                                            out.write("etPort                = " + tt.getEtTcpPort() + "\n");
+                                            out.write("etGroup               = " + group + "\n");
+                                        } else if (tt.getEtMethodCon().equals("mcast")) {
+                                            out.write("etHost                = " + tt.getmAddress() + "\n");
+                                            out.write("etPort                = " + tt.getEtUdpPort() + "\n");
+                                            out.write("etGroup               = " + group + "\n");
+                                        }
+
+                                    } else if (tt.getTransClass().equals("EmuSocket")) {
+                                        out.write("emuName               = " + l.getDestinationComponentName() + "\n");
+                                        out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
+                                        out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
+                                        out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
+                                        out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
+
+                                    } else if (tt.getTransClass().equals("File")) {
+                                        out.write("dataFile              = " + tt.getFileName() + "\n");
+                                        out.write("fileType              = " + tt.getFileType() + "\n");
+
+                                    } else if (tt.getTransClass().equals("None") ||
+                                            tt.getTransClass().equals("Debug")) {
                                     }
-
-                                } else if (tt.getTransClass().equals("EmuSocket")) {
-                                    out.write("emuName               = " + l.getDestinationComponentName() + "\n");
-                                    out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
-                                    out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
-                                    out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
-                                    out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
-
-                                } else if (tt.getTransClass().equals("File")) {
-                                    out.write("dataFile              = " + tt.getFileName() + "\n");
-                                    out.write("fileType              = " + tt.getFileType() + "\n");
-
-                                } else if (tt.getTransClass().equals("None") ||
-                                        tt.getTransClass().equals("Debug")) {
+                                    breakFlag = true;
+                                    break;
                                 }
-                                breakFlag = true;
-                                break;
                             }
                         }
+                        if (breakFlag) break;
                     }
-                    if (breakFlag) break;
                 }
-            }
+            } else if (cmp.getType().equals(ACodaType.USR.name()))
 
-            out.close();
+
+            /////////////////////////////
+
+                for (ExternalConfig ec : _compDat.values()) {
+                if (ec.getName().equals(cmp.getName())){
+                    int nl = ec.getiChannels().size();
+                    ArrayList<String> tpNames = new ArrayList<>();
+                    for (JCGTransport tr : ec.getTransports()) {
+                        // avoid writing the same transport twice.
+                        String tName = tr.getName();
+                        if (!tpNames.contains(tName)) {
+
+                            if (tr.getTransClass().equals("Et")) {
+                                out.write("emuName               = " + tr.getEtName() + "\n");
+                                out.write("etHost                = " + tt.getmAddress() + "\n");
+                                out.write("etPort                = " + tt.getEtUdpPort() + "\n");
+                                out.write("etGroup               = " + group + "\n");
+
+                                if (tr.isEtCreate()) {
+                                    out.append("     <server name=\"" + tr.getName() + "\" " +
+                                            "class=\"Et\" " +
+                                            "etName=\"" + tr.getEtName() + "\" " +
+                                            "create=\""+ tr.getDestinationEtCreate()+ "\" " +
+                                            "uPort=\"" + tr.getEtUdpPort() + "\" " +
+                                            "port=\"" + tr.getEtTcpPort() + "\" " +
+                                            "mAddr=\"" + tr.getmAddress() + "\" " +
+                                            "eventNum=\"" + tr.getEtEventNum() + "\" " +
+                                            "eventSize=\"" + tr.getEtEventSize() + "\" " +
+                                            "groups=\"" + nl + "\" " +
+//                        "wait=\"" + tr.getEtWait() + "\" " +
+                                            "/>\n\n");
+
+                                } else {
+                                    if (tr.getEtSubNet().equals("undefined") || tr.getEtSubNet().equals("")) {
+                                        out.append("     <server name=\"" + tr.getName() + "\" " +
+                                                "class=\"Et\" " +
+                                                "etName=\"" + tr.getEtName() + "\" " + "" +
+                                                "method=\"" + tr.getEtMethodCon() + "\" " +
+                                                "host=\"" + tr.getEtHostName() + "\" " +
+                                                "port=\"" + tr.getEtTcpPort() + "\" " +
+                                                "uPort=\"" + tr.getEtUdpPort() + "\" " +
+                                                "wait=\"" + tr.getEtWait() + "\"" +
+                                                "/>\n\n");
+                                    } else {
+                                        out.append("     <server name=\"" + tr.getName() + "\" " +
+                                                "class=\"Et\" " +
+                                                "etName=\"" + tr.getEtName() + "\" " + "" +
+                                                "method=\"" + tr.getEtMethodCon() + "\" " +
+                                                "host=\"" + tr.getEtHostName() + "\" " +
+                                                "port=\"" + tr.getEtTcpPort() + "\" " +
+                                                "uPort=\"" + tr.getEtUdpPort() + "\" " +
+                                                "subnet=\"" + tr.getEtSubNet() + "\" " +
+                                                "wait=\"" + tr.getEtWait() + "\"" +
+                                                "/>\n\n");
+                                    }
+
+                                }
+
+                            }
+
+                        } else if (tr.getTransClass().equals("EmuSocket")) {
+                            if (tr.getName().equals((cName + "_transport"))) {
+                                out.append("     <client name=\"" + tr.getName() + "\" " +
+                                        "class=\"Emu\" " +
+                                        "port=\"" + tr.getEmuDirectPort() + "\" " +
+                                        "/>\n\n");
+                            } else {
+                                out.append("     <server name=\"" + tr.getName() + "\" " +
+                                        "class=\"Emu\" " +
+                                        "/>\n\n");
+                            }
+                        } else if (tr.getTransClass().equals("cMsg")) {
+                            String udl = "platform";
+                            if (!tr.getcMsgHost().equals("platform")) {
+                                udl = "cMsg://" + tr.getcMsgHost() + ":" + tr.getcMsgPort() + "/cMsg/" + tr.getcMsgNameSpace();
+                            }
+                            out.append("     <server name=\"" + tr.getName() + "\" " +
+                                    "class=\"Cmsg\" " +
+                                    "udl=\"" + udl + "\" " +
+                                    "/>\n\n");
+                        } else if (tr.getTransClass().equals("File")) {
+
+                            out.append("     <server name=\"" + tr.getName() + "\" " +
+                                    "class=\"File\" " +
+                                    "/>\n\n");
+                        }
+                            tpNames.add(tName);
+                        }
+                    }
+
+
+                }
+                }
+
+/////////////////////////////
+
+
+                out.close();
 
         } catch (IOException e) {
             b = false;
