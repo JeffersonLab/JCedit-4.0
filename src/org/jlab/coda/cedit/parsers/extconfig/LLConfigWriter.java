@@ -624,13 +624,12 @@ public class LLConfigWriter {
                             String tName = tr.getName();
                             String io;
                             if(tName.startsWith(ec.getName())){
-                               io = "input";
+                               io = "input ";
                             } else {
                                 io = "output";
                             }
                             if (!tpNames.contains(tName)) {
-
-                                out.write("\n"+io+" transport class = " + tr.getTransClass() + "\n");
+                                out.write(io+" transport class = " + tr.getTransClass() + "\n");
 
                                 switch (tr.getTransClass()) {
                                     case "Et":
