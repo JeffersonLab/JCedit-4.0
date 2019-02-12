@@ -622,26 +622,38 @@ public class LLConfigWriter {
                         for (JCGTransport tr : ec.getTransports()) {
                             // avoid writing the same transport twice.
                             String tName = tr.getName();
+                            String io;
+                            if(tName.startsWith(ec.getName())){
+                               io = "input";
+                            } else {
+                                io = "output";
+                            }
                             if (!tpNames.contains(tName)) {
 
-                                if (tr.getTransClass().equals("Et")) {
-                                    out.write("emuName               = " + tr.getEtName() + "\n");
-                                    out.write("etHost                = " + tr.getmAddress() + "\n");
-                                    out.write("etPort                = " + tr.getEtTcpPort() + "\n");
-                                    out.write("etUdpPort             = " + tr.getEtUdpPort() + "\n");
-                                    out.write("eventNum              = " + tr.getEtEventNum() + "\n");
-                                    out.write("eventSize             = " + tr.getEtEventSize() + "\n");
-                                    out.write("method                = " + tr.getEtMethodCon() + "\n");
-                                    out.write("subnet                = " + tr.getEtSubNet() + "\n");
-                                    out.write("wait                 = " + tr.getEtWait() + "\n");
-                                } else if (tr.getTransClass().equals("EmuSocket")) {
-                                    out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
-                                    out.write("emuNet                = " + tr.getEmuSubNet() + "\n");
-                                    out.write("emuMaxBufferSize      = " + tr.getEmuMaxBuffer() + "\n");
-                                    out.write("emuTimeOut            = " + tr.getEmuWait() + "\n");
-                                } else if (tr.getTransClass().equals("File")) {
-                                    out.write("dataFile              = " + tr.getFileName() + "\n");
-                                    out.write("fileType              = " + tr.getFileType() + "\n");
+                                out.write("\n"+io+" transport class = " + tr.getTransClass() + "\n");
+
+                                switch (tr.getTransClass()) {
+                                    case "Et":
+                                        out.write("emuName                = " + tr.getEtName() + "\n");
+                                        out.write("etHost                 = " + tr.getmAddress() + "\n");
+                                        out.write("etPort                 = " + tr.getEtTcpPort() + "\n");
+                                        out.write("etUdpPort              = " + tr.getEtUdpPort() + "\n");
+                                        out.write("eventNum               = " + tr.getEtEventNum() + "\n");
+                                        out.write("eventSize              = " + tr.getEtEventSize() + "\n");
+                                        out.write("method                 = " + tr.getEtMethodCon() + "\n");
+                                        out.write("subnet                 = " + tr.getEtSubNet() + "\n");
+                                        out.write("wait                   = " + tr.getEtWait() + "\n");
+                                        break;
+                                    case "EmuSocket":
+                                        out.write("emuPort                = " + tr.getEmuDirectPort() + "\n");
+                                        out.write("emuNet                 = " + tr.getEmuSubNet() + "\n");
+                                        out.write("emuMaxBufferSize       = " + tr.getEmuMaxBuffer() + "\n");
+                                        out.write("emuTimeOut             = " + tr.getEmuWait() + "\n");
+                                        break;
+                                    case "File":
+                                        out.write("dataFile               = " + tr.getFileName() + "\n");
+                                        out.write("fileType               = " + tr.getFileType() + "\n");
+                                        break;
                                 }
                                 tpNames.add(tName);
                             }
