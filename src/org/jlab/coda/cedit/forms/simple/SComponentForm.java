@@ -150,6 +150,7 @@ public class SComponentForm extends JFrame {
         }
 
         switch(ACodaType.getEnum(comp.getType())){
+            case USR:
             case SLC:
             case WNC:
             case FCS:
@@ -173,7 +174,6 @@ public class SComponentForm extends JFrame {
                 label4.setEnabled(false);
                 label6.setEnabled(false);
                 break;
-            case USR:
             case ER:
             case PEB:
             case SEB:
