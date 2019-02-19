@@ -63,15 +63,15 @@ public class JCGComponent {
     @XmlElementWrapper(name = "links")
     @XmlElement(name="link")
     private Set<JCGLink> links
-            = Collections.synchronizedSet(new HashSet<JCGLink>());
+            = Collections.synchronizedSet(new HashSet<>());
     @XmlElementWrapper(name = "transports")
     @XmlElement(name="transport")
     private Set<JCGTransport> transports
-            = Collections.synchronizedSet(new HashSet<JCGTransport>());
+            = Collections.synchronizedSet(new HashSet<>());
     @XmlElementWrapper(name = "processes")
     @XmlElement(name="process")
     private Set<JCGProcess> processes
-            = Collections.synchronizedSet(new HashSet<JCGProcess>());
+            = Collections.synchronizedSet(new HashSet<>());
     private BufferedImage                          image;
 
     public JCGComponent(){

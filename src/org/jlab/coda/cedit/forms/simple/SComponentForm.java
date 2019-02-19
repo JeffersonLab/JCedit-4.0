@@ -57,6 +57,7 @@ public class SComponentForm extends JFrame {
     private boolean p_isRunData;
     private boolean p_isTsCheck;
     private boolean p_isSparsify;
+    private boolean p_isLittleEndian;
     private int p_tsSlop;
     private int p_buildThreads;
 
@@ -70,6 +71,7 @@ public class SComponentForm extends JFrame {
     private boolean _config_update = false;
     private boolean _rundata_update = false;
     private boolean _sparsify_update = false;
+    private boolean _littleEndian_update = false;
     private boolean _ts_update = false;
 
     public SComponentForm(DrawingCanvas canvas, JCGComponent comp, boolean editable) {
@@ -148,10 +150,8 @@ public class SComponentForm extends JFrame {
         }
 
         switch(ACodaType.getEnum(comp.getType())){
-            case USR:
             case SLC:
             case WNC:
-            case ER:
             case FCS:
             case FILE:
                 Rol1Label.setForeground(Color.lightGray);
@@ -169,9 +169,12 @@ public class SComponentForm extends JFrame {
                 tsSlopSpinner.setEnabled(false);
                 buildTreadsSpinner.setEnabled(false);
                 sparsifyCheckBox.setEnabled(false);
+                endianCheckBox.setEnabled(false);
                 label4.setEnabled(false);
                 label6.setEnabled(false);
                 break;
+            case USR:
+            case ER:
             case PEB:
             case SEB:
             case EB:
@@ -203,12 +206,28 @@ public class SComponentForm extends JFrame {
                         tsCheckBox.setSelected(false);
                         p_isTsCheck = false;
                     }
+
                     if(m.isSparsify()) {
                         sparsifyCheckBox.setSelected(true);
                         p_isSparsify = true;
                     } else {
                         sparsifyCheckBox.setSelected(false);
                         p_isSparsify = false;
+                    }
+                    // endiannes
+                    endianCheckBox.setSelected(false);
+                    p_isLittleEndian = false;
+                    if(m.getChnnels().size() <=0 ){
+                        JCGChannel c = new JCGChannel();
+                        m.addChnnel(c);
+                    } else {
+                        for (JCGChannel channel : m.getChnnels()) {
+                            if (channel.getEndian().equals("little")) {
+                                endianCheckBox.setSelected(true);
+                                p_isLittleEndian = true;
+                                break;
+                            }
+                        }
                     }
                     tsSlopSpinner.setValue(m.getTsSlop());
                     p_tsSlop = m.getTsSlop();
@@ -224,6 +243,7 @@ public class SComponentForm extends JFrame {
                 tsSlopSpinner.setEnabled(false);
                 buildTreadsSpinner.setEnabled(false);
                 sparsifyCheckBox.setEnabled(false);
+                endianCheckBox.setEnabled(false);
                 masterRocCheckBox.setEnabled(true);
                 label4.setEnabled(false);
                 label6.setEnabled(false);
@@ -245,6 +265,7 @@ public class SComponentForm extends JFrame {
             processComboBox.setEnabled(false);
             runDataCheckBox.setEnabled(false);
             sparsifyCheckBox.setEnabled(false);
+            endianCheckBox.setEnabled(false);
             tsCheckBox.setEnabled(false);
             tsSlopSpinner.setEnabled(false);
             buildTreadsSpinner.setEnabled(false);
@@ -390,9 +411,32 @@ public class SComponentForm extends JFrame {
             if(tsCheckBox.isEnabled()){
                 component.getModule().setTsCheck(tsCheckBox.isSelected());
             }
+
             if(sparsifyCheckBox.isEnabled()){
                 component.getModule().setSparsify(sparsifyCheckBox.isSelected());
             }
+
+            if (endianCheckBox.isEnabled()) {
+                if(endianCheckBox.isSelected()) {
+                    if (component.getModule().getChnnels().size() <=0){
+                        JCGChannel c = new JCGChannel();
+                        component.getModule().addChnnel(c);
+                    }
+                    for (JCGChannel channel : component.getModule().getChnnels()) {
+                        channel.setEndian("little");
+                    }
+                } else {
+                    if (component.getModule().getChnnels().size() <=0){
+                        JCGChannel c = new JCGChannel();
+                        component.getModule().addChnnel(c);
+                    }
+                    for (JCGChannel channel : component.getModule().getChnnels()) {
+                        channel.setEndian("big");
+                    }
+
+                }
+            }
+
             if(tsSlopSpinner.isEnabled()){
                 component.getModule().setTsSlop((Integer)tsSlopSpinner.getValue());
             }
@@ -517,12 +561,20 @@ public class SComponentForm extends JFrame {
         okAllButton.setEnabled(true);
         sparsifyCheckBox.setBackground(Color.YELLOW);
         _sparsify_update = true;
+
     }
 
     private void tsCheckBoxMouseClicked(MouseEvent e) {
         okAllButton.setEnabled(true);
         tsCheckBox.setBackground(Color.YELLOW);
         _ts_update = true;
+    }
+
+    private void endianCheckBoxMouseClicked(MouseEvent e) {
+        okAllButton.setEnabled(true);
+        endianCheckBox.setBackground(Color.YELLOW);
+        _littleEndian_update = true;
+
     }
 
     private void initComponents() {
@@ -564,6 +616,7 @@ public class SComponentForm extends JFrame {
         masterRocCheckBox = new JCheckBox();
         buildTreadsSpinner = new JSpinner();
         label6 = new JLabel();
+        endianCheckBox = new JCheckBox();
         okButton = new JButton();
         clearButton = new JButton();
         cancelButton = new JButton();
@@ -763,6 +816,15 @@ public class SComponentForm extends JFrame {
                 //---- label6 ----
                 label6.setText("Threads");
 
+                //---- endianCheckBox ----
+                endianCheckBox.setText("Little-endian");
+                endianCheckBox.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        endianCheckBoxMouseClicked(e);
+                    }
+                });
+
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
                 contentPanelLayout.setHorizontalGroup(
@@ -777,7 +839,7 @@ public class SComponentForm extends JFrame {
                                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                                     .addComponent(Rol1Label)
                                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(Rol1TextField, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
+                                                    .addComponent(Rol1TextField))
                                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                                     .addGroup(contentPanelLayout.createParallelGroup()
                                                         .addComponent(label1)
@@ -788,12 +850,12 @@ public class SComponentForm extends JFrame {
                                                             .addComponent(prioritySpinner, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
                                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                             .addComponent(masterRocCheckBox)
-                                                            .addGap(0, 180, Short.MAX_VALUE))
-                                                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)))
+                                                            .addGap(0, 0, Short.MAX_VALUE))
+                                                        .addComponent(nameTextField)))
                                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                                     .addComponent(Rol2Label)
                                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(Rol2TextField, GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)))
+                                                    .addComponent(Rol2TextField)))
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(contentPanelLayout.createParallelGroup()
                                                 .addGroup(contentPanelLayout.createSequentialGroup()
@@ -815,7 +877,7 @@ public class SComponentForm extends JFrame {
                                         .addGroup(GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
                                             .addComponent(configFileLabel)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(configFileTextField, GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                                            .addComponent(configFileTextField)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(label2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)))
                                     .addGap(12, 12, 12))
@@ -831,9 +893,11 @@ public class SComponentForm extends JFrame {
                                             .addComponent(tsSlopSpinner, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(label4)
-                                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(endianCheckBox)
+                                            .addContainerGap(18, Short.MAX_VALUE))
                                         .addGroup(contentPanelLayout.createSequentialGroup()
-                                            .addComponent(tsCheckBox, GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                                            .addComponent(tsCheckBox, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                                             .addGap(18, 18, 18)
                                             .addComponent(buildTreadsSpinner, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -844,7 +908,7 @@ public class SComponentForm extends JFrame {
                                         .addComponent(configFileLabel2)
                                         .addComponent(label3, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                                    .addComponent(scrollPane1)
                                     .addContainerGap())))
                 );
                 contentPanelLayout.setVerticalGroup(
@@ -903,7 +967,8 @@ public class SComponentForm extends JFrame {
                                     .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(sparsifyCheckBox)
                                         .addComponent(tsSlopSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label4)))
+                                        .addComponent(label4)
+                                        .addComponent(endianCheckBox)))
                                 .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                 );
             }
@@ -929,7 +994,7 @@ public class SComponentForm extends JFrame {
             dialogPaneLayout.setHorizontalGroup(
                 dialogPaneLayout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, dialogPaneLayout.createSequentialGroup()
-                        .addContainerGap(320, Short.MAX_VALUE)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(okButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(okAllButton)
@@ -939,7 +1004,7 @@ public class SComponentForm extends JFrame {
                         .addComponent(cancelButton)
                         .addContainerGap())
                     .addComponent(contentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(separator1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+                    .addComponent(separator1, GroupLayout.Alignment.TRAILING)
             );
             dialogPaneLayout.setVerticalGroup(
                 dialogPaneLayout.createParallelGroup()
@@ -1014,6 +1079,7 @@ public class SComponentForm extends JFrame {
     private JCheckBox masterRocCheckBox;
     private JSpinner buildTreadsSpinner;
     private JLabel label6;
+    private JCheckBox endianCheckBox;
     private JButton okButton;
     private JButton clearButton;
     private JButton cancelButton;
@@ -1126,6 +1192,7 @@ public class SComponentForm extends JFrame {
             runDataCheckBox.setSelected(false);
             tsCheckBox.setSelected(true);
             sparsifyCheckBox.setSelected(false);
+            endianCheckBox.setSelected(false);
             tsSlopSpinner.setValue(2);
             buildTreadsSpinner.setValue(2);
         }
@@ -1215,6 +1282,15 @@ public class SComponentForm extends JFrame {
                         if(_rundata_update) c.getModule().setRunData(component.getModule().isRunData());
                         if(_ts_update) c.getModule().setTsCheck(component.getModule().isTsCheck());
                         if(_sparsify_update) c.getModule().setSparsify(component.getModule().isSparsify());
+
+                        if(_littleEndian_update) {
+                            for (JCGChannel channel: c.getModule().getChnnels()){
+                                for(JCGChannel ch: component.getModule().getChnnels()){
+                                        channel.setEndian(ch.getEndian());
+                                }
+                            }
+                        }
+
                         if(_tsSlop_update) c.getModule().setTsSlop(component.getModule().getTsSlop());
                         if(_buildThreads_update) c.getModule().setThreads(component.getModule().getThreads());
 
@@ -1236,6 +1312,16 @@ public class SComponentForm extends JFrame {
                         if(_rundata_update) c.getModule().setRunData(component.getModule().isRunData());
                         if(_ts_update) c.getModule().setTsCheck(component.getModule().isTsCheck());
                         if(_sparsify_update) c.getModule().setSparsify(component.getModule().isSparsify());
+
+                        if(_littleEndian_update) {
+                            for (JCGChannel channel: c.getModule().getChnnels()){
+                                for(JCGChannel ch: component.getModule().getChnnels()){
+                                    channel.setEndian(ch.getEndian());
+                                }
+
+                            }
+                        }
+
                         if(_tsSlop_update) c.getModule().setTsSlop(component.getModule().getTsSlop());
                         if(_buildThreads_update) c.getModule().setThreads(component.getModule().getThreads());
 
@@ -1247,24 +1333,5 @@ public class SComponentForm extends JFrame {
             }
             dispose();
         }
-    }
-
-    private boolean isFormChanged(){
-        if(!p_rol1.equals(component.getRol1())) return true;
-        if(!p_rol1String.equals(component.getRol1UsrString())) return true;
-        if(!p_rol2.equals(component.getRol2())) return true;
-        if(!p_rol2String.equals(component.getRol2UsrString())) return true;
-
-        if(!p_userConfig.equals(component.getUserConfig())) return true;
-        if(p_isRunData != component.getModule().isRunData()) return true;
-        if(p_isTsCheck != component.getModule().isTsCheck()) return true;
-        if(p_isSparsify != component.getModule().isSparsify()) return true;
-        if(p_tsSlop != component.getModule().getTsSlop()) return true;
-        if(p_buildThreads != component.getModule().getThreads()) return true;
-
-        if(!component.isMaster()){
-            if (p_priority != component.getPriority()) return true;
-        }
-        return false;
     }
 }

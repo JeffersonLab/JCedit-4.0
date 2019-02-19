@@ -67,7 +67,7 @@ public class JCGModule {
 
     @XmlElementWrapper(name = "channels")
     @XmlElement(name="channel")
-    private Set<JCGChannel> channels = Collections.synchronizedSet(new HashSet<JCGChannel>());
+    private Set<JCGChannel> channels = Collections.synchronizedSet(new HashSet<>());
 
 
     public int getBlockSize() {

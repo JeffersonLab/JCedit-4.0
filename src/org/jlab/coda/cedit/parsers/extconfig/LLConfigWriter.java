@@ -351,32 +351,41 @@ public class LLConfigWriter {
     private String writeModule(JCGComponent cmp) {
         StringBuilder out = new StringBuilder();
         JCGModule md;
+        boolean isEndianLittle = false;
 
         md = cmp.getModule();
         if (md != null) {
+
+            for(JCGChannel ch:md.getChnnels()){
+            if(ch.getEndian().equals("little")){
+                isEndianLittle = true;
+                break;
+            }
+        }
             // here we assume that all modules share the same source and USR source
             out.append("   <modules>\n\n");
-//            out.append("   <modules src=\""+md.getSource()+"\" " +
-//                    "usr_src=\""+md.getUserSource()+"\"" +
-//                    ">\n\n");
-
             if (cmp.getType().equals(ACodaType.ER.name())) {
-                out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
-                        "id=\"" + md.getId() + "\" " +
-//                        "threads=\""+md.getThreads()+"\" " +
-                        "timeStats=\"off\" " +
-                        "> \n\n");
+                if(isEndianLittle) {
+                    out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "timeStats=\"off\" " +
+                            "endian=\"" + "little" + "\"" +
+                            "> \n\n");
+
+                } else {
+                    out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "timeStats=\"off\" " +
+                            "> \n\n");
+                }
             } else if (cmp.getType().equals(ACodaType.GT.name())) {
                 out.append("     <GTriggerModule class=\"" + md.getModuleClass(ACodaType.GT.name()) + "\" " +
                         "id=\"" + md.getId() + "\" " +
-//                        "threads=\""+md.getThreads()+"\" " +
                         "timeStats=\"off\" " +
                         "> \n\n");
             } else if (cmp.getType().equals(ACodaType.USR.name())) {
                 out.append("     <UsrModule class=\"" + cmp.getUserConfig() + "\" " +
                         "id=\"" + md.getId() + "\" " +
-//                        "threads=\""+md.getThreads()+"\" " +
-//                        "timeStats=\"off\" " +
                         "> \n\n");
             } else if (cmp.getType().equals(ACodaType.TS.name())) {
                 List<String> r_list = new ArrayList<>();
@@ -395,27 +404,47 @@ public class LLConfigWriter {
                 }
                 out.append("> \n\n");
             } else if (cmp.getType().equals(ACodaType.ROC.name())) {
-                out.append("     <RocModule class=\"" + md.getModuleClass(ACodaType.ROC.name()) + "\" " +
-                        "id=\"" + md.getId() + "\" " +
-//                        "threads=\""+md.getThreads()+"\" " +
-                        "timeStats=\"off\" " +
-                        "> \n\n");
+                if(isEndianLittle){
+                    out.append("     <RocModule class=\"" + md.getModuleClass(ACodaType.ROC.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "timeStats=\"off\" " +
+                            "endian=\"" + "little" + "\"" +
+                            "> \n\n");
+                } else {
+                    out.append("     <RocModule class=\"" + md.getModuleClass(ACodaType.ROC.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "timeStats=\"off\" " +
+                            "> \n\n");
+                }
             } else if (cmp.getType().equals(ACodaType.FCS.name())) {
                 out.append("     <FCSModule class=\"" + md.getModuleClass(ACodaType.FCS.name()) + "\" " +
                         "id=\"" + md.getId() + "\" " +
-//                        "threads=\""+md.getThreads()+"\" " +
                         "timeStats=\"off\" " +
                         "> \n\n");
             } else {
-                out.append("     <EbModule class=\"" + md.getModuleClass(ACodaType.PEB.name()) + "\" " +
-                        "id=\"" + md.getId() + "\" " +
-                        "threads=\"" + md.getThreads() + "\" " +
-                        "timeStats=\"off\" " +
-                        "runData=\"" + md.isRunData() + "\" " +
-                        "tsCheck=\"" + md.isTsCheck() + "\" " +
-                        "tsSlop=\"" + md.getTsSlop() + "\" " +
-                        "sparsify=\"" + md.isSparsify() + "\"" +
-                        "> \n\n");
+                if(isEndianLittle){
+                    out.append("     <EbModule class=\"" + md.getModuleClass(ACodaType.PEB.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "threads=\"" + md.getThreads() + "\" " +
+                            "timeStats=\"off\" " +
+                            "runData=\"" + md.isRunData() + "\" " +
+                            "tsCheck=\"" + md.isTsCheck() + "\" " +
+                            "tsSlop=\"" + md.getTsSlop() + "\" " +
+                            "sparsify=\"" + md.isSparsify() + "\" " +
+                            "endian=\"" + "little" + "\"" +
+                            "> \n\n");
+
+                } else {
+                    out.append("     <EbModule class=\"" + md.getModuleClass(ACodaType.PEB.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "threads=\"" + md.getThreads() + "\" " +
+                            "timeStats=\"off\" " +
+                            "runData=\"" + md.isRunData() + "\" " +
+                            "tsCheck=\"" + md.isTsCheck() + "\" " +
+                            "tsSlop=\"" + md.getTsSlop() + "\" " +
+                            "sparsify=\"" + md.isSparsify() + "\"" +
+                            "> \n\n");
+                }
             }
         }
         return out.toString();
@@ -537,6 +566,8 @@ public class LLConfigWriter {
 
     private boolean createRocConfigFile(String cName) {
         boolean b = true;
+        boolean isEndianLittle = false;
+
         String fileName = filePath + cName + ".dat";
         JCGComponent cmp = null;
         for (JCGComponent c : components) {
@@ -546,7 +577,19 @@ public class LLConfigWriter {
             }
         }
         if (cmp == null) return false;
-        try {
+
+        JCGModule md = cmp.getModule();
+        if (md != null) {
+
+            for (JCGChannel ch : md.getChnnels()) {
+                if (ch.getEndian().equals("little")) {
+                    isEndianLittle = true;
+                    break;
+                }
+            }
+        }
+
+            try {
 
             BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
 
@@ -578,32 +621,37 @@ public class LLConfigWriter {
                                 if (tt.getName().equals(l.getDestinationTransportName())) {
                                     out.write("output                = " + tt.getTransClass() + "\n");
 
-                                    if (tt.getTransClass().equals("Et")) {
-                                        out.write("emuName               = " + l.getDestinationComponentName() + "\n");
-                                        out.write("etName                = " + tt.getEtName() + "\n");
-                                        if (tt.getEtMethodCon().equals("direct")) {
-                                            out.write("etHost                = " + tt.getEtHostName() + "\n");
-                                            out.write("etPort                = " + tt.getEtTcpPort() + "\n");
-                                            out.write("etGroup               = " + group + "\n");
-                                        } else if (tt.getEtMethodCon().equals("mcast")) {
-                                            out.write("etHost                = " + tt.getmAddress() + "\n");
-                                            out.write("etPort                = " + tt.getEtUdpPort() + "\n");
-                                            out.write("etGroup               = " + group + "\n");
-                                        }
+                                    switch (tt.getTransClass()) {
+                                        case "Et":
+                                            out.write("emuName               = " + l.getDestinationComponentName() + "\n");
+                                            out.write("etName                = " + tt.getEtName() + "\n");
+                                            if (tt.getEtMethodCon().equals("direct")) {
+                                                out.write("etHost                = " + tt.getEtHostName() + "\n");
+                                                out.write("etPort                = " + tt.getEtTcpPort() + "\n");
+                                                out.write("etGroup               = " + group + "\n");
+                                            } else if (tt.getEtMethodCon().equals("mcast")) {
+                                                out.write("etHost                = " + tt.getmAddress() + "\n");
+                                                out.write("etPort                = " + tt.getEtUdpPort() + "\n");
+                                                out.write("etGroup               = " + group + "\n");
+                                            }
 
-                                    } else if (tt.getTransClass().equals("EmuSocket")) {
-                                        out.write("emuName               = " + l.getDestinationComponentName() + "\n");
-                                        out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
-                                        out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
-                                        out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
-                                        out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
+                                            break;
+                                        case "EmuSocket":
+                                            out.write("emuName               = " + l.getDestinationComponentName() + "\n");
+                                            out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
+                                            out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
+                                            out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
+                                            out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
 
-                                    } else if (tt.getTransClass().equals("File")) {
-                                        out.write("dataFile              = " + tt.getFileName() + "\n");
-                                        out.write("fileType              = " + tt.getFileType() + "\n");
+                                            break;
+                                        case "File":
+                                            out.write("dataFile              = " + tt.getFileName() + "\n");
+                                            out.write("fileType              = " + tt.getFileType() + "\n");
 
-                                    } else if (tt.getTransClass().equals("None") ||
-                                            tt.getTransClass().equals("Debug")) {
+                                            break;
+                                        case "None":
+                                        case "Debug":
+                                            break;
                                     }
                                     breakFlag = true;
                                     break;
@@ -656,6 +704,9 @@ public class LLConfigWriter {
                                 }
                                 tpNames.add(tName);
                             }
+                        }
+                        if(isEndianLittle){
+                            out.write("endian                 = little \n");
                         }
                     }
                 }
