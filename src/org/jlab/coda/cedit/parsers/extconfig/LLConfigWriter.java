@@ -681,7 +681,7 @@ public class LLConfigWriter {
 
                                 switch (tr.getTransClass()) {
                                     case "Et":
-                                        out.write("emuName                = " + tr.getEtName() + "\n");
+                                        out.write("etName                 = " + tr.getEtName() + "\n");
                                         out.write("etHost                 = " + tr.getmAddress() + "\n");
                                         out.write("etPort                 = " + tr.getEtTcpPort() + "\n");
                                         out.write("etUdpPort              = " + tr.getEtUdpPort() + "\n");
