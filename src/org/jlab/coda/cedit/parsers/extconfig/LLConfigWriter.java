@@ -626,29 +626,29 @@ public class LLConfigWriter {
 
                                     switch (tt.getTransClass()) {
                                         case "Et":
-                                            out.write("etName                 = " + tt.getEtName() + "\n");
+                                            out.write("etName                = " + tt.getEtName() + "\n");
                                             if (tt.getEtMethodCon().equals("direct")) {
-                                                out.write("etHost                 = " + tt.getEtHostName() + "\n");
-                                                out.write("etPort                 = " + tt.getEtTcpPort() + "\n");
-                                                out.write("etGroup                = " + group + "\n");
+                                                out.write("etHost                = " + tt.getEtHostName() + "\n");
+                                                out.write("etPort                = " + tt.getEtTcpPort() + "\n");
+                                                out.write("etGroup               = " + group + "\n");
                                             } else if (tt.getEtMethodCon().equals("mcast")) {
-                                                out.write("etHost                 = " + tt.getmAddress() + "\n");
-                                                out.write("etPort                 = " + tt.getEtUdpPort() + "\n");
-                                                out.write("etGroup                = " + group + "\n");
+                                                out.write("etHost                = " + tt.getmAddress() + "\n");
+                                                out.write("etPort                = " + tt.getEtUdpPort() + "\n");
+                                                out.write("etGroup               = " + group + "\n");
                                             }
 
                                             break;
                                         case "EmuSocket":
-                                            out.write("emuName                = " + l.getDestinationComponentName() + "\n");
-                                            out.write("emuPort                = " + tt.getEmuDirectPort() + "\n");
-                                            out.write("emuNet                 = " + tt.getEmuSubNet() + "\n");
-                                            out.write("emuMaxBufferSize       = " + tt.getEmuMaxBuffer() + "\n");
-                                            out.write("emuTimeOut             = " + tt.getEmuWait() + "\n");
+                                            out.write("emuName               = " + l.getDestinationComponentName() + "\n");
+                                            out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
+                                            out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
+                                            out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
+                                            out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
 
                                             break;
                                         case "File":
-                                            out.write("dataFile               = " + tt.getFileName() + "\n");
-                                            out.write("fileType               = " + tt.getFileType() + "\n");
+                                            out.write("dataFile              = " + tt.getFileName() + "\n");
+                                            out.write("fileType              = " + tt.getFileType() + "\n");
 
                                             break;
                                         case "None":
@@ -679,36 +679,36 @@ public class LLConfigWriter {
                                 io = "output";
                             }
                             if (!tpNames.contains(tName)) {
-                                out.write(io+" transport class = " + tr.getTransClass() + "\n");
+                                out.write(io+" transportClass = " + tr.getTransClass() + "\n");
 
                                 switch (tr.getTransClass()) {
                                     case "Et":
-                                        out.write("etName                 = " + tr.getEtName() + "\n");
-                                        out.write("etHost                 = " + tr.getmAddress() + "\n");
-                                        out.write("etPort                 = " + tr.getEtTcpPort() + "\n");
-                                        out.write("etUdpPort              = " + tr.getEtUdpPort() + "\n");
-                                        out.write("eventNum               = " + tr.getEtEventNum() + "\n");
-                                        out.write("eventSize              = " + tr.getEtEventSize() + "\n");
-                                        out.write("method                 = " + tr.getEtMethodCon() + "\n");
-                                        out.write("subnet                 = " + tr.getEtSubNet() + "\n");
-                                        out.write("wait                   = " + tr.getEtWait() + "\n");
+                                        out.write("etName                = " + tr.getEtName() + "\n");
+                                        out.write("etHost                = " + tr.getmAddress() + "\n");
+                                        out.write("etPort                = " + tr.getEtTcpPort() + "\n");
+                                        out.write("etUdpPort             = " + tr.getEtUdpPort() + "\n");
+                                        out.write("eventNum              = " + tr.getEtEventNum() + "\n");
+                                        out.write("eventSize             = " + tr.getEtEventSize() + "\n");
+                                        out.write("method                = " + tr.getEtMethodCon() + "\n");
+                                        out.write("subnet                = " + tr.getEtSubNet() + "\n");
+                                        out.write("wait                  = " + tr.getEtWait() + "\n");
                                         break;
                                     case "EmuSocket":
-                                        out.write("emuPort                = " + tr.getEmuDirectPort() + "\n");
-                                        out.write("emuNet                 = " + tr.getEmuSubNet() + "\n");
-                                        out.write("emuMaxBufferSize       = " + tr.getEmuMaxBuffer() + "\n");
-                                        out.write("emuTimeOut             = " + tr.getEmuWait() + "\n");
+                                        out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
+                                        out.write("emuNet                = " + tr.getEmuSubNet() + "\n");
+                                        out.write("emuMaxBufferSize      = " + tr.getEmuMaxBuffer() + "\n");
+                                        out.write("emuTimeOut            = " + tr.getEmuWait() + "\n");
                                         break;
                                     case "File":
-                                        out.write("dataFile               = " + tr.getFileName() + "\n");
-                                        out.write("fileType               = " + tr.getFileType() + "\n");
+                                        out.write("dataFile              = " + tr.getFileName() + "\n");
+                                        out.write("fileType              = " + tr.getFileType() + "\n");
                                         break;
                                 }
                                 tpNames.add(tName);
                             }
                         }
                         if(isEndianLittle){
-                            out.write("endian                 = little \n");
+                            out.write("endian                = little \n");
                         }
                     }
                 }
