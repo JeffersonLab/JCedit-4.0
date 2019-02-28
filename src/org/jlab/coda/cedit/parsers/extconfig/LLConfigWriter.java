@@ -684,7 +684,6 @@ public class LLConfigWriter {
             } else if (cmp.getType().equals(ACodaType.USR.name()))
                 for (ExternalConfig ec : _compDat.values()) {
                     if (ec.getName().equals(cmp.getName())) {
-                        int nl = ec.getiChannels().size();
                         ArrayList<String> tpNames = new ArrayList<>();
                         for (JCGTransport tr : ec.getTransports()) {
                             // avoid writing the same transport twice.
@@ -719,6 +718,9 @@ public class LLConfigWriter {
                                     case "File":
                                         out.write("dataFile              = " + tr.getFileName() + "\n");
                                         out.write("fileType              = " + tr.getFileType() + "\n");
+                                        out.write("splitBytes            = " + tr.getFileSplit() + "\n");
+                                        ec.getiChannels().size();
+
                                         break;
                                 }
                                 tpNames.add(tName);
