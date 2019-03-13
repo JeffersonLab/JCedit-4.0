@@ -185,7 +185,7 @@ public class JCParser {
         StringBuilder result = new StringBuilder();
 
         while ((e = str.indexOf(pattern, s)) >= 0) {
-            result.append(str.substring(s, e));
+            result.append(str, s, e);
             result.append(replace);
             s = e+pattern.length();
         }

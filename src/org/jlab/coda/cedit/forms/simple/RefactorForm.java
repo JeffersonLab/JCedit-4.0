@@ -69,7 +69,7 @@ public class RefactorForm extends JFrame {
         name = Name;
         type = Type;
 //        cmt = new HashMap<String, CDefinedComponent>();
-        JCGSetup setup = stp.getInstance();
+        JCGSetup setup = JCGSetup.getInstance();
         coolDbBrowser = new CoolDatabaseBrowser();
         initComponents();
         nameTextField.setText(name);

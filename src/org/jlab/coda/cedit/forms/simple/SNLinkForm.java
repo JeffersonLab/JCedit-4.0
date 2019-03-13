@@ -27,6 +27,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+
 import org.jlab.coda.cedit.cooldesktop.DrawingCanvas;
 import org.jlab.coda.cedit.system.*;
 import org.jlab.coda.cedit.system.JCGComponent;
@@ -41,6 +42,7 @@ public class SNLinkForm extends JFrame {
     private JCGLink link;
     private DrawingCanvas canvas;
     private JCGTransport destinationTransport = null;
+    private JCGTransport sourceTransport = null;
     private JCGSetup stp = JCGSetup.getInstance();
 
     private ComboBoxModel comboModel;
@@ -49,23 +51,23 @@ public class SNLinkForm extends JFrame {
         this.link = gl;
         this.canvas = canvas;
 
-        if(gl.getDestinationComponentType().equals(ACodaType.FILE.name())){
-            comboModel =  new DefaultComboBoxModel(new String[] {
+        if (gl.getDestinationComponentType().equals(ACodaType.FILE.name())) {
+            comboModel = new DefaultComboBoxModel(new String[]{
                     "Et",
                     "cMsg",
                     "File",
                     "Debug",
                     "None"
             });
-        } else if(gl.getSourceComponentType().equals(ACodaType.ROC.name()) ||
+        } else if (gl.getSourceComponentType().equals(ACodaType.ROC.name()) ||
                 gl.getSourceComponentType().equals(ACodaType.GT.name()) ||
                 gl.getSourceComponentType().equals(ACodaType.TS.name())) {
-            comboModel =  new DefaultComboBoxModel(new String[] {
+            comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
                     "Et"
             });
         } else {
-            comboModel =  new DefaultComboBoxModel(new String[] {
+            comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
                     "Et",
                     "cMsg"
@@ -75,7 +77,7 @@ public class SNLinkForm extends JFrame {
 
         initComponents();
         update();
-        if(!editable){
+        if (!editable) {
 
             disableEmu();
             disableEt();
@@ -87,18 +89,18 @@ public class SNLinkForm extends JFrame {
         }
     }
 
-    public void enableEtCustomization(boolean b){
-        if(b){
+    public void enableEtCustomization(boolean b) {
+        if (b) {
             etNumberEvents.setEnabled(true);
             etEventSize.setEnabled(true);
             etChunkSize.setEnabled(true);
             inputEtChunkSize.setEnabled(true);
             etWait.setEnabled(true);
             checkBoxEtCreate.setEnabled(true);
-            if((DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.PEB.name())) ||
+            if ((DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.PEB.name())) ||
                     (DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.SEB.name())) ||
                     (DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.ER.name()))
-                    ) {
+            ) {
                 singleEventOutCheckBox.setEnabled(true);
             }
             etDefaultsMenuItem.setEnabled(true);
@@ -113,44 +115,62 @@ public class SNLinkForm extends JFrame {
             etDefaultsMenuItem.setEnabled(false);
         }
     }
+
     private void update() {
-        String StName = link.getSourceComponentName()+"_transport";
-        String DtName = link.getDestinationComponentName()+"_transport";
-
-
+        String SName = link.getSourceComponentName();
+        String DName = link.getDestinationComponentName();
+        String StName = SName + "_transport";
+        String DtName = DName + "_transport";
 
         // get destination component transport
-        if(DrawingCanvas.getComp(link.getDestinationComponentName()).getTrnsports()!=null &&
-                !DrawingCanvas.getComp(link.getDestinationComponentName()).getTrnsports().isEmpty()){
+        if (DrawingCanvas.getComp(DName).getTrnsports() != null &&
+                !DrawingCanvas.getComp(DName).getTrnsports().isEmpty()) {
 
-            for(JCGTransport tr: DrawingCanvas.getComp(link.getDestinationComponentName()).getTrnsports()) {
-                if(tr.getName().equals(DtName)){
+            // destination transport
+            for (JCGTransport tr : DrawingCanvas.getComp(DName).getTrnsports()) {
+                if (tr.getName().equals(DtName)) {
                     destinationTransport = tr;
                     break;
                 }
             }
-            if(destinationTransport!=null){
-                if(DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.FILE.name())){
+            if (destinationTransport != null) {
+                if (DrawingCanvas.getComp(DName).getType().equals(ACodaType.FILE.name())) {
                     destinationTransport.setEtName("undefined");
                     destinationTransport.setEtSubNet("undefined");
                     destinationTransport.setNoLink(false);
                 }
             }
+
+            // source transport
+            for (JCGTransport tr : DrawingCanvas.getComp(SName).getTrnsports()) {
+                if (tr.getName().equals(StName)) {
+                    sourceTransport = tr;
+                    break;
+                }
+            }
+            if (sourceTransport == null) {
+                // default is EmuSocket for the rest
+                sourceTransport = new JCGTransport();
+                sourceTransport.setName(StName);
+                sourceTransport.setNoLink(false);
+                DrawingCanvas.getComp(SName).addTrnsport(sourceTransport);
+            }
+
         }
 
         // define a default transport for the destination component if it is not defined
-        if(destinationTransport==null){
-            if(link.getDestinationComponentType().equals(ACodaType.ER.name())) {
+        if (destinationTransport == null) {
+            if (link.getDestinationComponentType().equals(ACodaType.ER.name())) {
                 destinationTransport = new JCGTransport();
                 destinationTransport.setName(DtName);
                 destinationTransport.setTransClass("Et");
-                destinationTransport.setEtName("/tmp/et_" + stp.getExpid() + "_" + link.getDestinationComponentName());
+                destinationTransport.setEtName("/tmp/et_" + stp.getExpid() + "_" + DName);
                 destinationTransport.setEtEventNum((Integer) etNumberEvents.getValue());
                 destinationTransport.setEtEventSize((Integer) etEventSize.getValue() * 1000);
                 destinationTransport.setEtChunkSize((Integer) etChunkSize.getValue());
                 destinationTransport.setInputEtChunkSize((Integer) inputEtChunkSize.getValue());
                 destinationTransport.setEtWait((Integer) etWait.getValue());
-                if(checkBoxEtCreate.isSelected()) {
+                if (checkBoxEtCreate.isSelected()) {
                     destinationTransport.setDestinationEtCreate("true");
                 } else {
                     destinationTransport.setDestinationEtCreate("false;");
@@ -169,12 +189,13 @@ public class SNLinkForm extends JFrame {
             }
         }
 
+
         link.setDestinationTransportName(DtName);
         link.setSourceTransportName(StName);
 
 // fill the form
-        sourceComponentTextField.setText(link.getSourceComponentName());
-        destinationComponentTextField.setText(link.getDestinationComponentName());
+        sourceComponentTextField.setText(SName);
+        destinationComponentTextField.setText(DName);
 
         transportClassComboBox.setSelectedItem(destinationTransport.getTransClass());
         etNameTextField.setText(destinationTransport.getEtName());
@@ -187,26 +208,25 @@ public class SNLinkForm extends JFrame {
         fileNameTextField.setText(destinationTransport.getFileName());
 
         etNumberEvents.setValue(destinationTransport.getEtEventNum());
-        etEventSize.setValue(destinationTransport.getEtEventSize()/1000);
+        etEventSize.setValue(destinationTransport.getEtEventSize() / 1000);
         etChunkSize.setValue(destinationTransport.getEtChunkSize());
         inputEtChunkSize.setValue(destinationTransport.getInputEtChunkSize());
         etWait.setValue(destinationTransport.getEtWait());
-        if(destinationTransport.getDestinationEtCreate().equals("true")) {
+        if (destinationTransport.getDestinationEtCreate().equals("true")) {
             checkBoxEtCreate.setSelected(true);
         } else {
             checkBoxEtCreate.setSelected(false);
         }
-        if(destinationTransport.getSingle().equals("true")){
+        if (destinationTransport.getSingle().equals("true")) {
             singleEventOutCheckBox.setSelected(true);
         } else {
             singleEventOutCheckBox.setSelected(false);
         }
 
-        if(destinationTransport.getFileSplit()<0){
+        if (destinationTransport.getFileSplit() < 0) {
             fileSplitSpinner.setValue(2000);
-        }
-        else {
-            fileSplitSpinner.setValue((int)(destinationTransport.getFileSplit()/10000000));
+        } else {
+            fileSplitSpinner.setValue((int) (destinationTransport.getFileSplit() / 10000000));
         }
 
         fileTypeComboBox.setSelectedItem(destinationTransport.getFileType());
@@ -214,10 +234,10 @@ public class SNLinkForm extends JFrame {
         // emuSocket
         emuPortSpinner.setValue(destinationTransport.getEmuDirectPort());
         emuSocketWaitSpinner.setValue(destinationTransport.getEmuWait());
-        emuMaxBufferSpinner.setValue(destinationTransport.getEmuMaxBuffer()/1000);
+        emuMaxBufferSpinner.setValue(destinationTransport.getEmuMaxBuffer() / 1000);
         emuSubnetTextField.setText(destinationTransport.getEmuSubNet());
-        emuFatPipeCheckBox.setSelected(destinationTransport.isEmuFatPipe());
 
+        emuFatPipeCheckBox.setSelected(sourceTransport.isEmuFatPipe());
 
         // cMsg
         cMsgTypeTextField.setText(destinationTransport.getcMsgType());
@@ -228,14 +248,14 @@ public class SNLinkForm extends JFrame {
         checkTrClass();
     }
 
-    private void enableEt(){
+    private void enableEt() {
         etNameTextField.setEnabled(true);
         etNameLabel.setEnabled(true);
         etConnectionMethodLabel.setEnabled(true);
         connectionMethodComboBox.setEnabled(true);
         etCustomizationMenue.setEnabled(true);
 
-        if(connectionMethodComboBox.getSelectedItem().equals("direct")){
+        if (connectionMethodComboBox.getSelectedItem().equals("direct")) {
             etTcpPortLabel.setEnabled(true);
             etTcpPortSpinner.setEnabled(true);
             etHostLabel.setEnabled(true);
@@ -262,7 +282,7 @@ public class SNLinkForm extends JFrame {
         }
     }
 
-    private void disableEt(){
+    private void disableEt() {
         etNameTextField.setEnabled(false);
         etNameLabel.setEnabled(false);
         etHostTextField.setEnabled(false);
@@ -291,7 +311,7 @@ public class SNLinkForm extends JFrame {
 
     }
 
-    private void enableEmu(){
+    private void enableEmu() {
         emuMaxBufferSpinner.setEnabled(true);
         emuSocketWaitSpinner.setEnabled(true);
         emuPortSpinner.setEnabled(true);
@@ -299,7 +319,7 @@ public class SNLinkForm extends JFrame {
         emuFatPipeCheckBox.setEnabled(true);
     }
 
-    private void disableEmu(){
+    private void disableEmu() {
         emuMaxBufferSpinner.setEnabled(false);
         emuSocketWaitSpinner.setEnabled(false);
         emuPortSpinner.setEnabled(false);
@@ -307,9 +327,9 @@ public class SNLinkForm extends JFrame {
         emuFatPipeCheckBox.setEnabled(false);
     }
 
-    private void enableCMsg(){
+    private void enableCMsg() {
         cMsgHostTextField.setEnabled(true);
-        if(destinationTransport.getcMsgHost().equals("platform")){
+        if (destinationTransport.getcMsgHost().equals("platform")) {
             cMsgNameSpaceTextField.setEnabled(false);
             cMsgPortSpinner.setEnabled(false);
         } else {
@@ -321,7 +341,7 @@ public class SNLinkForm extends JFrame {
 
     }
 
-    private void disableCMsg(){
+    private void disableCMsg() {
         cMsgHostTextField.setEnabled(false);
         cMsgNameSpaceTextField.setEnabled(false);
         cMsgPortSpinner.setEnabled(false);
@@ -330,7 +350,7 @@ public class SNLinkForm extends JFrame {
 
     }
 
-    private void enableFile(){
+    private void enableFile() {
         fileNameTextField.setEnabled(true);
         fileNameLabel.setEnabled(true);
         fileSplitSpinner.setEnabled(true);
@@ -340,7 +360,7 @@ public class SNLinkForm extends JFrame {
 
     }
 
-    private void disableFile(){
+    private void disableFile() {
         fileNameTextField.setEnabled(false);
         fileNameLabel.setEnabled(false);
         fileSplitSpinner.setEnabled(false);
@@ -350,30 +370,30 @@ public class SNLinkForm extends JFrame {
 
     }
 
-    public void checkTrClass(){
+    public void checkTrClass() {
         // control access to the form
-        if(transportClassComboBox.getSelectedItem().equals("Et")){
+        if (transportClassComboBox.getSelectedItem().equals("Et")) {
             enableEt();
 
             disableEmu();
             disableCMsg();
             disableFile();
 
-        } else if (transportClassComboBox.getSelectedItem().equals("File")){
+        } else if (transportClassComboBox.getSelectedItem().equals("File")) {
             enableFile();
 
             disableEt();
             disableEmu();
             disableCMsg();
 
-        }else if (transportClassComboBox.getSelectedItem().equals("EmuSocket")){
+        } else if (transportClassComboBox.getSelectedItem().equals("EmuSocket")) {
             enableEmu();
 
             disableEt();
             disableCMsg();
             disableFile();
 
-        }else if (transportClassComboBox.getSelectedItem().equals("cMsg")){
+        } else if (transportClassComboBox.getSelectedItem().equals("cMsg")) {
             enableCMsg();
 
             disableEt();
@@ -381,7 +401,7 @@ public class SNLinkForm extends JFrame {
             disableFile();
 
         } else if (transportClassComboBox.getSelectedItem().equals("None") ||
-                transportClassComboBox.getSelectedItem().equals("Debug")){
+                transportClassComboBox.getSelectedItem().equals("Debug")) {
             disableEt();
             disableEmu();
             disableCMsg();
@@ -390,7 +410,7 @@ public class SNLinkForm extends JFrame {
     }
 
     private void cMsgHostTextFieldActionPerformed(ActionEvent e) {
-        if(cMsgHostTextField.getText().equals("platform")){
+        if (cMsgHostTextField.getText().equals("platform")) {
             cMsgPortSpinner.setEnabled(false);
             cMsgNameSpaceTextField.setEnabled(false);
         } else {
@@ -551,44 +571,44 @@ public class SNLinkForm extends JFrame {
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
-                panel1Layout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(label3)
-                            .addComponent(label1))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(sourceComponentTextField, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(destinationComponentTextField, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(label2)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addComponent(singleEventOutCheckBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(transportClassComboBox))
-                        .addGap(30, 30, 30))
+                    panel1Layout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel1Layout.createParallelGroup()
+                                            .addComponent(label3)
+                                            .addComponent(label1))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel1Layout.createParallelGroup()
+                                            .addComponent(sourceComponentTextField, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(destinationComponentTextField, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(label2)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(singleEventOutCheckBox, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(transportClassComboBox))
+                                    .addGap(30, 30, 30))
             );
             panel1Layout.setVerticalGroup(
-                panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup()
+                    panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label2))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(label1)
-                                    .addComponent(sourceComponentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(label3)
-                                    .addComponent(destinationComponentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(transportClassComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(singleEventOutCheckBox)))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(panel1Layout.createParallelGroup()
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                    .addContainerGap()
+                                                    .addComponent(label2))
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                            .addComponent(label1)
+                                                            .addComponent(sourceComponentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                            .addComponent(label3)
+                                                            .addComponent(destinationComponentTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(panel1Layout.createSequentialGroup()
+                                                    .addComponent(transportClassComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(singleEventOutCheckBox)))
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
 
@@ -615,9 +635,9 @@ public class SNLinkForm extends JFrame {
             etConnectionMethodLabel.setText("Method");
 
             //---- connectionMethodComboBox ----
-            connectionMethodComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
-                "direct",
-                "mcast"
+            connectionMethodComboBox.setModel(new DefaultComboBoxModel<>(new String[]{
+                    "direct",
+                    "mcast"
             }));
             connectionMethodComboBox.setAction(action8);
 
@@ -689,119 +709,119 @@ public class SNLinkForm extends JFrame {
             GroupLayout panel2Layout = new GroupLayout(panel2);
             panel2.setLayout(panel2Layout);
             panel2Layout.setHorizontalGroup(
-                panel2Layout.createParallelGroup()
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panel2Layout.createParallelGroup()
+                    panel2Layout.createParallelGroup()
                             .addGroup(panel2Layout.createSequentialGroup()
-                                .addGroup(panel2Layout.createParallelGroup()
-                                    .addGroup(panel2Layout.createSequentialGroup()
-                                        .addGroup(panel2Layout.createParallelGroup()
-                                            .addComponent(etTcpPortLabel)
-                                            .addComponent(etHostLabel))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panel2Layout.createParallelGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel2Layout.createParallelGroup()
                                             .addGroup(panel2Layout.createSequentialGroup()
-                                                .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(etHostTextField, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                                    .addComponent(etNameTextField, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(panel2Layout.createParallelGroup()
-                                                    .addGroup(panel2Layout.createSequentialGroup()
-                                                        .addGap(0, 0, Short.MAX_VALUE)
-                                                        .addComponent(etConnectionMethodLabel)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(connectionMethodComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(panel2Layout.createSequentialGroup()
-                                                        .addComponent(label4)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(etSubnetLabel)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(etSubnetTextField))))
+                                                    .addGroup(panel2Layout.createParallelGroup()
+                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                    .addGroup(panel2Layout.createParallelGroup()
+                                                                            .addComponent(etTcpPortLabel)
+                                                                            .addComponent(etHostLabel))
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addGroup(panel2Layout.createParallelGroup()
+                                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                                                                            .addComponent(etHostTextField, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                                                                                            .addComponent(etNameTextField, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                    .addGroup(panel2Layout.createParallelGroup()
+                                                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                                                    .addGap(0, 0, Short.MAX_VALUE)
+                                                                                                    .addComponent(etConnectionMethodLabel)
+                                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                    .addComponent(connectionMethodComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                                                    .addComponent(label4)
+                                                                                                    .addGap(18, 18, 18)
+                                                                                                    .addComponent(etSubnetLabel)
+                                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                    .addComponent(etSubnetTextField))))
+                                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                                                    .addComponent(label6)
+                                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                    .addComponent(etEventSize, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
+                                                                                            .addGroup(GroupLayout.Alignment.LEADING, panel2Layout.createSequentialGroup()
+                                                                                                    .addComponent(etTcpPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                                                                                                    .addGap(34, 34, 34)
+                                                                                                    .addComponent(etUdpPortLabel)
+                                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                    .addComponent(etUdpPortSpinner, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+                                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                                    .addComponent(etMAddressLabel)))
+                                                                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                                                    .addGap(46, 46, 46)
+                                                                                                    .addComponent(mAddressTextField, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+                                                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                                                    .addGap(18, 18, 18)
+                                                                                                    .addComponent(checkBoxEtCreate)
+                                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                                    .addComponent(label9)))
+                                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                    .addComponent(etWait, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                                                            .addComponent(etNameLabel))
+                                                    .addContainerGap())
                                             .addGroup(panel2Layout.createSequentialGroup()
-                                                .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(panel2Layout.createSequentialGroup()
-                                                        .addComponent(label6)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(etEventSize, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(GroupLayout.Alignment.LEADING, panel2Layout.createSequentialGroup()
-                                                        .addComponent(etTcpPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(34, 34, 34)
-                                                        .addComponent(etUdpPortLabel)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(etUdpPortSpinner, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(etMAddressLabel)))
-                                                .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                    .addGroup(panel2Layout.createSequentialGroup()
-                                                        .addGap(46, 46, 46)
-                                                        .addComponent(mAddressTextField, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(panel2Layout.createSequentialGroup()
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(checkBoxEtCreate)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(label9)))
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(etWait, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(etNameLabel))
-                                .addContainerGap())
-                            .addGroup(panel2Layout.createSequentialGroup()
-                                .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(panel2Layout.createSequentialGroup()
-                                        .addComponent(label5)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(etNumberEvents, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(202, 202, 202))
-                                    .addGroup(panel2Layout.createSequentialGroup()
-                                        .addComponent(label19)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputEtChunkSize, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(label20)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(etChunkSize, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                    .addComponent(label5)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                    .addComponent(etNumberEvents, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(202, 202, 202))
+                                                            .addGroup(panel2Layout.createSequentialGroup()
+                                                                    .addComponent(label19)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(inputEtChunkSize, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(18, 18, 18)
+                                                                    .addComponent(label20)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(etChunkSize, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)))
+                                                    .addGap(0, 0, Short.MAX_VALUE))))
             );
             panel2Layout.setVerticalGroup(
-                panel2Layout.createParallelGroup()
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(etNameLabel)
-                            .addComponent(etNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(connectionMethodComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(etConnectionMethodLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(etHostTextField)
-                            .addComponent(etHostLabel)
-                            .addComponent(label4)
-                            .addComponent(etSubnetLabel)
-                            .addComponent(etSubnetTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(etTcpPortLabel)
-                            .addComponent(mAddressTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(etMAddressLabel)
-                            .addComponent(etUdpPortLabel)
-                            .addComponent(etUdpPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(etTcpPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(label5)
-                            .addComponent(etEventSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label6)
-                            .addComponent(etNumberEvents, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(etWait, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label9)
-                            .addComponent(checkBoxEtCreate))
-                        .addGap(8, 8, 8)
-                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(label19)
-                            .addComponent(inputEtChunkSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label20)
-                            .addComponent(etChunkSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
+                    panel2Layout.createParallelGroup()
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(etNameLabel)
+                                            .addComponent(etNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(connectionMethodComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(etConnectionMethodLabel))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(etHostTextField)
+                                            .addComponent(etHostLabel)
+                                            .addComponent(label4)
+                                            .addComponent(etSubnetLabel)
+                                            .addComponent(etSubnetTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(etTcpPortLabel)
+                                            .addComponent(mAddressTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(etMAddressLabel)
+                                            .addComponent(etUdpPortLabel)
+                                            .addComponent(etUdpPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(etTcpPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(4, 4, 4)
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(label5)
+                                            .addComponent(etEventSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label6)
+                                            .addComponent(etNumberEvents, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(etWait, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label9)
+                                            .addComponent(checkBoxEtCreate))
+                                    .addGap(8, 8, 8)
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(label19)
+                                            .addComponent(inputEtChunkSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label20)
+                                            .addComponent(etChunkSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addContainerGap())
             );
         }
 
@@ -822,50 +842,50 @@ public class SNLinkForm extends JFrame {
             FileTypeLabel.setText("Type");
 
             //---- fileTypeComboBox ----
-            fileTypeComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
-                "coda",
-                "binary",
-                "ascii"
+            fileTypeComboBox.setModel(new DefaultComboBoxModel<>(new String[]{
+                    "coda",
+                    "binary",
+                    "ascii"
             }));
 
             GroupLayout panel3Layout = new GroupLayout(panel3);
             panel3.setLayout(panel3Layout);
             panel3Layout.setHorizontalGroup(
-                panel3Layout.createParallelGroup()
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(fileNameLabel)
-                            .addComponent(FileTypeLabel))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel3Layout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(fileSplitLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(fileNameTextField))
-                        .addContainerGap())
+                    panel3Layout.createParallelGroup()
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(fileNameLabel)
+                                            .addComponent(FileTypeLabel))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel3Layout.createParallelGroup()
+                                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                                                    .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(fileSplitLabel)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(fileNameTextField))
+                                    .addContainerGap())
             );
             panel3Layout.setVerticalGroup(
-                panel3Layout.createParallelGroup()
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(fileNameLabel)
-                            .addComponent(fileNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel3Layout.createParallelGroup()
+                    panel3Layout.createParallelGroup()
                             .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fileSplitLabel)))
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FileTypeLabel))))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(fileNameLabel)
+                                            .addComponent(fileNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panel3Layout.createParallelGroup()
+                                            .addGroup(panel3Layout.createSequentialGroup()
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                            .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(fileSplitLabel)))
+                                            .addGroup(panel3Layout.createSequentialGroup()
+                                                    .addGap(8, 8, 8)
+                                                    .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                            .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(FileTypeLabel))))
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
 
@@ -913,45 +933,45 @@ public class SNLinkForm extends JFrame {
             GroupLayout panel4Layout = new GroupLayout(panel4);
             panel4.setLayout(panel4Layout);
             panel4Layout.setHorizontalGroup(
-                panel4Layout.createParallelGroup()
-                    .addGroup(panel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(etTcpPortLabel2)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel4Layout.createParallelGroup()
+                    panel4Layout.createParallelGroup()
                             .addGroup(panel4Layout.createSequentialGroup()
-                                .addComponent(emuFatPipeCheckBox)
-                                .addGap(0, 506, Short.MAX_VALUE))
-                            .addGroup(panel4Layout.createSequentialGroup()
-                                .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label7)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emuMaxBufferSpinner, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label10)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emuSocketWaitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label17)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emuSubnetTextField)))
-                        .addContainerGap())
+                                    .addContainerGap()
+                                    .addComponent(etTcpPortLabel2)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel4Layout.createParallelGroup()
+                                            .addGroup(panel4Layout.createSequentialGroup()
+                                                    .addComponent(emuFatPipeCheckBox)
+                                                    .addGap(0, 506, Short.MAX_VALUE))
+                                            .addGroup(panel4Layout.createSequentialGroup()
+                                                    .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(label7)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(emuMaxBufferSpinner, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(label10)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(emuSocketWaitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(label17)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(emuSubnetTextField)))
+                                    .addContainerGap())
             );
             panel4Layout.setVerticalGroup(
-                panel4Layout.createParallelGroup()
-                    .addGroup(panel4Layout.createSequentialGroup()
-                        .addGroup(panel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(etTcpPortLabel2)
-                            .addComponent(label7)
-                            .addComponent(emuMaxBufferSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label10)
-                            .addComponent(emuSocketWaitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label17)
-                            .addComponent(emuSubnetTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(emuFatPipeCheckBox))
+                    panel4Layout.createParallelGroup()
+                            .addGroup(panel4Layout.createSequentialGroup()
+                                    .addGroup(panel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(etTcpPortLabel2)
+                                            .addComponent(label7)
+                                            .addComponent(emuMaxBufferSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label10)
+                                            .addComponent(emuSocketWaitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label17)
+                                            .addComponent(emuSubnetTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(emuFatPipeCheckBox))
             );
         }
 
@@ -987,111 +1007,111 @@ public class SNLinkForm extends JFrame {
             GroupLayout panel5Layout = new GroupLayout(panel5);
             panel5.setLayout(panel5Layout);
             panel5Layout.setHorizontalGroup(
-                panel5Layout.createParallelGroup()
-                    .addGroup(panel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panel5Layout.createParallelGroup()
+                    panel5Layout.createParallelGroup()
                             .addGroup(panel5Layout.createSequentialGroup()
-                                .addComponent(label11)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cMsgHostTextField)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label12)
-                                .addGap(14, 14, 14))
-                            .addGroup(panel5Layout.createSequentialGroup()
-                                .addComponent(label15)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cMsgSubjectTextField)))
-                        .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addGroup(panel5Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(label13)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cMsgPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label14)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cMsgNameSpaceTextField))
-                            .addGroup(panel5Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(label16)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cMsgTypeTextField)))
-                        .addContainerGap())
+                                    .addContainerGap()
+                                    .addGroup(panel5Layout.createParallelGroup()
+                                            .addGroup(panel5Layout.createSequentialGroup()
+                                                    .addComponent(label11)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(cMsgHostTextField)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(label12)
+                                                    .addGap(14, 14, 14))
+                                            .addGroup(panel5Layout.createSequentialGroup()
+                                                    .addComponent(label15)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(cMsgSubjectTextField)))
+                                    .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addGroup(panel5Layout.createSequentialGroup()
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(label13)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(cMsgPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(label14)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(cMsgNameSpaceTextField))
+                                            .addGroup(panel5Layout.createSequentialGroup()
+                                                    .addGap(24, 24, 24)
+                                                    .addComponent(label16)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(cMsgTypeTextField)))
+                                    .addContainerGap())
             );
             panel5Layout.setVerticalGroup(
-                panel5Layout.createParallelGroup()
-                    .addGroup(panel5Layout.createSequentialGroup()
-                        .addGroup(panel5Layout.createParallelGroup()
-                            .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(label11)
-                                .addComponent(cMsgHostTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label12)
-                                .addComponent(label13)
-                                .addComponent(cMsgPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label14))
-                            .addComponent(cMsgNameSpaceTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(label15)
-                            .addComponent(cMsgTypeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label16)
-                            .addComponent(cMsgSubjectTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 13, Short.MAX_VALUE))
+                    panel5Layout.createParallelGroup()
+                            .addGroup(panel5Layout.createSequentialGroup()
+                                    .addGroup(panel5Layout.createParallelGroup()
+                                            .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(label11)
+                                                    .addComponent(cMsgHostTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(label12)
+                                                    .addComponent(label13)
+                                                    .addComponent(cMsgPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(label14))
+                                            .addComponent(cMsgNameSpaceTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(panel5Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(label15)
+                                            .addComponent(cMsgTypeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label16)
+                                            .addComponent(cMsgSubjectTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(0, 13, Short.MAX_VALUE))
             );
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(okButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(removeButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(clearButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cancelButton))
-                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
-                    .addContainerGap())
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(contentPaneLayout.createParallelGroup()
+                                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(okButton)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(removeButton)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clearButton)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cancelButton))
+                                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panel5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panel4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel4, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(cancelButton)
-                        .addComponent(clearButton)
-                        .addComponent(removeButton)
-                        .addComponent(okButton))
-                    .addContainerGap())
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel4, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cancelButton)
+                                        .addComponent(clearButton)
+                                        .addComponent(removeButton)
+                                        .addComponent(okButton))
+                                .addContainerGap())
         );
         pack();
         setLocationRelativeTo(getOwner());
 // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    private void showWarning(String s){
-        JOptionPane.showMessageDialog(this,s);
+    private void showWarning(String s) {
+        JOptionPane.showMessageDialog(this, s);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -1189,7 +1209,7 @@ public class SNLinkForm extends JFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
-            if(connectionMethodComboBox.getSelectedItem().equals("direct")){
+            if (connectionMethodComboBox.getSelectedItem().equals("direct")) {
                 etMAddressLabel.setEnabled(false);
                 mAddressTextField.setEnabled(false);
                 etUdpPortLabel.setEnabled(false);
@@ -1241,20 +1261,20 @@ public class SNLinkForm extends JFrame {
         public void actionPerformed(ActionEvent e) {
             JCGComponent s = canvas.getGCMPs().get(link.getSourceComponentName());
             JCGComponent d = canvas.getGCMPs().get(link.getDestinationComponentName());
-            for(JCGLink l: s.getLnks()){
-                if(l.getName().equals(link.getName())){
+            for (JCGLink l : s.getLnks()) {
+                if (l.getName().equals(link.getName())) {
                     s.removeLnk(l);
                     break;
                 }
             }
-            for(JCGLink ll: d.getLnks()){
-                if(ll.getName().equals(link.getName())){
+            for (JCGLink ll : d.getLnks()) {
+                if (ll.getName().equals(link.getName())) {
                     d.removeLnk(ll);
                     break;
                 }
             }
-            canvas.getGCMPs().put(s.getName(),s);
-            canvas.getGCMPs().put(d.getName(),d);
+            canvas.getGCMPs().put(s.getName(), s);
+            canvas.getGCMPs().put(d.getName(), d);
             canvas.repaint();
             dispose();
         }
@@ -1270,8 +1290,8 @@ public class SNLinkForm extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
 
-            if(etHostTextField.isEnabled()){
-                if(!JCUtil.IP_validate(etHostTextField.getText())){
+            if (etHostTextField.isEnabled()) {
+                if (!JCUtil.IP_validate(etHostTextField.getText())) {
                     showWarning("Host name must be a valide IP address (e.g. 129.57.29.62)");
                     return;
                 }
@@ -1287,13 +1307,13 @@ public class SNLinkForm extends JFrame {
             destinationTransport.setEtUdpPort((Integer) etUdpPortSpinner.getValue());
             destinationTransport.setmAddress(mAddressTextField.getText().trim());
             destinationTransport.setEtMethodCon(connectionMethodComboBox.getSelectedItem().toString());
-            destinationTransport.setEtEventNum((Integer)etNumberEvents.getValue());
-            destinationTransport.setEtEventSize((Integer)etEventSize.getValue()*1000);
-            destinationTransport.setEtChunkSize((Integer)etChunkSize.getValue());
-            destinationTransport.setInputEtChunkSize((Integer)inputEtChunkSize.getValue());
-            destinationTransport.setEtWait((Integer)etWait.getValue());
+            destinationTransport.setEtEventNum((Integer) etNumberEvents.getValue());
+            destinationTransport.setEtEventSize((Integer) etEventSize.getValue() * 1000);
+            destinationTransport.setEtChunkSize((Integer) etChunkSize.getValue());
+            destinationTransport.setInputEtChunkSize((Integer) inputEtChunkSize.getValue());
+            destinationTransport.setEtWait((Integer) etWait.getValue());
 
-            if(checkBoxEtCreate.isSelected()){
+            if (checkBoxEtCreate.isSelected()) {
                 destinationTransport.setDestinationEtCreate("true");
             } else {
                 destinationTransport.setDestinationEtCreate("false");
@@ -1307,28 +1327,29 @@ public class SNLinkForm extends JFrame {
 
             destinationTransport.setFileName(fileNameTextField.getText().trim());
 
-            int d =  (Integer)fileSplitSpinner.getValue();
-            destinationTransport.setFileSplit(d*10000000L);
+            int d = (Integer) fileSplitSpinner.getValue();
+            destinationTransport.setFileSplit(d * 10000000L);
             destinationTransport.setFileType((String) fileTypeComboBox.getSelectedItem());
 
 
             //emu
-            destinationTransport.setEmuDirectPort((Integer)emuPortSpinner.getValue());
-            destinationTransport.setEmuMaxBuffer((int)emuMaxBufferSpinner.getValue()*1000);
-            destinationTransport.setEmuWait((Integer)emuSocketWaitSpinner.getValue());
+            destinationTransport.setEmuDirectPort((Integer) emuPortSpinner.getValue());
+            destinationTransport.setEmuMaxBuffer((int) emuMaxBufferSpinner.getValue() * 1000);
+            destinationTransport.setEmuWait((Integer) emuSocketWaitSpinner.getValue());
             destinationTransport.setEmuSubNet(emuSubnetTextField.getText());
-            destinationTransport.setEmuFatPipe(emuFatPipeCheckBox.isSelected());
+
+            sourceTransport.setEmuFatPipe(emuFatPipeCheckBox.isSelected());
 
             //cMsg
             destinationTransport.setcMsgHost(cMsgHostTextField.getText());
             destinationTransport.setcMsgNameSpace(cMsgNameSpaceTextField.getText());
-            destinationTransport.setcMsgPort((Integer)cMsgPortSpinner.getValue());
+            destinationTransport.setcMsgPort((Integer) cMsgPortSpinner.getValue());
             destinationTransport.setcMsgSubject(cMsgSubjectTextField.getText());
             destinationTransport.setcMsgType(cMsgTypeTextField.getText());
 
             // update subtype of the destination component if it is of type File
-            JCGComponent tc =canvas.getGCMPs().get(link.getDestinationComponentName());
-            if (tc.getType().equals(ACodaType.FILE.name())){
+            JCGComponent tc = canvas.getGCMPs().get(link.getDestinationComponentName());
+            if (tc.getType().equals(ACodaType.FILE.name())) {
                 tc.setSubType(destinationTransport.getTransClass());
             }
 
@@ -1353,7 +1374,7 @@ public class SNLinkForm extends JFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
-            if(DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.FILE.name())){
+            if (DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.FILE.name())) {
                 transportClassComboBox.setSelectedItem("File");
             } else {
                 transportClassComboBox.setSelectedItem("EmuSocket");

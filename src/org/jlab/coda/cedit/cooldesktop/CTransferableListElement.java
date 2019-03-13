@@ -32,7 +32,7 @@ public class CTransferableListElement implements Transferable {
     public static DataFlavor LIST_ELEMENT_STRING_FLAVOR = new DataFlavor(String.class, "Component name");
     public static DataFlavor LIST_ELEMENT_LABEL_FLAVOR = new DataFlavor(Integer.class, "Component label");
 
-    DataFlavor flavors[] = {LIST_ELEMENT_STRING_FLAVOR, LIST_ELEMENT_LABEL_FLAVOR};
+    DataFlavor[] flavors = {LIST_ELEMENT_STRING_FLAVOR, LIST_ELEMENT_LABEL_FLAVOR};
 
     String data;
 

@@ -87,9 +87,7 @@ public class JCGModule {
     }
 
     public void addChnnel(JCGChannel c){
-        if(!channels.contains(c)){
-            channels.add(c);
-        }
+        channels.add(c);
     }
 
     public String getModuleClass(String componentType) {
@@ -245,9 +243,7 @@ public class JCGModule {
         if (singleEventMode != null ? !singleEventMode.equals(jcgModule.singleEventMode) : jcgModule.singleEventMode != null)
             return false;
         if (source != null ? !source.equals(jcgModule.source) : jcgModule.source != null) return false;
-        if (userSource != null ? !userSource.equals(jcgModule.userSource) : jcgModule.userSource != null) return false;
-
-        return true;
+        return userSource != null ? userSource.equals(jcgModule.userSource) : jcgModule.userSource == null;
     }
 
 }

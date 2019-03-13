@@ -439,12 +439,9 @@ public class JCGLink {
             return false;
         if (sourceModuleName != null ? !sourceModuleName.equals(jcgLink.getSourceModuleName()) : jcgLink.getSourceModuleName() != null)
             return false;
-        if (sourceStationName != null ? !sourceStationName.equals(jcgLink.getSourceStationName()) : jcgLink.getSourceStationName() != null)
-            return false;
-//        if (sourceTransportName != null ? !sourceTransportName.equals(jcgLink.getSourceTransportName()) : jcgLink.getSourceTransportName() != null)
+        return sourceStationName != null ? sourceStationName.equals(jcgLink.getSourceStationName()) : jcgLink.getSourceStationName() == null;//        if (sourceTransportName != null ? !sourceTransportName.equals(jcgLink.getSourceTransportName()) : jcgLink.getSourceTransportName() != null)
 //            return false;
 
-        return true;
     }
 
     @Override

@@ -259,8 +259,7 @@ public class JCGProcess {
         if (sendText != null ? !sendText.equals(that.getSendText()) : that.getSendText() != null) return false;
         if (sendType != null ? !sendType.equals(that.getSendType()) : that.getSendType() != null) return false;
         if (transition != null ? !transition.equals(that.getTransition()) : that.getTransition() != null) return false;
-        if(exitCode!=that.getExitCode()) return false;
-        return true;
+        return exitCode == that.getExitCode();
     }
 
     @Override

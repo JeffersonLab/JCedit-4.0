@@ -536,9 +536,7 @@ public class DrawingCanvas extends JPanel {
             JCGComponent c = GCMPs.get(gc.getName());
             GCMPs.remove(gc.getName(),c);
         }
-        if(_unZoomGCMPs.containsKey(gc.getName())){
-            _unZoomGCMPs.remove(gc.getName());
-        }
+        _unZoomGCMPs.remove(gc.getName());
     }
 
     public void clearGCMPs(){

@@ -222,7 +222,7 @@ public class JCListDialog extends JComponent implements Accessible {
                 ))
         );
 
-        jPanel1Layout.linkSize(new java.awt.Component[] {cancelButton, okButton});
+        jPanel1Layout.linkSize(cancelButton, okButton);
 
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup()

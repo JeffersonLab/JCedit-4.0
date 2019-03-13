@@ -1152,9 +1152,7 @@ public class CDesktop extends JFrame {
                         return true;
                     }
                 }
-                if(!drawingCanvas.getSupervisor().equals(serCompMap.get(name))) {
-                    return true;
-                }
+                return !drawingCanvas.getSupervisor().equals(serCompMap.get(name));
             }
         }
         return false;

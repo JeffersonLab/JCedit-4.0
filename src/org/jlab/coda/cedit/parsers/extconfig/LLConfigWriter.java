@@ -143,6 +143,12 @@ public class LLConfigWriter {
                 }
                 // add channel
                 sCfg.addOutputChannel(sc);
+
+                JCGTransport str = getSourceTransport(l);
+                if(str !=null) {
+                    sCfg.setFat(str.isEmuFatPipe());
+                }
+
                 _compDat.put(sCfg.getName(), sCfg);
             }
             group++;
@@ -221,7 +227,7 @@ public class LLConfigWriter {
                         out.write(writeInChannels(ec.getName(), ec.getType(), ch));
                     }
                     for (JCGChannel ch : ec.getoChannels().values()) {
-                        out.write(writeOutChannels(ch, cmp.getId()));
+                        out.write(writeOutChannels(ch, ec.isFat, cmp.getId()));
                     }
                     if (ec.getType().equals(ACodaType.ER.name())) {
                         out.write("     </ErModule>\n\n");
@@ -467,7 +473,7 @@ public class LLConfigWriter {
         return out.toString();
     }
 
-    private String writeOutChannels(JCGChannel ch, int id) {
+    private String writeOutChannels(JCGChannel ch, boolean isFat, int id) {
         StringBuilder out = new StringBuilder();
         // check if the transport is file
         if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("File")) {
@@ -490,7 +496,8 @@ public class LLConfigWriter {
 
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("EmuSocket")) {
             int socketCount = 1;
-            if (ch.getTransport().isEmuFatPipe()) socketCount = 2;
+//            if (ch.getTransport().isEmuFatPipe()) socketCount = 2;
+            if (isFat) socketCount = 2;
             if (ch.getTransport().getEmuSubNet().equals("undefined") || ch.getTransport().getEmuSubNet().equals("")) {
                 out.append("         <outchannel id=\"" + id + "\" " +
                         "name=\"" + ch.getName() + "\" " +
@@ -560,13 +567,11 @@ public class LLConfigWriter {
                         "/>\n\n");
             }
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("EmuSocket")) {
-            int socketCount = 1;
-            if (ch.getTransport().isEmuFatPipe()) socketCount = 2;
 
             out.append("         <inchannel id=\"" + ch.getId() + "\" " +
                     "name=\"" + ch.getName() + "\" " +
                     "transp=\"" + ch.getTransport().getName() + "\" " +
-                    "sockets=\"" + socketCount + "\" " +
+//                    "sockets=\"" + socketCount + "\" " +
                     "/>\n\n");
 
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("cMsg")) {
@@ -963,6 +968,16 @@ public class LLConfigWriter {
                 iChannels = new HashMap<String, JCGChannel>();
         private HashMap<String, JCGChannel>
                 oChannels = new HashMap<String, JCGChannel>();
+
+        private boolean isFat;
+
+        public boolean isFat() {
+            return isFat;
+        }
+
+        public void setFat(boolean fat) {
+            isFat = fat;
+        }
 
         public String getName() {
             return name;
