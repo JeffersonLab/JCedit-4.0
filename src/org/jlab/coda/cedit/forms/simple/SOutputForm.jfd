@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_112-release" class="java.beans.XMLDecoder">
+<java version="1.8.0_152-release" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -13,16 +13,20 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq l {space :::p, par l {seq {comp panel3:::::x, space :::p}, seq {comp panel1:::::x, space :::p}, seq t {space :0:357:x, comp okButton:::p::p, space :::p, comp clearButton:::p::p, space :::p, comp cancelButton:::p::p, space :p:4:p}, seq l {space :p:8:p, comp separator1::::538:x, space :::p}, comp panel2::l:::x}}}</string>
+        <string>par l {seq l {space :p::p, par l {seq {comp panel3:::::x, space :p::p}, seq {comp panel1:::::x, space :::p}, seq t {space :0:0:x, comp okButton:::p::p, space :::p, comp clearButton:::p::p, space :::p, comp cancelButton:::p::p, space :p:4:p}, seq l {space :p:8:p, comp separator1:::::x, space :::p}, comp panel2::l:::x}}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :::p, comp panel1:::::x, space :::p, comp panel2:::p::p, space :::p, comp panel3:::p::p, space :::p, comp separator1:::p::p, space :::p, par b {comp okButton::b:p::p, comp clearButton::b:p::p, comp cancelButton::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :::p, comp panel1:::p::p, space :::p, comp panel2:::p::p, space :::p, comp panel3:::p::p, space :::p, comp separator1:::p::p, space :::p, par b {comp okButton::b:p::p, comp clearButton::b:p::p, comp cancelButton::b:p::p}, space :::x}}</string>
        </void>
       </object>
       <void method="setProperty">
        <string>title</string>
        <string>Output</string>
+      </void>
+      <void method="setProperty">
+       <string>resizable</string>
+       <boolean>false</boolean>
       </void>
       <void method="add">
        <object class="com.jformdesigner.model.FormContainer">
@@ -31,11 +35,11 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq {par l {seq {space :::p, par l {seq t {comp label1:::p::p, space :::p, comp nameTextField::::340:x, space s:::p, comp label2:::p::p, space :::p, comp transportClassComboBox:::p:87:p}, seq l {comp label3:::p::p, space :0:452:x}}}, seq {space :p:42:p, comp scrollPane1::::486:x}}, space :::p}}</string>
+          <string>par l {seq t {space :::p, par t {comp scrollPane1:::::x, seq t {comp label1:::p::p, space :::p, comp nameTextField:::::x, space s:::p, comp label2:::p::p, space :::p, comp transportClassComboBox:::p:87:p}, seq l {comp label3:::p::p, space :0:0:x}}, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq l {par b {comp transportClassComboBox::b:p::p, comp label2::b:p::p, comp label1::b:p::p, comp nameTextField::b:p::p}, space :::p, comp label3:::p::p, space :::p, comp scrollPane1::::23:x, space :::p}}</string>
+          <string>par l {seq l {par b {comp transportClassComboBox::b:p::p, comp label2::b:p::p, comp label1::b:p::p, comp nameTextField::b:p::p}, space :::p, comp label3:::p::p, space :::p, comp scrollPane1:::p:105:p, space :::x}}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -153,7 +157,7 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq {space :::p, par l {comp etNameLabel:::p::p, seq l {par l {comp etTcpPortLabel::l:p::p, comp etHostLabel::l:p::p}, space :::p, par t:::p {comp etHostTextField::l:::x:3, seq l {comp etTcpPortSpinner:::p:69:p, space :::p, comp etUdpPortLabel:::p::p, space :::p, comp etUdpPortSpinner:::p:69:p, space u:::p, comp etMAddressLabel:::p::p, space :::p, comp mAddressTextField:::p:124:p}, seq l {comp etNameTextField:::p:230:p, space :p:40:p, comp etConnectionMethodLabel:::p::p, space :::p, comp connectionMethodComboBox:::p::p}}}}, space :::p}}</string>
+          <string>par l {seq {space :::p, par l {comp etNameLabel:::p::p, seq l {par l {comp etTcpPortLabel::l:p::p, comp etHostLabel::l:p::p}, space :::p, par t:::p {comp etHostTextField::l:::x:3, seq l {comp etTcpPortSpinner:::p:69:p, space :::p, comp etUdpPortLabel:::p::p, space :::p, comp etUdpPortSpinner:::p:69:p, space u:::p, comp etMAddressLabel:::p::p, space :::p, comp mAddressTextField:::::x}, seq l {comp etNameTextField:::p:230:p, space :p:40:p, comp etConnectionMethodLabel:::p::p, space :::p, comp connectionMethodComboBox:::p::p}}}}, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
@@ -344,11 +348,11 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq {space :::p, comp fileNameLabel:::p::p, space :::p, par l {seq {par l {comp fileTypeComboBox::l:p:91:p, comp FileTypeLabel::l:p::p}, space :p:89:p, par l:::p {comp FileTypeLabel2:::::x, comp fileInternalBuffer:::::x}, space ::72:x, par l {comp fileSplitSpinner:::p:106:p, comp fileSplitLabel:::p::p}}, comp fileNameTextField::::481:x}, space :::p}}</string>
+          <string>par l {seq l {space :p::p, comp fileNameLabel:::p::p, space :p::p, par l {comp fileNameTextField:::::x, seq l {par l {comp FileTypeLabel:::p::p, comp fileTypeComboBox::l:p:91:p, comp compressionCheckBox::l:p::p}, space :p:76:p, par l {comp FileTypeLabel2:::p::p, comp fileInternalBuffer::l:p:123:p, seq l {comp compressionModeComboBox:::p:74:p, space :::p, comp label4:::p::p}}, par l {seq {space :p:100:p, par l {comp fileSplitSpinner:::p:106:p, comp fileSplitLabel:::p::p}}, seq l {space :p:74:p, comp compressionThreadsSpinner:::p:74:p, space :::p, comp label5:::p::p}}, space :p:37:p}}, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq l {par b {comp fileNameLabel::b:p::p, comp fileNameTextField::b:p::p}, space ::14:x, par l {seq t {comp fileSplitLabel:::p::p, space :::p, comp fileSplitSpinner:::p::p}, seq t {comp FileTypeLabel:::p::p, space :::p, comp fileTypeComboBox:::p::p}, seq t {comp FileTypeLabel2:::p::p, space :::p, comp fileInternalBuffer:::p::p}}, space :::p}}</string>
+          <string>par l {seq l {par b {comp fileNameLabel::b:p::p, comp fileNameTextField::b:p::p}, space s:::p, par b {comp FileTypeLabel::b:p::p, comp FileTypeLabel2::b:p::p, comp fileSplitLabel::b:p::p}, space :::p, par b {comp fileTypeComboBox::b:p::p, comp fileInternalBuffer::b:p::p, comp fileSplitSpinner::b:p::p}, space s:::p, par l {comp compressionCheckBox:::p::p, par b {comp compressionModeComboBox::b:p::p, comp compressionThreadsSpinner::b:p::p, comp label4::b:p::p, comp label5::b:p::p}}, space ::10:x}}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -489,6 +493,96 @@
           </void>
          </object>
         </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JCheckBox</string>
+          <void method="setProperty">
+           <string>text</string>
+           <string>Compression</string>
+          </void>
+          <void method="setProperty">
+           <string>selected</string>
+           <boolean>true</boolean>
+          </void>
+          <void property="name">
+           <string>compressionCheckBox</string>
+          </void>
+          <void method="addEvent">
+           <object class="com.jformdesigner.model.FormEvent">
+            <string>javax.swing.event.ChangeListener</string>
+            <string>stateChanged</string>
+            <string>compressionCheckBoxStateChanged</string>
+            <boolean>true</boolean>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent" id="FormComponent0">
+          <string>javax.swing.JComboBox</string>
+          <void method="setProperty">
+           <string>model</string>
+           <object class="javax.swing.DefaultComboBoxModel">
+            <void property="selectedItem">
+             <string>NoC</string>
+            </void>
+            <void method="addElement">
+             <string>NoC</string>
+            </void>
+            <void method="addElement">
+             <string>LZ4</string>
+            </void>
+            <void method="addElement">
+             <string>LZ4+</string>
+            </void>
+            <void method="addElement">
+             <string>GZIP</string>
+            </void>
+           </object>
+          </void>
+          <void property="name">
+           <string>compressionModeComboBox</string>
+          </void>
+          <void method="auxiliary">
+           <void method="setProperty">
+            <string>JavaCodeGenerator.postInitCode</string>
+            <string>compressionModeComboBox.setSelectedIndex(1);</string>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JLabel</string>
+          <void method="setProperty">
+           <string>text</string>
+           <string>Mode</string>
+          </void>
+          <void property="name">
+           <string>label4</string>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JSpinner</string>
+          <void property="name">
+           <string>compressionThreadsSpinner</string>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JLabel</string>
+          <void method="setProperty">
+           <string>text</string>
+           <string>Threads</string>
+          </void>
+          <void property="name">
+           <string>label5</string>
+          </void>
+         </object>
+        </void>
        </object>
       </void>
       <void method="add">
@@ -561,8 +655,8 @@
       <void method="setProperty">
        <string>size</string>
        <object class="java.awt.Dimension">
-        <int>560</int>
-        <int>460</int>
+        <int>625</int>
+        <int>615</int>
        </object>
       </void>
      </object>
@@ -589,8 +683,8 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
-        <int>545</int>
+        <int>5</int>
+        <int>680</int>
        </object>
       </void>
      </object>
@@ -617,8 +711,8 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>55</int>
-        <int>545</int>
+        <int>65</int>
+        <int>680</int>
        </object>
       </void>
      </object>
@@ -645,8 +739,8 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>110</int>
-        <int>545</int>
+        <int>125</int>
+        <int>680</int>
        </object>
       </void>
      </object>
@@ -673,8 +767,8 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>215</int>
-        <int>545</int>
+        <int>185</int>
+        <int>680</int>
        </object>
       </void>
      </object>
@@ -701,8 +795,8 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
-        <int>595</int>
+        <int>5</int>
+        <int>730</int>
        </object>
       </void>
      </object>

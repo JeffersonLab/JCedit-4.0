@@ -66,6 +66,10 @@ public class JCGTransport {
 
     private boolean noLink = false;
 
+    // this can break backwards compatibility
+    private int compression = 1; //lz4 0-no compression, 1-lz4, 2-lz4_best, 3-gzip
+    private int compressionThreads = 2;
+
     public JCGTransport() {
     }
 
@@ -75,7 +79,8 @@ public class JCGTransport {
                         String etMethodCon, String etHostName, String etSubNet, String destinationEtCreate, int emuDirectPort,
                         int emuMaxBuffer, int emuWait, String emuSubNet, boolean emuFatPipe, String cMsgHost, int cMsgPort,
                         String cMsgNameSpace, String cMsgSubject, String cMsgType, String fileName,
-                        String fileType, long fileSplit, int fileInternalBuffer, boolean noLink) {
+                        String fileType, long fileSplit, int fileInternalBuffer, boolean noLink,
+                        int compression, int compressionThreads) {
         this.name = name;
         this.transClass = transClass;
         this.etName = etName;
@@ -111,6 +116,8 @@ public class JCGTransport {
         this.fileSplit = fileSplit;
         this.fileInternalBuffer = fileInternalBuffer;
         this.noLink = noLink;
+        this.compression = compression;
+        this.compressionThreads = compressionThreads;
     }
 
     public String getName() {
@@ -393,6 +400,22 @@ public class JCGTransport {
         this.single = single;
     }
 
+    public int getCompression() {
+        return compression;
+    }
+
+    public void setCompression(int compression) {
+        this.compression = compression;
+    }
+
+    public int getCompressionThreads() {
+        return compressionThreads;
+    }
+
+    public void setCompressionThreads(int compressionThreads) {
+        this.compressionThreads = compressionThreads;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -437,6 +460,8 @@ public class JCGTransport {
         if (fileType != null ? !fileType.equals(that.getFileType()) : that.getFileType() != null) return false;
         if (name != null ? !name.equals(that.getName()) : that.getName() != null) return false;
         if (transClass != null ? !transClass.equals(that.getTransClass()) : that.getTransClass() != null) return false;
+        if (compression != that.getCompression()) return false;
+        if (compressionThreads != that.getCompressionThreads()) return false;
         return single.equals(that.getSingle());
 
     }
@@ -466,6 +491,8 @@ public class JCGTransport {
                 ", \nfileSplit=" + fileSplit +
                 ", \nfileInternalBf=" + fileInternalBuffer +
                 ", \nnoLink=" + noLink +
+                ", \ncompression=" + compression +
+                ", \ncompressionThreads=" + compressionThreads +
                 '}';
     }
 }

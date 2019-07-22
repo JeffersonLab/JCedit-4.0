@@ -23,6 +23,7 @@
 
 package org.jlab.coda.cedit.forms.simple;
 
+import javax.swing.event.*;
 import org.jlab.coda.cedit.cooldesktop.CDesktop;
 import org.jlab.coda.cedit.cooldesktop.DrawingCanvas;
 import org.jlab.coda.cedit.system.*;
@@ -79,6 +80,10 @@ public class SOutputForm extends JFrame {
             fileInternalBuffer.setEnabled(false);
             okButton.setEnabled(false);
             clearButton.setEnabled(false);
+
+            compressionCheckBox.setEnabled(false);
+            compressionModeComboBox.setEnabled(false);
+            compressionThreadsSpinner.setEnabled(false);
         }
     }
 
@@ -111,6 +116,11 @@ public class SOutputForm extends JFrame {
             fileInternalBuffer.setEnabled(false);
             okButton.setEnabled(false);
             clearButton.setEnabled(false);
+
+            compressionCheckBox.setEnabled(false);
+            compressionModeComboBox.setEnabled(false);
+            compressionThreadsSpinner.setEnabled(false);
+
         }
     }
 
@@ -172,6 +182,19 @@ public class SOutputForm extends JFrame {
             descriptionTextArea.setEnabled(false);
         }
 
+        // Compression
+        compressionModeComboBox.setSelectedIndex(gt.getCompression());
+        compressionThreadsSpinner.setValue(gt.getCompressionThreads());
+        if(gt.getCompression() > 0) {
+          compressionCheckBox.setSelected(true);
+            compressionModeComboBox.setEnabled(true);
+            compressionThreadsSpinner.setEnabled(true);
+        } else {
+            compressionCheckBox.setSelected(false);
+            compressionModeComboBox.setEnabled(false);
+            compressionThreadsSpinner.setEnabled(false);
+        }
+
     }
 
     public void checkTrClass(){
@@ -214,6 +237,9 @@ public class SOutputForm extends JFrame {
             fileTypeComboBox.setEnabled(false);
             FileTypeLabel.setForeground(Color.lightGray);
 
+            compressionCheckBox.setEnabled(false);
+            compressionModeComboBox.setEnabled(false);
+            compressionThreadsSpinner.setEnabled(false);
 
         } else if (transportClassComboBox.getSelectedItem().equals("File")){
             etNameTextField.setEnabled(false);
@@ -238,6 +264,11 @@ public class SOutputForm extends JFrame {
             fileTypeComboBox.setEnabled(true);
             FileTypeLabel.setForeground(Color.black);
 
+            compressionCheckBox.setEnabled(true);
+            compressionModeComboBox.setEnabled(true);
+            compressionThreadsSpinner.setEnabled(true);
+
+
         } else if (transportClassComboBox.getSelectedItem().equals("None") ||
                 transportClassComboBox.getSelectedItem().equals("Debug")){
             etNameTextField.setEnabled(false);
@@ -261,9 +292,23 @@ public class SOutputForm extends JFrame {
             fileSplitLabel.setForeground(Color.lightGray);
             fileTypeComboBox.setEnabled(false);
             FileTypeLabel.setForeground(Color.lightGray);
+
+            compressionCheckBox.setEnabled(true);
+            compressionModeComboBox.setEnabled(true);
+            compressionThreadsSpinner.setEnabled(true);
+
         }
     }
 
+    private void compressionCheckBoxStateChanged(ChangeEvent e) {
+        if(compressionCheckBox.isSelected()){
+            compressionModeComboBox.setEnabled(true);
+            compressionThreadsSpinner.setEnabled(true);
+        } else {
+            compressionModeComboBox.setEnabled(false);
+            compressionThreadsSpinner.setEnabled(false);
+        }
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -298,6 +343,11 @@ public class SOutputForm extends JFrame {
         fileTypeComboBox = new JComboBox<>();
         fileInternalBuffer = new JComboBox<>();
         FileTypeLabel2 = new JLabel();
+        compressionCheckBox = new JCheckBox();
+        compressionModeComboBox = new JComboBox<>();
+        label4 = new JLabel();
+        compressionThreadsSpinner = new JSpinner();
+        label5 = new JLabel();
         separator1 = new JSeparator();
         cancelButton = new JButton();
         clearButton = new JButton();
@@ -310,6 +360,7 @@ public class SOutputForm extends JFrame {
 
         //======== this ========
         setTitle("Output");
+        setResizable(false);
         Container contentPane = getContentPane();
 
         //======== panel1 ========
@@ -343,25 +394,21 @@ public class SOutputForm extends JFrame {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(scrollPane1)
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(panel1Layout.createParallelGroup()
-                                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                        .addComponent(label1)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nameTextField, GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(label2)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(transportClassComboBox, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panel1Layout.createSequentialGroup()
-                                        .addComponent(label3)
-                                        .addGap(0, 452, Short.MAX_VALUE))))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)))
+                                .addComponent(label1)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nameTextField)
+                                .addGap(18, 18, 18)
+                                .addComponent(label2)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(transportClassComboBox, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                .addComponent(label3)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
             );
             panel1Layout.setVerticalGroup(
@@ -375,8 +422,8 @@ public class SOutputForm extends JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label3)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
 
@@ -445,7 +492,7 @@ public class SOutputForm extends JFrame {
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(etMAddressLabel)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(mAddressTextField, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(mAddressTextField))
                                     .addGroup(GroupLayout.Alignment.LEADING, panel2Layout.createSequentialGroup()
                                         .addComponent(etNameTextField, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
                                         .addGap(40, 40, 40)
@@ -514,6 +561,26 @@ public class SOutputForm extends JFrame {
             //---- FileTypeLabel2 ----
             FileTypeLabel2.setText("Internal Buffer [MB]");
 
+            //---- compressionCheckBox ----
+            compressionCheckBox.setText("Compression");
+            compressionCheckBox.setSelected(true);
+            compressionCheckBox.addChangeListener(e -> compressionCheckBoxStateChanged(e));
+
+            //---- compressionModeComboBox ----
+            compressionModeComboBox.setModel(new DefaultComboBoxModel<>(new String[] {
+                "NoC",
+                "LZ4",
+                "LZ4+",
+                "GZIP"
+            }));
+            compressionModeComboBox.setSelectedIndex(1);
+
+            //---- label4 ----
+            label4.setText("Mode");
+
+            //---- label5 ----
+            label5.setText("Threads");
+
             GroupLayout panel3Layout = new GroupLayout(panel3);
             panel3.setLayout(panel3Layout);
             panel3Layout.setHorizontalGroup(
@@ -523,19 +590,32 @@ public class SOutputForm extends JFrame {
                         .addComponent(fileNameLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel3Layout.createParallelGroup()
+                            .addComponent(fileNameTextField)
                             .addGroup(panel3Layout.createSequentialGroup()
                                 .addGroup(panel3Layout.createParallelGroup()
+                                    .addComponent(FileTypeLabel)
                                     .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FileTypeLabel))
-                                .addGap(89, 89, 89)
-                                .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(FileTypeLabel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fileInternalBuffer))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                                    .addComponent(compressionCheckBox))
+                                .addGap(76, 76, 76)
                                 .addGroup(panel3Layout.createParallelGroup()
-                                    .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fileSplitLabel)))
-                            .addComponent(fileNameTextField, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
+                                    .addComponent(FileTypeLabel2)
+                                    .addComponent(fileInternalBuffer, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel3Layout.createSequentialGroup()
+                                        .addComponent(compressionModeComboBox, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(label4)))
+                                .addGroup(panel3Layout.createParallelGroup()
+                                    .addGroup(panel3Layout.createSequentialGroup()
+                                        .addGap(100, 100, 100)
+                                        .addGroup(panel3Layout.createParallelGroup()
+                                            .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(fileSplitLabel)))
+                                    .addGroup(panel3Layout.createSequentialGroup()
+                                        .addGap(74, 74, 74)
+                                        .addComponent(compressionThreadsSpinner, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(label5)))
+                                .addGap(37, 37, 37)))
                         .addContainerGap())
             );
             panel3Layout.setVerticalGroup(
@@ -544,21 +624,25 @@ public class SOutputForm extends JFrame {
                         .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(fileNameLabel)
                             .addComponent(fileNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(FileTypeLabel)
+                            .addComponent(FileTypeLabel2)
+                            .addComponent(fileSplitLabel))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fileInternalBuffer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(panel3Layout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addComponent(fileSplitLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fileSplitSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addComponent(FileTypeLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addComponent(FileTypeLabel2)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fileInternalBuffer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
+                            .addComponent(compressionCheckBox)
+                            .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(compressionModeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(compressionThreadsSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(label4)
+                                .addComponent(label5)))
+                        .addContainerGap(10, Short.MAX_VALUE))
             );
         }
 
@@ -586,7 +670,7 @@ public class SOutputForm extends JFrame {
                             .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addContainerGap())
                         .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 357, Short.MAX_VALUE)
+                            .addGap(0, 0, Short.MAX_VALUE)
                             .addComponent(okButton)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(clearButton)
@@ -595,7 +679,7 @@ public class SOutputForm extends JFrame {
                             .addGap(4, 4, 4))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addGap(8, 8, 8)
-                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                            .addComponent(separator1)
                             .addContainerGap())
                         .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -603,7 +687,7 @@ public class SOutputForm extends JFrame {
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -615,7 +699,7 @@ public class SOutputForm extends JFrame {
                         .addComponent(okButton)
                         .addComponent(clearButton)
                         .addComponent(cancelButton))
-                    .addContainerGap())
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -654,6 +738,11 @@ public class SOutputForm extends JFrame {
     private JComboBox<String> fileTypeComboBox;
     private JComboBox<String> fileInternalBuffer;
     private JLabel FileTypeLabel2;
+    private JCheckBox compressionCheckBox;
+    private JComboBox<String> compressionModeComboBox;
+    private JLabel label4;
+    private JSpinner compressionThreadsSpinner;
+    private JLabel label5;
     private JSeparator separator1;
     private JButton cancelButton;
     private JButton clearButton;
@@ -761,7 +850,12 @@ public class SOutputForm extends JFrame {
                 gt.setFileType((String) fileTypeComboBox.getSelectedItem());
                 gt.setNoLink(true);
 
-
+                if(compressionCheckBox.isSelected()){
+                    gt.setCompression(compressionModeComboBox.getSelectedIndex());
+                    gt.setCompressionThreads((Integer)compressionThreadsSpinner.getValue());
+                } else {
+                    gt.setCompression(0);
+                }
 
                 gt.setName(nameTextField.getText().trim()+"_transport");
 
@@ -833,6 +927,14 @@ public class SOutputForm extends JFrame {
             fileSplitSpinner.setValue(200);
             fileInternalBuffer.setSelectedItem("100");
             fileTypeComboBox.setSelectedItem("coda");
+
+            compressionCheckBox.setEnabled(true);
+            compressionModeComboBox.setEnabled(true);
+            compressionThreadsSpinner.setEnabled(true);
+            compressionCheckBox.setSelected(true);
+            compressionModeComboBox.setSelectedIndex(1);
+            compressionThreadsSpinner.setValue(2);
+
         }
     }
 

@@ -17,7 +17,7 @@
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :::p, comp panel1:::p:80:p, space :::p, comp panel2::::191:x, space :::p, comp panel4:::p:74:p, space :::p, comp panel5:::p::p, space :::p, comp panel3:::p::p, space :::p, par b {comp cancelButton::b:p::p, comp clearButton::b:p::p, comp removeButton::b:p::p, comp okButton::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :::p, comp panel1:::p:80:p, space :::p, comp panel2::::221:x, space :::p, comp panel4:::p:74:p, space :::p, comp panel5:::p::p, space :::p, comp panel3:::p::p, space :::p, par b {comp cancelButton::b:p::p, comp clearButton::b:p::p, comp removeButton::b:p::p, comp okButton::b:p::p}, space :::p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -747,7 +747,7 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq l {space :::p, comp etTcpPortLabel2:::p::p, space :::p, par l {seq {comp emuFatPipeCheckBox:::p::p, space :0:562:x}, seq {comp emuPortSpinner:::p:76:p, space :p:18:p, comp label7:::p::p, space :::p, comp emuMaxBufferSpinner:::p:93:p, space s:::p, comp label10:::p::p, space :::p, comp emuSocketWaitSpinner:::p::p, space :::p, comp label17:::p::p, space :::p, comp emuSubnetTextField:::::x}}, space :::p}}</string>
+          <string>par l {seq l {space :::p, comp etTcpPortLabel2:::p::p, space :::p, par l {seq {comp emuFatPipeCheckBox:::p::p, space :0:577:x}, seq {comp emuPortSpinner:::p:76:p, space :p:18:p, comp label7:::p::p, space :::p, comp emuMaxBufferSpinner:::p:93:p, space s:::p, comp label10:::p::p, space :::p, comp emuSocketWaitSpinner:::p::p, space :::p, comp label17:::p::p, space :::p, comp emuSubnetTextField:::::x}}, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
@@ -1150,8 +1150,8 @@
       <void method="setProperty">
        <string>size</string>
        <object class="java.awt.Dimension">
-        <int>700</int>
-        <int>680</int>
+        <int>715</int>
+        <int>710</int>
        </object>
       </void>
      </object>

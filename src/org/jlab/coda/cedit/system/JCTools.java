@@ -756,9 +756,11 @@ public class JCTools {
                 c.getEtUdpPort(), c.getEtWait(), c.getmAddress(), c.getEtEventNum(), c.getEtEventSize(), c.getEtChunkSize(),
                 c.getInputEtChunkSize(),c.getSingle(), c.getEtGroups(), c.getEtRecvBuf(), c.getEtSendBuf(), c.getEtMethodCon(),
                 c.getEtHostName(),
-                c.getEtSubNet(), c.getDestinationEtCreate(), c.getEmuDirectPort(), c.getEmuMaxBuffer(), c.getEmuWait(), c.getEmuSubNet(), c.isEmuFatPipe(),
+                c.getEtSubNet(), c.getDestinationEtCreate(), c.getEmuDirectPort(), c.getEmuMaxBuffer(), c.getEmuWait(),
+                c.getEmuSubNet(), c.isEmuFatPipe(),
                 c.getcMsgHost(), c.getcMsgPort(), c.getcMsgNameSpace(), c.getcMsgSubject(), c.getcMsgType(),
-                c.getFileName(), c.getFileType(), c.getFileSplit(), c.getFileInternalBuffer(), c.isNoLink());
+                c.getFileName(), c.getFileType(), c.getFileSplit(), c.getFileInternalBuffer(), c.isNoLink(),
+                c.getCompression(), c.getCompressionThreads());
     }
 
     public static JCGProcess deepCpProcess (JCGProcess c) {
