@@ -66,6 +66,13 @@ public class SNLinkForm extends JFrame {
                     "EmuSocket",
                     "Et"
             });
+        } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name())) {
+            comboModel = new DefaultComboBoxModel(new String[]{
+                    "EmuSocket+Et",
+                    "EmuSocket",
+                    "Et",
+                    "cMsg"
+            });
         } else {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
@@ -392,6 +399,13 @@ public class SNLinkForm extends JFrame {
             enableEmu();
 
             disableEt();
+            disableCMsg();
+            disableFile();
+
+        }else if (transportClassComboBox.getSelectedItem().equals("EmuSocket+Et")) {
+            enableEmu();
+            enableEt();
+
             disableCMsg();
             disableFile();
 
@@ -943,7 +957,7 @@ public class SNLinkForm extends JFrame {
                         .addGroup(panel4Layout.createParallelGroup()
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addComponent(emuFatPipeCheckBox)
-                                .addGap(0, 577, Short.MAX_VALUE))
+                                .addGap(0, 562, Short.MAX_VALUE))
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1092,7 +1106,7 @@ public class SNLinkForm extends JFrame {
                     .addContainerGap()
                     .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                    .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel4, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)

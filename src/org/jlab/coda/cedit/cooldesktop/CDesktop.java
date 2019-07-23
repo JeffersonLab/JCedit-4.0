@@ -211,7 +211,8 @@ public class CDesktop extends JFrame {
             }
         }
         for(JCGTransport tt:_transports.values()) {
-            if (tt.getTransClass().equals("EmuSocket")) {
+            if (tt.getTransClass().equals("EmuSocket") ||
+                    tt.getTransClass().equals("EmuSocket+Et")) {
                 int xp = tt.getEmuDirectPort();
                 while (!_ports.add(xp)) {
                     xp = xp + 1;

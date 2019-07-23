@@ -188,7 +188,8 @@ public class CDesktopLimited extends JFrame {
                                         tt.setTransClass(cpt.getValue());
                                     }
 
-                                    if(tt.getTransClass().equals("Et")){
+                                    if(tt.getTransClass().equals("Et") ||
+                                            tt.getTransClass().equals("EmuSocket+Et")){
                                         if(cpt.getName().equals("etName")){
                                             tt.setEtName(cpt.getValue());
                                         }

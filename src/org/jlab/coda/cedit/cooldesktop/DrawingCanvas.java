@@ -1077,7 +1077,8 @@ public class DrawingCanvas extends JPanel {
                                         for(JCGTransport tr:GCMPs.get(l.getDestinationComponentName()).getTrnsports()){
                                             if(tr.getName().equals(l.getDestinationTransportName())){
                                                 destinationNetworkInfo.add(tr.getTransClass());
-                                                if(tr.getTransClass().equals("Et")){
+                                                if(tr.getTransClass().equals("Et") ||
+                                                tr.getTransClass().equals("EmuSocket+Et")){
                                                     destinationNetworkInfo.add(tr.getEtName());
                                                     destinationNetworkInfo.add(tr.getEtMethodCon());
                                                 } else if(tr.getTransClass().equals("File")){
