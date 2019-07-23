@@ -579,7 +579,6 @@ public class SComponentForm extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner non-commercial license
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         label1 = new JLabel();
@@ -1042,7 +1041,6 @@ public class SComponentForm extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner non-commercial license
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel label1;
@@ -1096,7 +1094,6 @@ public class SComponentForm extends JFrame {
     private class ProcessAction extends AbstractAction {
         private ProcessAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Open");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1135,7 +1132,6 @@ public class SComponentForm extends JFrame {
     private class CancelAction extends AbstractAction {
         private CancelAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Cancel");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1148,7 +1144,6 @@ public class SComponentForm extends JFrame {
     private class ClearAction extends AbstractAction {
         private ClearAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Clear");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1201,7 +1196,6 @@ public class SComponentForm extends JFrame {
     private class OkAction extends AbstractAction {
         private OkAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Ok");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1240,7 +1234,6 @@ public class SComponentForm extends JFrame {
     private class OkAllAction extends AbstractAction {
         private OkAllAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Apply to All");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
