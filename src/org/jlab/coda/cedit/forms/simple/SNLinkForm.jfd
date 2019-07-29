@@ -793,7 +793,7 @@
           <void method="setProperty">
            <string>model</string>
            <object class="javax.swing.SpinnerNumberModel">
-            <int>1000</int>
+            <int>4100</int>
             <int>1</int>
             <int>30000</int>
             <int>1</int>

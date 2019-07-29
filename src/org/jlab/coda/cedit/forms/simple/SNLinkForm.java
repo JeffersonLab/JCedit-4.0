@@ -929,7 +929,7 @@ public class SNLinkForm extends JFrame {
             label7.setText("Max Buffer (KByte)");
 
             //---- emuMaxBufferSpinner ----
-            emuMaxBufferSpinner.setModel(new SpinnerNumberModel(1000, 1, 30000, 1));
+            emuMaxBufferSpinner.setModel(new SpinnerNumberModel(4100, 1, 30000, 1));
 
             //---- label10 ----
             label10.setText("Wait");
