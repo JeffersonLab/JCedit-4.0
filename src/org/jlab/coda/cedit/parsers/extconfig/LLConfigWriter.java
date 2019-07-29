@@ -353,7 +353,7 @@ public class LLConfigWriter {
                 break;
             case "EmuSocket+Et":
 
-//                if (ec.getType().equals(ACodaType.ER.name())) {
+                if (ec.getType().equals(ACodaType.ER.name())) {
                     // ET
                     if ((tr.getName().equals((cName + "_transport"))) && (tr.getDestinationEtCreate().equals("true"))) {
                         tr.setEtCreate(true);
@@ -439,7 +439,19 @@ public class LLConfigWriter {
                                 "class=\"Emu\" " +
                                 "/>\n\n");
                     }
-//                }
+                } else {
+                    // EMU
+                    if (tr.getName().equals((cName + "_transport"))) {
+                        out.append("     <client name=\"" + tr.getName() + "\" " +
+                                "class=\"Emu\" " +
+                                "port=\"" + tr.getEmuDirectPort() + "\" " +
+                                "/>\n\n");
+                    } else {
+                        out.append("     <server name=\"" + tr.getName() + "\" " +
+                                "class=\"Emu\" " +
+                                "/>\n\n");
+                    }
+                }
                 break;
             case "cMsg":
                 String udl = "platform";
