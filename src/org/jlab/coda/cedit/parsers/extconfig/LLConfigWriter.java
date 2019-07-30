@@ -708,11 +708,12 @@ public class LLConfigWriter {
                     "/>\n\n");
             if (cType != null && cType.equals(ACodaType.ER.name())) {
                 out.append("         <inchannel id=\"" + ch.getId() + "\" " +
-                        "name=\"" + ch.getName() + "\" " +
+                        "name=et_input\"" +
                         "transp=\"" + ch.getTransport().getName() +
                         "_async" +
                         "\" " +
                         "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
+                        "stationName=inputStation\"" +
                         "/>\n\n");
 
             }
