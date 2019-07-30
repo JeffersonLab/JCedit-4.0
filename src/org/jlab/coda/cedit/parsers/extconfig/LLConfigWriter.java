@@ -707,13 +707,14 @@ public class LLConfigWriter {
 //                    "sockets=\"" + socketCount + "\" " +
                     "/>\n\n");
             if (cType != null && cType.equals(ACodaType.ER.name())) {
-                out.append("         <inchannel id=\"" + ch.getId() + "\" " +
-                        "name=et_input\"" +
+                out.append("         <inchannel id=\" " + ch.getId()+1 + "\" " +
+                        "name=" + "\" " + "et_input\"" +
                         "transp=\"" + ch.getTransport().getName() +
                         "_async" +
                         "\" " +
                         "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
-                        "stationName=inputStation\"" +
+                        "\" " +
+                        "stationName=inputStation\"" + "\" " +
                         "/>\n\n");
 
             }
