@@ -706,7 +706,16 @@ public class LLConfigWriter {
                     "transp=\"" + ch.getTransport().getName() + "\" " +
 //                    "sockets=\"" + socketCount + "\" " +
                     "/>\n\n");
+            if (cType != null && cType.equals(ACodaType.ER.name())) {
+                out.append("         <inchannel id=\"" + ch.getId() + "\" " +
+                        "name=\"" + ch.getName() + "\" " +
+                        "transp=\"" + ch.getTransport().getName() +
+                        "_async" +
+                        "\" " +
+                        "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
+                        "/>\n\n");
 
+            }
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("cMsg")) {
             out.append("         <inchannel id=\"" + ch.getId() + "\" " +
                     "name=\"" + ch.getName() + "\" " +
