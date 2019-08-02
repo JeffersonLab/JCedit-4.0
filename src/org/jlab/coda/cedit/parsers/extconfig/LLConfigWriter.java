@@ -714,6 +714,7 @@ public class LLConfigWriter {
                         "\" " +
                         "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
                         "stationName=\"inputStation\"" +
+                        "ignoreErrors=\"true\"" +
                         "/>\n\n");
 
             }
