@@ -67,16 +67,13 @@ public class SNLinkForm extends JFrame {
                     "EmuSocket",
                     "Et"
             });
-        } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name()) ) {
+        } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name()) ||
+                gl.getDestinationComponentType().equals(ACodaType.EBER.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket+Et",
                     "EmuSocket",
                     "Et",
                     "cMsg"
-            });
-        } else if (gl.getDestinationComponentType().equals(ACodaType.EBER.name())) {
-            comboModel = new DefaultComboBoxModel(new String[]{
-                    "EmuSocket+Et",
             });
         } else {
             comboModel = new DefaultComboBoxModel(new String[]{

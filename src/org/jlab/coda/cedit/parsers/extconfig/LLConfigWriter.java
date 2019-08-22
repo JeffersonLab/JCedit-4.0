@@ -532,15 +532,16 @@ public class LLConfigWriter {
                             "name=\"" + cmp.getName()+"_ER" + "\" " +
                             "transp=\"Fifo\" " +
                             "/>\n\n");
-                    // output channel for ER module
-                // input channel for EB
-                for (JCGChannel ch : ec.getoChannels().values()) {
-                    out.append("         <outchannel id=\"" + ch.getId() + "\" " +
-                            "name=\"" + ch.getName() + "\" " +
-                            "transp=\"" + ch.getTransport().getName() + "\" " +
-                            "group=\"" + ch.getGroup() + "\" " +
-                            "chunk=\"" + ch.getTransport().getEtChunkSize() + "\" " +
-                            "single=\"" + ch.getTransport().getSingle() + "\" " +
+                // input channel for ET
+                for (JCGChannel ch : ec.getiChannels().values()) {
+                    out.append("         <inchannel id=\"" + (ch.getId()+1) + "\" " +
+                            "name=\"et_input\" " +
+                            "transp=\"" + ch.getTransport().getName() +
+                            "_async" +
+                            "\" " +
+                            "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
+                            "stationName=\"inputStation\"" +
+                            " ignoreErrors=\"true\"" +
                             "/>\n\n");
                 }
                 out.append("     </ErModule>\n\n");
@@ -742,21 +743,13 @@ public class LLConfigWriter {
 
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("Et")) {
             if (cType != null && !(cType.equals(ACodaType.ER.name()))) {
-                if (cType.equals(ACodaType.FCS.name())) {
-                    out.append("         <inchannel id=\"" + ch.getId() + "\" " +
-                            "name=\"" + ch.getName() + "\" " +
-                            "transp=\"" + ch.getTransport().getName() + "\" " +
-                            "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
-                            "controlFilter=\"on\" " +
-                            "/>\n\n");
-                } else {
+
                     out.append("         <inchannel id=\"" + ch.getId() + "\" " +
                             "name=\"" + ch.getName() + "\" " +
                             "transp=\"" + ch.getTransport().getName() + "\" " +
                             "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
                             "idFilter=\"" + ch.getIdFilter() + "\" " +
                             "/>\n\n");
-                }
             } else {
                 out.append("         <inchannel id=\"" + ch.getId() + "\" " +
                         "name=\"" + ch.getName() + "\" " +
