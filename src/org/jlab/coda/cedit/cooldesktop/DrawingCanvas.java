@@ -601,23 +601,24 @@ public class DrawingCanvas extends JPanel {
                 res = endType.equals(ACodaType.PEB.name()) ||
                         endType.equals(ACodaType.DC.name()) ||
                         endType.equals(ACodaType.EB.name()) ||
+                        endType.equals(ACodaType.EBER.name()) ||
                         endType.equals(ACodaType.FILE.name());
                 break;
             case DC:
                 res = endType.equals(ACodaType.SEB.name()) ||
+                        endType.equals(ACodaType.EBER.name()) ||
                         endType.equals(ACodaType.FILE.name());
                 break;
             case EB:
             case PEB:
             case SEB:
-                res = endType.equals(ACodaType.ER.name()) ||
-                        endType.equals(ACodaType.FCS.name()) ||
-                        endType.equals(ACodaType.FILE.name())||
+                res = endType.equals(ACodaType.FILE.name()) ||
+                        endType.equals(ACodaType.ER.name()) ||
                         endType.equals(ACodaType.USR.name());
                 break;
-            case FCS:
-                res = endType.equals(ACodaType.ER.name()) ||
-                        endType.equals(ACodaType.FILE.name());
+            case EBER:
+                res = endType.equals(ACodaType.FILE.name()) ||
+                        endType.equals(ACodaType.USR.name());
                 break;
             case ER:
                 res = endType.equals(ACodaType.FILE.name()) ||
@@ -1078,7 +1079,7 @@ public class DrawingCanvas extends JPanel {
                                             if(tr.getName().equals(l.getDestinationTransportName())){
                                                 destinationNetworkInfo.add(tr.getTransClass());
                                                 if(tr.getTransClass().equals("Et") ||
-                                                tr.getTransClass().equals("EmuSocket+Et")){
+                                                        tr.getTransClass().equals("EmuSocket+Et")){
                                                     destinationNetworkInfo.add(tr.getEtName());
                                                     destinationNetworkInfo.add(tr.getEtMethodCon());
                                                 } else if(tr.getTransClass().equals("File")){

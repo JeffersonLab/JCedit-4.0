@@ -242,6 +242,7 @@ public class CDesktopLimited extends JFrame {
             // emu configure updates .xml file
         } else if(type.equals(ACodaType.DC.name()) ||
                 type.equals(ACodaType.SEB.name()) ||
+                type.equals(ACodaType.EBER.name()) ||
                 type.equals(ACodaType.PEB.name())){
             EmuConfigReader rd = new EmuConfigReader(runType, com.getName());
             if(rd.isConfigExists()){

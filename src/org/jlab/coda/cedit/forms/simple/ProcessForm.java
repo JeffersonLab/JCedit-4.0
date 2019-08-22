@@ -39,7 +39,6 @@ public class ProcessForm extends JFrame {
     private JCGComponent spv;
     private SupervisorForm sForm = null;
     private SComponentForm sCompForm = null;
-    private FCSForm fCompForm = null;
     private JCGProcess gp;
     private DrawingCanvas canvas;
     private Pattern ptr = Pattern.compile("\\w+");
@@ -59,17 +58,6 @@ public class ProcessForm extends JFrame {
 
     public ProcessForm(SComponentForm compForm, DrawingCanvas canvas, JCGProcess gp, boolean isNew) {
         this.sCompForm = compForm;
-        this.gp        = gp;
-        this.canvas    = canvas;
-        initComponents();
-        prePostGroup   = new ButtonGroup();
-        prePostGroup.add(beforeRadioButton);
-        prePostGroup.add(afterRadioButton);
-        update();
-    }
-
-    public ProcessForm(FCSForm compForm, DrawingCanvas canvas, JCGProcess gp, boolean isNew) {
-        this.fCompForm = compForm;
         this.gp        = gp;
         this.canvas    = canvas;
         initComponents();
@@ -419,12 +407,7 @@ public class ProcessForm extends JFrame {
                     scriptCommandLabel.setText("Command");
 
                     //---- scriptCommandTextField ----
-                    scriptCommandTextField.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            scriptCommandTextFieldActionPerformed(e);
-                        }
-                    });
+                    scriptCommandTextField.addActionListener(e -> scriptCommandTextFieldActionPerformed(e));
                     scriptCommandTextField.addKeyListener(new KeyAdapter() {
                         @Override
                         public void keyTyped(KeyEvent e) {
@@ -501,12 +484,7 @@ public class ProcessForm extends JFrame {
                         sendSubjectLabel.setText("Subject");
 
                         //---- sendSubjectTextField ----
-                        sendSubjectTextField.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                sendSubjectTextFieldActionPerformed(e);
-                            }
-                        });
+                        sendSubjectTextField.addActionListener(e -> sendSubjectTextFieldActionPerformed(e));
                         sendSubjectTextField.addKeyListener(new KeyAdapter() {
                             @Override
                             public void keyTyped(KeyEvent e) {
@@ -813,13 +791,7 @@ public class ProcessForm extends JFrame {
 
                     // add process name to the combo box of the component form
                     sCompForm.addProcessCombo(gp.getName());
-                } else if(fCompForm!=null){
-                    canvas.getGCMPs().get(fCompForm.getName()).addPrcess(gp);
-
-                    // add process name to the combo box of the component form
-                    fCompForm.addProcessCombo(gp.getName());
-
-                } else if(sForm!=null){
+                }  else if(sForm!=null){
                     canvas.getSupervisor().addPrcess(gp);
                     sForm.addProcessCombo(gp.getName());
                 }
@@ -903,13 +875,6 @@ public class ProcessForm extends JFrame {
 
                 // remove process name from the combo box of the component form
                 sCompForm.removeProcessCombo(gp.getName());
-
-            // FCS component
-            } else if(fCompForm!=null){
-                canvas.getGCMPs().get(fCompForm.getName()).removePrcess((gp));
-
-                // remove process name from the combo box of the component form
-                fCompForm.removeProcessCombo(gp.getName());
 
             // Supervisor
             } else if(sForm!=null && spv!=null){

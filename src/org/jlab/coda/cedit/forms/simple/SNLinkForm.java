@@ -63,15 +63,20 @@ public class SNLinkForm extends JFrame {
                 gl.getSourceComponentType().equals(ACodaType.GT.name()) ||
                 gl.getSourceComponentType().equals(ACodaType.TS.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
+                    "EmuSocket+Et",
                     "EmuSocket",
                     "Et"
             });
-        } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name())) {
+        } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name()) ) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket+Et",
                     "EmuSocket",
                     "Et",
                     "cMsg"
+            });
+        } else if (gl.getDestinationComponentType().equals(ACodaType.EBER.name())) {
+            comboModel = new DefaultComboBoxModel(new String[]{
+                    "EmuSocket+Et",
             });
         } else {
             comboModel = new DefaultComboBoxModel(new String[]{
@@ -106,6 +111,7 @@ public class SNLinkForm extends JFrame {
             checkBoxEtCreate.setEnabled(true);
             if ((DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.PEB.name())) ||
                     (DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.SEB.name())) ||
+                    (DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.EBER.name())) ||
                     (DrawingCanvas.getComp(link.getDestinationComponentName()).getType().equals(ACodaType.ER.name()))
             ) {
                 singleEventOutCheckBox.setEnabled(true);
@@ -244,8 +250,6 @@ public class SNLinkForm extends JFrame {
         emuMaxBufferSpinner.setValue(destinationTransport.getEmuMaxBuffer() / 1000);
         emuSubnetTextField.setText(destinationTransport.getEmuSubNet());
 
-        System.out.println("DDD "+sourceTransport);
-        System.out.println("DDD "+emuFatPipeCheckBox);
         emuFatPipeCheckBox.setSelected(sourceTransport.isEmuFatPipe());
 
         // cMsg

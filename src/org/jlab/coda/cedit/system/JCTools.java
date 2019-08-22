@@ -279,7 +279,7 @@ public class JCTools {
         List<Integer> dcIds = new ArrayList<Integer>();
         List<Integer> pebIds = new ArrayList<Integer>();
         List<Integer> sebIds = new ArrayList<Integer>();
-        List<Integer> fcsIds = new ArrayList<Integer>();
+        List<Integer> eberIds = new ArrayList<Integer>();
         List<Integer> erIds = new ArrayList<Integer>();
         List<Integer> slcIds = new ArrayList<Integer>();
         List<Integer> usrIds = new ArrayList<Integer>();
@@ -297,8 +297,8 @@ public class JCTools {
                 pebIds.add(p.getId());
             } else if(t.equals(ACodaType.SEB.name())){
                 sebIds.add(p.getId());
-            } else if(t.equals(ACodaType.FCS.name())){
-                fcsIds.add(p.getId());
+            } else if(t.equals(ACodaType.EBER.name())){
+                eberIds.add(p.getId());
             } else if(t.equals(ACodaType.ER.name())){
                 erIds.add(p.getId());
             } else if(t.equals(ACodaType.SLC.name())){
@@ -347,9 +347,9 @@ public class JCTools {
             }
         }
 
-        unique = new HashSet<Integer>(fcsIds);
+        unique = new HashSet<Integer>(eberIds);
         for(int tmp:unique){
-            if(Collections.frequency(fcsIds,tmp)>1) {
+            if(Collections.frequency(eberIds,tmp)>1) {
                 JCTools.showError("Malformed coda component description xml. " +
                         "\nDuplicate id = " + tmp + " for type = FCS components.");
                 return false;

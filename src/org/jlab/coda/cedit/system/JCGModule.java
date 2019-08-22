@@ -98,8 +98,6 @@ public class JCGModule {
             return tsModuleClass;
         }else if (componentType.equals(ACodaType.ER.name())) {
             return erModuleClass;
-        }  else if (componentType.equals(ACodaType.FCS.name())) {
-            return fcsModuleClass;
         } else {
             return ebModuleClass;
         }

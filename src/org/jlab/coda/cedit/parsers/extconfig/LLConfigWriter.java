@@ -167,19 +167,6 @@ public class LLConfigWriter {
 
             // farm control system component config creation
             if (ec.getType() != null) {
-                if (ec.getType().equals((ACodaType.FCS.name()))) {
-                    JCGComponent cmp = null;
-                    for (JCGComponent c : components) {
-                        if (c.getName().equals(ec.getName())) {
-                            cmp = c;
-                            break;
-                        }
-                    }
-                    if (cmp != null) {
-                        createFCSConfigFile(cmp);
-                    }
-
-                }
                 fileName = filePath + ec.getName() + ".xml";
 
                 if (ec.getType().equals(ACodaType.ROC.name()) ||
@@ -218,33 +205,34 @@ public class LLConfigWriter {
                         }
                     }
 
-                    // modules
-                    out.write(writeModule(cmp));
-
-                    // find the component
-                    // channels
-                    for (JCGChannel ch : ec.getiChannels().values()) {
-                        out.write(writeInChannels(ec.getName(), ec.getType(), ch));
-                    }
-                    for (JCGChannel ch : ec.getoChannels().values()) {
-                        out.write(writeOutChannels(ch, ec.isFat, cmp.getId()));
-                    }
-                    if (ec.getType().equals(ACodaType.ER.name())) {
-                        out.write("     </ErModule>\n\n");
-                    } else if (ec.getType().equals(ACodaType.ROC.name())) {
-                        out.write("     </RocModule>\n\n");
-                    } else if (ec.getType().equals(ACodaType.GT.name())) {
-                        out.write("     </GTriggerModule>\n\n");
-                    } else if (ec.getType().equals(ACodaType.USR.name())) {
-                        out.write("     </UsrModule>\n\n");
-                    } else if (ec.getType().equals(ACodaType.FCS.name())) {
-                        out.write("     </FCSModule>\n\n");
-                    } else if (ec.getType().equals(ACodaType.TS.name())) {
-                        out.write("     </TsModule>\n\n");
+                    if(cmp.getType().equals(ACodaType.EBER.name())){
+                     out.write(writeEBERModulesAndChannels(cmp));
                     } else {
-                        out.write("     </EbModule>\n\n");
-                    }
+                        // modules
+                        out.write(writeModule(cmp));
 
+                        // find the component
+                        // channels
+                        for (JCGChannel ch : ec.getiChannels().values()) {
+                            out.write(writeInChannels(ec.getName(), ec.getType(), ch));
+                        }
+                        for (JCGChannel ch : ec.getoChannels().values()) {
+                            out.write(writeOutChannels(ch, ec.isFat, cmp.getId()));
+                        }
+                        if (ec.getType().equals(ACodaType.ER.name())) {
+                            out.write("     </ErModule>\n\n");
+                        } else if (ec.getType().equals(ACodaType.ROC.name())) {
+                            out.write("     </RocModule>\n\n");
+                        } else if (ec.getType().equals(ACodaType.GT.name())) {
+                            out.write("     </GTriggerModule>\n\n");
+                        } else if (ec.getType().equals(ACodaType.USR.name())) {
+                            out.write("     </UsrModule>\n\n");
+                        } else if (ec.getType().equals(ACodaType.TS.name())) {
+                            out.write("     </TsModule>\n\n");
+                        } else {
+                            out.write("     </EbModule>\n\n");
+                        }
+                    }
                     out.write("   </modules>\n\n");
 
                     out.write("</component>\n\n");
@@ -353,7 +341,8 @@ public class LLConfigWriter {
                 break;
             case "EmuSocket+Et":
 
-                if (ec.getType().equals(ACodaType.ER.name())) {
+                if (ec.getType().equals(ACodaType.ER.name()) ||
+                        ec.getType().equals(ACodaType.EBER.name())) {
                     // ET
                     if ((tr.getName().equals((cName + "_transport"))) && (tr.getDestinationEtCreate().equals("true"))) {
                         tr.setEtCreate(true);
@@ -474,6 +463,93 @@ public class LLConfigWriter {
     }
 
 
+    private String writeEBERModulesAndChannels(JCGComponent cmp) {
+        StringBuilder out = new StringBuilder();
+        JCGModule md;
+        boolean isEndianLittle = false;
+
+        md = cmp.getModule();
+        if (md != null) {
+
+            for (JCGChannel ch : md.getChnnels()) {
+                if (ch.getEndian().equals("little")) {
+                    isEndianLittle = true;
+                    break;
+                }
+            }
+            out.append("   <modules>\n\n");
+            if (cmp.getType().equals(ACodaType.EBER.name())) {
+                if (isEndianLittle) {
+
+                    // EB module =============================================
+                    out.append("     <EbModule class=\"" + md.getModuleClass(ACodaType.EB.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "threads=\"" + md.getThreads() + "\" " +
+                            "timeStats=\"off\" " +
+                            "runData=\"" + md.isRunData() + "\" " +
+                            "tsCheck=\"" + md.isTsCheck() + "\" " +
+                            "tsSlop=\"" + md.getTsSlop() + "\" " +
+                            "sparsify=\"" + md.isSparsify() + "\" " +
+                            "endian=\"" + "little" + "\"" +
+                            "> \n\n");
+                } else {
+                    out.append("     <EbModule class=\"" + md.getModuleClass(ACodaType.EB.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "threads=\"" + md.getThreads() + "\" " +
+                            "timeStats=\"off\" " +
+                            "runData=\"" + md.isRunData() + "\" " +
+                            "tsCheck=\"" + md.isTsCheck() + "\" " +
+                            "tsSlop=\"" + md.getTsSlop() + "\" " +
+                            "sparsify=\"" + md.isSparsify() + "\"" +
+                            "> \n\n");
+
+                }
+
+                    // input channel for EB
+                    ExternalConfig ec = _compDat.get(cmp.getName());
+                    for (JCGChannel ch : ec.getiChannels().values()) {
+                        out.append("         <inchannel id=\"" + ch.getId() + "\" " +
+                                "name=\"" + ch.getName() + "\" " +
+                                "transp=\"" + ch.getTransport().getName() + "\" " +
+//                    "sockets=\"" + socketCount + "\" " +
+                                "/>\n\n");
+                    }
+                    // output channel for EB module
+                    out.append("         <outchannel id=\"" + md.getId() + "\" " +
+                            "name=\"" + cmp.getName()+"_ER" + "\" " +
+                            "transp=\"Fifo\" " +
+                            "/>\n\n");
+                    out.append("     </EbModule>\n\n");
+
+                    // ER module =============================================
+                    out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "timeStats=\"off\" " +
+                            "endian=\"" + "little" + "\"" +
+                            "> \n\n");
+                    // input channel for ER module
+                    out.append("         <inchannel id=\"" + md.getId() + "\" " +
+                            "name=\"" + cmp.getName()+"_ER" + "\" " +
+                            "transp=\"Fifo\" " +
+                            "/>\n\n");
+                    // output channel for ER module
+                // input channel for EB
+                for (JCGChannel ch : ec.getoChannels().values()) {
+                    out.append("         <outchannel id=\"" + ch.getId() + "\" " +
+                            "name=\"" + ch.getName() + "\" " +
+                            "transp=\"" + ch.getTransport().getName() + "\" " +
+                            "group=\"" + ch.getGroup() + "\" " +
+                            "chunk=\"" + ch.getTransport().getEtChunkSize() + "\" " +
+                            "single=\"" + ch.getTransport().getSingle() + "\" " +
+                            "/>\n\n");
+                }
+                out.append("     </ErModule>\n\n");
+
+            }
+        }
+        return out.toString();
+    }
+
     private String writeModule(JCGComponent cmp) {
         StringBuilder out = new StringBuilder();
         JCGModule md;
@@ -542,11 +618,6 @@ public class LLConfigWriter {
                             "timeStats=\"off\" " +
                             "> \n\n");
                 }
-            } else if (cmp.getType().equals(ACodaType.FCS.name())) {
-                out.append("     <FCSModule class=\"" + md.getModuleClass(ACodaType.FCS.name()) + "\" " +
-                        "id=\"" + md.getId() + "\" " +
-                        "timeStats=\"off\" " +
-                        "> \n\n");
             } else {
                 if (isEndianLittle) {
                     out.append("     <EbModule class=\"" + md.getModuleClass(ACodaType.PEB.name()) + "\" " +

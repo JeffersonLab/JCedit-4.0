@@ -115,8 +115,8 @@ public class SComponentForm extends JFrame {
             priorityModel = new SpinnerNumberModel(ACodaType.WNC.priority(), ACodaType.WNC.priority(), ACodaType.WNC.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.ER.name())){
             priorityModel = new SpinnerNumberModel(ACodaType.ER.priority(), ACodaType.ER.priority(), ACodaType.ER.priority()+100, 1);
-        } else if(comp.getType().equals(ACodaType.FCS.name())){
-            priorityModel = new SpinnerNumberModel(ACodaType.FCS.priority(), ACodaType.FCS.priority(), ACodaType.FCS.priority()+100, 1);
+        } else if(comp.getType().equals(ACodaType.EBER.name())){
+            priorityModel = new SpinnerNumberModel(ACodaType.EBER.priority(), ACodaType.EBER.priority(), ACodaType.EBER.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.PEB.name())){
             priorityModel = new SpinnerNumberModel(ACodaType.PEB.priority(), ACodaType.PEB.priority(), ACodaType.PEB.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.SEB.name())){
@@ -125,8 +125,6 @@ public class SComponentForm extends JFrame {
             priorityModel = new SpinnerNumberModel(ACodaType.DC.priority(), ACodaType.DC.priority(), ACodaType.DC.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.EB.name())){
             priorityModel = new SpinnerNumberModel(ACodaType.EB.priority(), ACodaType.EB.priority(), ACodaType.EB.priority()+100, 1);
-        } else if(comp.getType().equals(ACodaType.CDEB.name())){
-            priorityModel = new SpinnerNumberModel(ACodaType.CDEB.priority(), ACodaType.CDEB.priority(), ACodaType.CDEB.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.ROC.name())){
             priorityModel = new SpinnerNumberModel(ACodaType.ROC.priority(), ACodaType.ROC.priority(), ACodaType.ROC.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.GT.name())){
@@ -153,7 +151,6 @@ public class SComponentForm extends JFrame {
             case USR:
             case SLC:
             case WNC:
-            case FCS:
             case FILE:
                 Rol1Label.setForeground(Color.lightGray);
                 Rol1usrStringLabel.setForeground(Color.lightGray);
@@ -178,7 +175,7 @@ public class SComponentForm extends JFrame {
             case PEB:
             case SEB:
             case EB:
-            case CDEB:
+            case EBER:
             case DC:
                 Rol1Label.setForeground(Color.lightGray);
                 Rol1usrStringLabel.setForeground(Color.lightGray);
@@ -1158,8 +1155,8 @@ public class SComponentForm extends JFrame {
                 prioritySpinner.setValue(ACodaType.WNC.priority());
             } else if(component.getType().equals(ACodaType.ER.name())){
                 prioritySpinner.setValue(ACodaType.ER.priority());
-            } else if(component.getType().equals(ACodaType.FCS.name())){
-                prioritySpinner.setValue(ACodaType.FCS.priority());
+            } else if(component.getType().equals(ACodaType.EBER.name())){
+                prioritySpinner.setValue(ACodaType.EBER.priority());
             } else if(component.getType().equals(ACodaType.PEB.name())){
                 prioritySpinner.setValue(ACodaType.PEB.priority());
             } else if(component.getType().equals(ACodaType.SEB.name())){

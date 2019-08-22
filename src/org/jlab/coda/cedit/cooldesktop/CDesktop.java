@@ -72,7 +72,7 @@ public class CDesktop extends JFrame {
             ACodaType.DC.name(),
             ACodaType.PEB.name(),
             ACodaType.SEB.name(),
-            ACodaType.FCS.name(),
+            ACodaType.EBER.name(),
             ACodaType.ER.name(),
             ACodaType.SLC.name(),
             ACodaType.USR.name(),
@@ -410,8 +410,8 @@ public class CDesktop extends JFrame {
                                     selectedType = ACodaType.SEB.name();
                                     break;
                                 case 6:
-                                    cbt(ACodaType.FCS.name());
-                                    selectedType = ACodaType.FCS.name();
+                                    cbt(ACodaType.EBER.name());
+                                    selectedType = ACodaType.EBER.name();
                                     break;
                                 case 7:
                                     cbt(ACodaType.ER.name());
