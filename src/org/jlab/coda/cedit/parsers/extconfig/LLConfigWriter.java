@@ -463,6 +463,7 @@ public class LLConfigWriter {
     }
 
 
+
     private String writeEBERModulesAndChannels(JCGComponent cmp) {
         StringBuilder out = new StringBuilder();
         JCGModule md;
