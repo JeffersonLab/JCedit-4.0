@@ -704,7 +704,7 @@ public class JCTools {
 
     /**
      * Checks existence of undefined rtv in the string
-     * (i.e. checks for existence of "%(" in teh string)
+     * (i.e. checks for existence of "%(" in the string)
      * @param input original input string
      * @return true or false
      */

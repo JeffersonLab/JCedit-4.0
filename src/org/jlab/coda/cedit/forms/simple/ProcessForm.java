@@ -396,7 +396,8 @@ public class ProcessForm extends JFrame {
                     "download",
                     "prestart",
                     "go",
-                    "end"
+                    "end",
+                    "reset"
                 }));
 
                 //======== panel1 ========
@@ -623,7 +624,7 @@ public class ProcessForm extends JFrame {
                             .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(14, Short.MAX_VALUE))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -652,23 +653,23 @@ public class ProcessForm extends JFrame {
                 buttonBarLayout.setHorizontalGroup(
                     buttonBarLayout.createParallelGroup()
                         .addGroup(buttonBarLayout.createSequentialGroup()
-                            .addGap(188, 188, 188)
-                            .addComponent(saveButton, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+                            .addGap(171, 171, 171)
+                            .addComponent(saveButton)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(button1)
+                            .addComponent(button1, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancelButton, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())
                 );
                 buttonBarLayout.setVerticalGroup(
                     buttonBarLayout.createParallelGroup()
                         .addGroup(buttonBarLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(cancelButton)
-                            .addComponent(button1)
+                            .addComponent(saveButton)
                             .addComponent(removeButton)
-                            .addComponent(saveButton))
+                            .addComponent(button1)
+                            .addComponent(cancelButton))
                 );
             }
             dialogPane.add(buttonBar, BorderLayout.SOUTH);

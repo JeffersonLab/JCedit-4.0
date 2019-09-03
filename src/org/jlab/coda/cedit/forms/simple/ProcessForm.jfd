@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_40-release" class="java.beans.XMLDecoder">
+<java version="1.8.0_152-release" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -45,7 +45,7 @@
            </void>
            <void method="setProperty">
             <string>$verticalGroup</string>
-            <string>par l {seq l {par b {comp label1::b:p::p, comp nameTextField::b:p::p, comp periodSpinner::b:p::p, comp peridicLabel::b:p::p, comp periodicCheckBox::b:p::p, comp syncCheckBox::b:p::p}, space u:p::p, par l {par b {comp beforeRadioButton::b:p::p, comp afterRadioButton::b:p::p, comp label3::b:p::p}, par b:l {comp stateComboBox::b:p::p, comp forceEndCheckBox::b:p::p}}, space :::p, comp panel1:::p::p, space :::p, comp panel2:::p::p, space ::14:x}}</string>
+            <string>par l {seq l {par b {comp label1::b:p::p, comp nameTextField::b:p::p, comp periodSpinner::b:p::p, comp peridicLabel::b:p::p, comp periodicCheckBox::b:p::p, comp syncCheckBox::b:p::p}, space u:p::p, par l {par b {comp beforeRadioButton::b:p::p, comp afterRadioButton::b:p::p, comp label3::b:p::p}, par b:l {comp stateComboBox::b:p::p, comp forceEndCheckBox::b:p::p}}, space :::p, comp panel1:::p::p, space :::p, comp panel2:::p::p, space :::x}}</string>
            </void>
           </object>
           <void property="name">
@@ -199,6 +199,9 @@
               </void>
               <void method="addElement">
                <string>end</string>
+              </void>
+              <void method="addElement">
+               <string>reset</string>
               </void>
              </object>
             </void>
@@ -497,11 +500,11 @@
            <class>org.jdesktop.layout.GroupLayout</class>
            <void method="setProperty">
             <string>$horizontalGroup</string>
-            <string>par l {seq {space :p:188:p, comp saveButton:::p:67:p, space :::p, comp removeButton:::p:86:p, space :::p, comp button1:::p::p, space :::p, comp cancelButton:::p:80:p, space :::p}}</string>
+            <string>par l {seq {space :p:171:p, comp saveButton:::p::p, space :::p, comp removeButton:::p:94:p, space :::p, comp button1:::p:84:p, space :::p, comp cancelButton:::p:94:p, space :::p}}</string>
            </void>
            <void method="setProperty">
             <string>$verticalGroup</string>
-            <string>par l {par b {comp cancelButton::b:p::p, comp button1::b:p::p, comp removeButton::b:p::p, comp saveButton::b:p::p}}</string>
+            <string>par l {par b {comp saveButton::b:p::p, comp removeButton::b:p::p, comp button1::b:p::p, comp cancelButton::b:p::p}}</string>
            </void>
           </object>
           <void method="setProperty">
