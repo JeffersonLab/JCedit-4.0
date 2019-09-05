@@ -321,6 +321,11 @@ public class CoolDatabaseBrowser {
                             case "end":
                                 tmpState = "ended";
                                 break;
+                            case "reset":
+                                tmpState = "reseted";
+                                prc.setBefore(true);
+                                prc.setAfter(false);
+                                break;
                         }
                         if (tmpState != null) {
                             if (prc.isBefore()) {
