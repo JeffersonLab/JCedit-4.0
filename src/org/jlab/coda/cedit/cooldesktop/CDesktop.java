@@ -2480,7 +2480,7 @@ public class CDesktop extends JFrame {
 
                     for (JCGTransport t:c.getTrnsports()){
                         if (t.getFileName().contains("$")){
-                            if(t.getFileName().indexOf("$") == 0) {
+                            if(t.getFileName().charAt(t.getFileName().indexOf("$") + 1) !='(' ) {
                                 isSyntaxError = true;
                                 break;
                             }
