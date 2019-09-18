@@ -2510,6 +2510,7 @@ public class CDesktop extends JFrame {
                     if(j!=0) return;
                 }
 
+
                 name = runType;
 
                 if(name.equals("undefined")) name = configNameLabel.getText();
