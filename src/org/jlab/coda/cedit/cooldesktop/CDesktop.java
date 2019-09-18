@@ -2470,6 +2470,7 @@ public class CDesktop extends JFrame {
         }
 
         public void actionPerformed(ActionEvent e) {
+            boolean isSyntaxError = false;
             String name;
             StringBuilder noRolCmps = new StringBuilder();
             if(drawingCanvas.getGCMPs().isEmpty()){
@@ -2477,6 +2478,14 @@ public class CDesktop extends JFrame {
             } else {
                 for(JCGComponent c:drawingCanvas.getGCMPs().values()){
 
+                    for (JCGTransport t:c.getTrnsports()){
+                        if (t.getFileName().contains("$")){
+                            if(t.getFileName().indexOf("$") == 0) {
+                                isSyntaxError = true;
+                                break;
+                            }
+                        }
+                    }
                     if((c.getType().equals(ACodaType.ROC.name()) ||
                             c.getType().equals(ACodaType.GT.name()) ||
                             c.getType().equals(ACodaType.TS.name()))
@@ -2492,6 +2501,15 @@ public class CDesktop extends JFrame {
                             "warning",JOptionPane.YES_NO_OPTION);
                     if(j!=0) return;
                 }
+
+                if(isSyntaxError){
+                    int j = JOptionPane.showConfirmDialog(me,
+                            "Syntax error in the output file name. \n"+
+                                    "\nContinue?",
+                            "warning",JOptionPane.YES_NO_OPTION);
+                    if(j!=0) return;
+                }
+
                 name = runType;
 
                 if(name.equals("undefined")) name = configNameLabel.getText();
