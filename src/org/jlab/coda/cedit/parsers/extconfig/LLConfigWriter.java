@@ -537,17 +537,20 @@ public class LLConfigWriter {
                         "transp=\"Fifo\" " +
                         "/>\n\n");
                 // input channel for ET
+
                 for (JCGChannel ch : ec.getiChannels().values()) {
-                    out.append("         <inchannel id=\"" + (ch.getId() + 1) + "\" " +
-                            "name=\"et_input\" " +
-                            "transp=\"" + ch.getTransport().getName() +
-                            "_async" +
-                            "\" " +
-                            "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
-                            "stationName=\"inputStation\"" +
-                            " ignoreErrors=\"true\"" +
-                            "/>\n\n");
-                    break;
+                    if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("EmuSocket+Et")) {
+                        out.append("         <inchannel id=\"" + (ch.getId() + 1) + "\" " +
+                                "name=\"et_input\" " +
+                                "transp=\"" + ch.getTransport().getName() +
+                                "_async" +
+                                "\" " +
+                                "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
+                                "stationName=\"inputStation\"" +
+                                " ignoreErrors=\"true\"" +
+                                "/>\n\n");
+                        break;
+                    }
                 }
 
 //                out.append("     </ErModule>\n\n");
