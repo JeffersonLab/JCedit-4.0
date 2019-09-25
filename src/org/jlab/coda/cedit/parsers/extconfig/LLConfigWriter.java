@@ -885,6 +885,14 @@ public class LLConfigWriter {
                                             out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
 
                                             break;
+                                        case "EmuSocket+Et":
+                                            out.write("emuName               = " + l.getDestinationComponentName() + "\n");
+                                            out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
+                                            out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
+                                            out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
+                                            out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
+
+                                            break;
                                         case "File":
                                             out.write("dataFile              = " + tt.getFileName() + "\n");
                                             out.write("fileType              = " + tt.getFileType() + "\n");
@@ -932,6 +940,12 @@ public class LLConfigWriter {
                                         out.write("wait                  = " + tr.getEtWait() + "\n");
                                         break;
                                     case "EmuSocket":
+                                        out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
+                                        out.write("emuNet                = " + tr.getEmuSubNet() + "\n");
+                                        out.write("emuMaxBufferSize      = " + tr.getEmuMaxBuffer() + "\n");
+                                        out.write("emuTimeOut            = " + tr.getEmuWait() + "\n");
+                                        break;
+                                   case "EmuSocket+Et":
                                         out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
                                         out.write("emuNet                = " + tr.getEmuSubNet() + "\n");
                                         out.write("emuMaxBufferSize      = " + tr.getEmuMaxBuffer() + "\n");
