@@ -205,8 +205,12 @@ public class LLConfigWriter {
                         }
                     }
 
-                    if(cmp.getType().equals(ACodaType.EBER.name())){
-                     out.write(writeEBERModulesAndChannels(cmp));
+                    if (cmp.getType().equals(ACodaType.EBER.name())) {
+                        out.write(writeEBERModulesAndChannels(cmp));
+                        for (JCGChannel ch : ec.getoChannels().values()) {
+                            out.write(writeOutChannels(ch, ec.isFat, cmp.getId()));
+                        }
+                        out.append("     </ErModule>\n\n");
                     } else {
                         // modules
                         out.write(writeModule(cmp));
@@ -463,7 +467,6 @@ public class LLConfigWriter {
     }
 
 
-
     private String writeEBERModulesAndChannels(JCGComponent cmp) {
         StringBuilder out = new StringBuilder();
         JCGModule md;
@@ -506,36 +509,36 @@ public class LLConfigWriter {
 
                 }
 
-                    // input channel for EB
-                    ExternalConfig ec = _compDat.get(cmp.getName());
-                    for (JCGChannel ch : ec.getiChannels().values()) {
-                        out.append("         <inchannel id=\"" + ch.getId() + "\" " +
-                                "name=\"" + ch.getName() + "\" " +
-                                "transp=\"" + ch.getTransport().getName() + "\" " +
+                // input channel for EB
+                ExternalConfig ec = _compDat.get(cmp.getName());
+                for (JCGChannel ch : ec.getiChannels().values()) {
+                    out.append("         <inchannel id=\"" + ch.getId() + "\" " +
+                            "name=\"" + ch.getName() + "\" " +
+                            "transp=\"" + ch.getTransport().getName() + "\" " +
 //                    "sockets=\"" + socketCount + "\" " +
-                                "/>\n\n");
-                    }
-                    // output channel for EB module
-                    out.append("         <outchannel id=\"" + md.getId() + "\" " +
-                            "name=\"" + cmp.getName()+"_ER" + "\" " +
-                            "transp=\"Fifo\" " +
                             "/>\n\n");
-                    out.append("     </EbModule>\n\n");
+                }
+                // output channel for EB module
+                out.append("         <outchannel id=\"" + md.getId() + "\" " +
+                        "name=\"" + cmp.getName() + "_ER" + "\" " +
+                        "transp=\"Fifo\" " +
+                        "/>\n\n");
+                out.append("     </EbModule>\n\n");
 
-                    // ER module =============================================
-                    out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
-                            "id=\"" + md.getId() + "\" " +
-                            "timeStats=\"off\" " +
-                            "endian=\"" + "little" + "\"" +
-                            "> \n\n");
-                    // input channel for ER module
-                    out.append("         <inchannel id=\"" + md.getId() + "\" " +
-                            "name=\"" + cmp.getName()+"_ER" + "\" " +
-                            "transp=\"Fifo\" " +
-                            "/>\n\n");
+                // ER module =============================================
+                out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
+                        "id=\"" + md.getId() + "\" " +
+                        "timeStats=\"off\" " +
+                        "endian=\"" + "little" + "\"" +
+                        "> \n\n");
+                // input channel for ER module
+                out.append("         <inchannel id=\"" + md.getId() + "\" " +
+                        "name=\"" + cmp.getName() + "_ER" + "\" " +
+                        "transp=\"Fifo\" " +
+                        "/>\n\n");
                 // input channel for ET
                 for (JCGChannel ch : ec.getiChannels().values()) {
-                    out.append("         <inchannel id=\"" + (ch.getId()+1) + "\" " +
+                    out.append("         <inchannel id=\"" + (ch.getId() + 1) + "\" " +
                             "name=\"et_input\" " +
                             "transp=\"" + ch.getTransport().getName() +
                             "_async" +
@@ -544,8 +547,10 @@ public class LLConfigWriter {
                             "stationName=\"inputStation\"" +
                             " ignoreErrors=\"true\"" +
                             "/>\n\n");
+                    break;
                 }
-                out.append("     </ErModule>\n\n");
+
+//                out.append("     </ErModule>\n\n");
 
             }
         }
@@ -745,12 +750,12 @@ public class LLConfigWriter {
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("Et")) {
             if (cType != null && !(cType.equals(ACodaType.ER.name()))) {
 
-                    out.append("         <inchannel id=\"" + ch.getId() + "\" " +
-                            "name=\"" + ch.getName() + "\" " +
-                            "transp=\"" + ch.getTransport().getName() + "\" " +
-                            "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
-                            "idFilter=\"" + ch.getIdFilter() + "\" " +
-                            "/>\n\n");
+                out.append("         <inchannel id=\"" + ch.getId() + "\" " +
+                        "name=\"" + ch.getName() + "\" " +
+                        "transp=\"" + ch.getTransport().getName() + "\" " +
+                        "chunk=\"" + ch.getTransport().getInputEtChunkSize() + "\" " +
+                        "idFilter=\"" + ch.getIdFilter() + "\" " +
+                        "/>\n\n");
             } else {
                 out.append("         <inchannel id=\"" + ch.getId() + "\" " +
                         "name=\"" + ch.getName() + "\" " +
@@ -772,7 +777,7 @@ public class LLConfigWriter {
 //                    "sockets=\"" + socketCount + "\" " +
                     "/>\n\n");
             if (cType != null && cType.equals(ACodaType.ER.name())) {
-                out.append("         <inchannel id=\"" + (ch.getId()+1) + "\" " +
+                out.append("         <inchannel id=\"" + (ch.getId() + 1) + "\" " +
                         "name=\"et_input\" " +
                         "transp=\"" + ch.getTransport().getName() +
                         "_async" +

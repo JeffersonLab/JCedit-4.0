@@ -59,18 +59,13 @@ public class SNLinkForm extends JFrame {
                     "Debug",
                     "None"
             });
-        } else if (gl.getSourceComponentType().equals(ACodaType.ROC.name()) ||
-                gl.getSourceComponentType().equals(ACodaType.GT.name()) ||
-                gl.getSourceComponentType().equals(ACodaType.TS.name())) {
+        } else if (gl.getDestinationComponentType().equals(ACodaType.EBER.name()))   {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket+Et",
                     "EmuSocket",
-                    "Et"
             });
-        } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name()) ||
-                gl.getDestinationComponentType().equals(ACodaType.EBER.name())) {
+        } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
-                    "EmuSocket+Et",
                     "EmuSocket",
                     "Et",
                     "cMsg"
@@ -208,7 +203,11 @@ public class SNLinkForm extends JFrame {
         destinationComponentTextField.setText(DName);
 
         transportClassComboBox.setSelectedItem(destinationTransport.getTransClass());
-        etNameTextField.setText(destinationTransport.getEtName());
+        if(destinationTransport.getEtName().equals("undefined")){
+            etNameTextField.setText("/tmp/et_"+stp.getExpid()+"_"+DName);
+        } else {
+            etNameTextField.setText(destinationTransport.getEtName());
+        }
         etHostTextField.setText(destinationTransport.getEtHostName());
         etSubnetTextField.setText(destinationTransport.getEtSubNet());
         etTcpPortSpinner.setValue(destinationTransport.getEtTcpPort());
