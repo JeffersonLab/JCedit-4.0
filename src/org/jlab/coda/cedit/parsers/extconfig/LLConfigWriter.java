@@ -861,10 +861,11 @@ public class LLConfigWriter {
 
                             for (JCGTransport tt : _compMap.get(l.getDestinationComponentName()).getTrnsports()) {
                                 if (tt.getName().equals(l.getDestinationTransportName())) {
-                                    out.write("output                = " + tt.getTransClass() + "\n");
+
 
                                     switch (tt.getTransClass()) {
                                         case "Et":
+                                            out.write("output                = " + tt.getTransClass() + "\n");
                                             out.write("etName                = " + tt.getEtName() + "\n");
                                             if (tt.getEtMethodCon().equals("direct")) {
                                                 out.write("etHost                = " + tt.getEtHostName() + "\n");
@@ -878,6 +879,7 @@ public class LLConfigWriter {
 
                                             break;
                                         case "EmuSocket":
+                                            out.write("output                = " + tt.getTransClass() + "\n");
                                             out.write("emuName               = " + l.getDestinationComponentName() + "\n");
                                             out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
                                             out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
@@ -886,6 +888,7 @@ public class LLConfigWriter {
 
                                             break;
                                         case "EmuSocket+Et":
+                                            out.write("output                = EmuSocket\n");
                                             out.write("emuName               = " + l.getDestinationComponentName() + "\n");
                                             out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
                                             out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
@@ -894,6 +897,7 @@ public class LLConfigWriter {
 
                                             break;
                                         case "File":
+                                            out.write("output                = " + tt.getTransClass() + "\n");
                                             out.write("dataFile              = " + tt.getFileName() + "\n");
                                             out.write("fileType              = " + tt.getFileType() + "\n");
 
@@ -925,10 +929,10 @@ public class LLConfigWriter {
                                 io = "output";
                             }
                             if (!tpNames.contains(tName)) {
-                                out.write(io + " transportClass = " + tr.getTransClass() + "\n");
 
                                 switch (tr.getTransClass()) {
                                     case "Et":
+                                        out.write(io + " transportClass = " + tr.getTransClass() + "\n");
                                         out.write("etName                = " + tr.getEtName() + "\n");
                                         out.write("etHost                = " + tr.getmAddress() + "\n");
                                         out.write("etPort                = " + tr.getEtTcpPort() + "\n");
@@ -940,18 +944,21 @@ public class LLConfigWriter {
                                         out.write("wait                  = " + tr.getEtWait() + "\n");
                                         break;
                                     case "EmuSocket":
+                                        out.write(io + " transportClass = " + tr.getTransClass() + "\n");
                                         out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
                                         out.write("emuNet                = " + tr.getEmuSubNet() + "\n");
                                         out.write("emuMaxBufferSize      = " + tr.getEmuMaxBuffer() + "\n");
                                         out.write("emuTimeOut            = " + tr.getEmuWait() + "\n");
                                         break;
-                                   case "EmuSocket+Et":
+                                    case "EmuSocket+Et":
+                                        out.write("output                = EmuSocket\n");
                                         out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
                                         out.write("emuNet                = " + tr.getEmuSubNet() + "\n");
                                         out.write("emuMaxBufferSize      = " + tr.getEmuMaxBuffer() + "\n");
                                         out.write("emuTimeOut            = " + tr.getEmuWait() + "\n");
                                         break;
                                     case "File":
+                                        out.write(io + " transportClass = " + tr.getTransClass() + "\n");
                                         out.write("dataFile              = " + tr.getFileName() + "\n");
                                         out.write("fileType              = " + tr.getFileType() + "\n");
                                         out.write("splitBytes            = " + tr.getFileSplit() + "\n");
