@@ -27,12 +27,12 @@
 package org.jlab.coda.cedit.forms.simple;
 
 import org.jlab.coda.cedit.cooldesktop.CDesktop;
+import org.jlab.coda.cedit.forms.util.SortedListModel;
 import org.jlab.coda.cedit.util.CDirList;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.util.Collections;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
@@ -44,17 +44,25 @@ import javax.swing.text.Position;
 public class RunTypeList extends JFrame {
 
     private SupervisorForm parent;
+    private SortedListModel model;
     public RunTypeList(SupervisorForm parent) {
-        initComponents();
-        this.parent = parent;
+
+        model = new SortedListModel();
 
         CDirList fc = new CDirList(CDesktop.stp.getCoolHome() +
                 File.separator+ CDesktop.stp.getExpid()+
                 File.separator+"config"+
                 File.separator+"Control", null);
 
-        list1.setListData(fc.getNames());
-//        Collections.sort(list1);
+        for (String s: fc.getNames()){
+            model.add(s);
+        }
+
+        //        list1.setListData(fc.getNames());
+
+        initComponents();
+        this.parent = parent;
+
         String currentRunType = parent.getSupervisorName();
         int index = list1.getNextMatch(currentRunType,0, Position.Bias.Forward);
         if(index!=-1){
@@ -65,11 +73,10 @@ public class RunTypeList extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner non-commercial license
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         scrollPane1 = new JScrollPane();
-        list1 = new JList();
+        list1 = new JList(model);
         buttonBar = new JPanel();
         okButton = new JButton();
         cancelButton = new JButton();
@@ -99,13 +106,13 @@ public class RunTypeList extends JFrame {
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                             .addContainerGap())
                 );
                 contentPanelLayout.setVerticalGroup(
                     contentPanelLayout.createParallelGroup()
                         .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                             .addContainerGap())
                 );
             }
@@ -139,7 +146,6 @@ public class RunTypeList extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner non-commercial license
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JScrollPane scrollPane1;
@@ -154,7 +160,6 @@ public class RunTypeList extends JFrame {
     private class OkAction extends AbstractAction {
         private OkAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "OK");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -170,7 +175,6 @@ public class RunTypeList extends JFrame {
     private class CancelAction extends AbstractAction {
         private CancelAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Cancel");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
