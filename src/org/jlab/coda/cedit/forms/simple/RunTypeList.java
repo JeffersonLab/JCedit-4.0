@@ -32,6 +32,7 @@ import org.jlab.coda.cedit.util.CDirList;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.Collections;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.border.*;
@@ -53,6 +54,7 @@ public class RunTypeList extends JFrame {
                 File.separator+"Control", null);
 
         list1.setListData(fc.getNames());
+//        Collections.sort(list1);
         String currentRunType = parent.getSupervisorName();
         int index = list1.getNextMatch(currentRunType,0, Position.Bias.Forward);
         if(index!=-1){

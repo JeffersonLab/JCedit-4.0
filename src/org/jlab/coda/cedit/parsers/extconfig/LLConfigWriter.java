@@ -526,11 +526,18 @@ public class LLConfigWriter {
                 out.append("     </EbModule>\n\n");
 
                 // ER module =============================================
-                out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
-                        "id=\"" + md.getId() + "\" " +
-                        "timeStats=\"off\" " +
-                        "endian=\"" + "little" + "\"" +
-                        "> \n\n");
+                if (isEndianLittle) {
+                    out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "timeStats=\"off\" " +
+                            "endian=\"" + "little" + "\"" +
+                            "> \n\n");
+                } else {
+                    out.append("     <ErModule class=\"" + md.getModuleClass(ACodaType.ER.name()) + "\" " +
+                            "id=\"" + md.getId() + "\" " +
+                            "timeStats=\"off\" " +
+                            "> \n\n");
+                }
                 // input channel for ER module
                 out.append("         <inchannel id=\"" + md.getId() + "\" " +
                         "name=\"" + cmp.getName() + "_ER" + "\" " +
