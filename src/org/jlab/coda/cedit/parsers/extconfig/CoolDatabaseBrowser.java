@@ -463,6 +463,7 @@ public class CoolDatabaseBrowser {
                     if(!link.getSourceComponentName().equals(gc.getName())) {
                         // streamID = linked component name
                         out.write("   <cool:linkedTo>" + link.getSourceComponentName() + "</cool:linkedTo>\n");
+                        out.write("   <cool:linkedToType>" + link.getSourceComponentType() + "</cool:linkedToType>\n");
                     }
                 }
 
