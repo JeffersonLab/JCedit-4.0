@@ -673,7 +673,7 @@ public class LLConfigWriter {
                     "transp=\"" + ch.getTransport().getName() + "\" " +
                     "fileName=\"" + ch.getTransport().getFileName() + "\" " +
                     "split=\"" + ch.getTransport().getFileSplit() + "\" " +
-                    "internalBuf=\"" + ch.getTransport().getFileInternalBuffer() + "\" " +
+//                    "internalBuf=\"" + ch.getTransport().getFileInternalBuffer() + "\" " +
                     "/>\n\n");
 
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("Et")) {
@@ -754,7 +754,7 @@ public class LLConfigWriter {
                     "transp=\"" + ch.getTransport().getName() + "\" " +
                     "fileName=\"" + ch.getTransport().getFileName() + "\" " +
                     "split=\"" + ch.getTransport().getFileSplit() + "\" " +
-                    "internalBuf=\"" + ch.getTransport().getFileInternalBuffer() + "\" " +
+//                    "internalBuf=\"" + ch.getTransport().getFileInternalBuffer() + "\" " +
                     "/>\n\n");
 
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("Et")) {
