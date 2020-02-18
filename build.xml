@@ -49,6 +49,9 @@
             <fileset dir="${build_dir}/common/jar/jena" >
                 <include name="*.jar" />
             </fileset>
+            <fileset dir="${build_dir}/common/jar" >
+                <include name="*.jar" />
+            </fileset>
         </path>
     </target>
 
@@ -65,6 +68,9 @@
         <path id="library.lib.classpath">
 <!--            <pathelement location="${build_dir}/common/jar/jena.jar"/>-->
             <fileset dir="${build_dir}/common/jar/jena" >
+                <include name="*.jar" />
+            </fileset>
+            <fileset dir="${build_dir}/common/jar" >
                 <include name="*.jar" />
             </fileset>
         </path>
