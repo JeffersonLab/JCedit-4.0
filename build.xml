@@ -39,12 +39,16 @@
     <target name="coda_env.exist" depends="coda_env.check" if="coda_env_isSet">
         <property name="build_dir"  value="${env.CODA}" />
         <property name="jar_dir" value="${build_dir}/common/jar"/>
+        <property name="jena_jar_dir" value="${build_dir}/common/jar/jena"/>
         <property name="common_bin_dir" value="${build_dir}/common/bin"/>
         <property name="bin_dir" value="${build_dir}/Linux-i686/bin"/>
         <property name="bin64_dir" value="${build_dir}/Linux-x86_64/bin"/>
         <property name="bin_source_dir" value="${module.JCedit.basedir}/bin/coda"/>
         <path id="library.lib.classpath">
-            <pathelement location="${build_dir}/common/jar/jena.jar"/>
+<!--            <pathelement location="${build_dir}/common/jar/jena/jena.jar"/>-->
+            <fileset dir="${build_dir}/common/jar/jena" >
+                <include name="*.jar" />
+            </fileset>
         </path>
     </target>
 
@@ -53,12 +57,16 @@
         <mkdir dir = "./build"/>
         <property name="build_dir"  value="./build" />
         <property name="jar_dir" value="${build_dir}/common/jar"/>
+        <property name="jena_jar_dir" value="${build_dir}/common/jar/jena"/>
         <property name="common_bin_dir" value="${build_dir}/common/bin"/>
         <property name="bin_dir" value="${build_dir}/Linux-i686/bin"/>
         <property name="bin64_dir" value="${build_dir}/Linux-x86_64/bin"/>
         <property name="bin_source_dir" value="${module.JCedit.basedir}/bin/local"/>
         <path id="library.lib.classpath">
-            <pathelement location="${build_dir}/common/jar/jena.jar"/>
+<!--            <pathelement location="${build_dir}/common/jar/jena.jar"/>-->
+            <fileset dir="${build_dir}/common/jar/jena" >
+                <include name="*.jar" />
+            </fileset>
         </path>
     </target>
 
@@ -146,6 +154,11 @@
             <available file="${jar_dir}" type="dir"/>
         </condition>
     </target>
+    <target name="jena.dir.check">
+        <condition property="jena.dir.exists">
+            <available file="${jena_jar_dir}" type="dir"/>
+        </condition>
+    </target>
     <target name="common_bin_dir.check">
         <condition property="common_bin_dir.exists">
             <available file="${common_bin_dir}" type="dir"/>
@@ -163,7 +176,7 @@
     </target>
     <target name="jena_jar.check">
         <condition property="jena_jar.exists">
-            <available file="${jar_dir}/jena.jar" type="file"/>
+            <available file="${jena_jar_dir}/jena.jar" type="file"/>
         </condition>
     </target>
 
@@ -172,10 +185,16 @@
         <echo>... creating missing ${jar_dir}"</echo>
         <mkdir dir = "${jar_dir}"/>
     </target>
-    <target name="jena_jar.install" depends="jena_jar.check" unless="jena_jar.exists">
-        <echo>... installing ${module.afecs-1.4.basedir}/lib/jena.jar"</echo>
-        <copy file = "${module.JCedit.basedir}/lib/jena.jar" todir="${build_dir}/common/jar"/>
+    <target name="jena_jar_dir.create" depends="jena.dir.check" unless="jena.dir.exists">
+        <echo>... creating ${jena_jar_dir} </echo>
+        <mkdir dir="${jena_jar_dir}"/>
     </target>
+
+    <target name="jena_jar.install" depends="jena_jar.check" unless="jena_jar.exists">
+        <echo>... installing ${module.afecs.basedir}/lib/jena.jar"</echo>
+        <copy file = "${module.JCedit.basedir}/lib/jena.jar" todir="${build_dir}/common/jar/jena"/>
+    </target>
+
 
     <target name="common_bin_dir.create" depends="common_bin_dir.check" unless="common_bin_dir.exists">
         <echo>... creating missing ${common_bin_dir}"</echo>
@@ -190,7 +209,7 @@
         <mkdir dir = "${bin64_dir}"/>
     </target>
 
-    <target name="check_config" depends="jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, jena_jar.install" description="Check configuration"/>
+    <target name="check_config" depends="jar_dir.create, jena_jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, jena_jar.install" description="Check configuration"/>
 
     <property name="module.jdk.home.JCedit" value="${project.jdk.home}"/>
     <property name="module.jdk.bin.JCedit" value="${project.jdk.bin}"/>
