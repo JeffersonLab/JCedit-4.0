@@ -180,6 +180,12 @@
         </condition>
     </target>
 
+    <target name="jaxb-2_0-final-api.check">
+        <condition property="jaxb-2_0-final-api.exists">
+            <available file="${jar_dir}/jaxb-2_0-final-api.jar" type="file"/>
+        </condition>
+    </target>
+
     <!-- creating directories -->
     <target name="jar_dir.create" depends="jar_dir.check" unless="jar_dir.exists">
         <echo>... creating missing ${jar_dir}"</echo>
@@ -193,6 +199,11 @@
     <target name="jena_jar.install" depends="jena_jar.check" unless="jena_jar.exists">
         <echo>... installing ${module.afecs.basedir}/lib/jena.jar"</echo>
         <copy file = "${module.JCedit.basedir}/lib/jena.jar" todir="${build_dir}/common/jar/jena"/>
+    </target>
+
+    <target name="jaxb-2_0-final-api.install" depends="jaxb-2_0-final-api.check" unless="jaxb-2_0-final-api.exists">
+        <echo>... installing ${module.afecs.basedir}/lib/jaxb-2_0-final-api.jar"</echo>
+        <copy file="${module.JCedit.basedir}/lib/JinFlux.jar" todir="${build_dir}/common/jar"/>
     </target>
 
 
@@ -209,7 +220,7 @@
         <mkdir dir = "${bin64_dir}"/>
     </target>
 
-    <target name="check_config" depends="jar_dir.create, jena_jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, jena_jar.install" description="Check configuration"/>
+    <target name="check_config" depends="jar_dir.create, jena_jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, jaxb-2_0-final-api.install, jena_jar.install" description="Check configuration"/>
 
     <property name="module.jdk.home.JCedit" value="${project.jdk.home}"/>
     <property name="module.jdk.bin.JCedit" value="${project.jdk.bin}"/>
@@ -321,6 +332,8 @@
 
     <target name="cp" description="install">
         <copy file="jcedit-4.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
+        <copy file = "${module.JCedit.basedir}/lib/jaxb-2_0-final-api.jar" todir="${build_dir}/common/jar" overwrite="true"/>
+
         <copy file = "${bin_source_dir}/jcedit" todir="${common_bin_dir}"/>
         <copy file = "${bin_source_dir}/jcedit_view" todir="${common_bin_dir}"/>
 
