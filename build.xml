@@ -46,10 +46,10 @@
         <property name="bin_source_dir" value="${module.JCedit.basedir}/bin/coda"/>
         <path id="library.lib.classpath">
 <!--            <pathelement location="${build_dir}/common/jar/jena/jena.jar"/>-->
-            <fileset dir="${build_dir}/common/jar/jena" >
+            <fileset dir="${build_dir}/common/jar" >
                 <include name="*.jar" />
             </fileset>
-            <fileset dir="${build_dir}/common/jar" >
+            <fileset dir="${build_dir}/common/jar/jena" >
                 <include name="*.jar" />
             </fileset>
         </path>
@@ -67,10 +67,10 @@
         <property name="bin_source_dir" value="${module.JCedit.basedir}/bin/local"/>
         <path id="library.lib.classpath">
 <!--            <pathelement location="${build_dir}/common/jar/jena.jar"/>-->
-            <fileset dir="${build_dir}/common/jar/jena" >
+            <fileset dir="${build_dir}/common/jar" >
                 <include name="*.jar" />
             </fileset>
-            <fileset dir="${build_dir}/common/jar" >
+            <fileset dir="${build_dir}/common/jar/jena" >
                 <include name="*.jar" />
             </fileset>
         </path>
