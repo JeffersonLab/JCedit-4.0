@@ -203,7 +203,7 @@
 
     <target name="jaxb-2_0-final-api.install" depends="jaxb-2_0-final-api.check" unless="jaxb-2_0-final-api.exists">
         <echo>... installing ${module.afecs.basedir}/lib/jaxb-2_0-final-api.jar"</echo>
-        <copy file="${module.JCedit.basedir}/lib/JinFlux.jar" todir="${build_dir}/common/jar"/>
+        <copy file="${module.JCedit.basedir}/lib/jaxb-2_0-final-api.jar" todir="${build_dir}/common/jar"/>
     </target>
 
 
