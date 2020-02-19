@@ -198,8 +198,9 @@ public class CoolDatabaseBrowser {
             context = JAXBContext.newInstance(JCGComponent.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            m.marshal(cmp, new File(filePath+"."+cmp.getName()+"_p.xml"));
-        } catch (JAXBException e) {
+            FileOutputStream fos = new FileOutputStream(new File(filePath+"."+cmp.getName()+"_p.xml"));
+            m.marshal(cmp, fos);
+        } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }

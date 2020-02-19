@@ -28,6 +28,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class JaxbCreateTest {
@@ -41,6 +42,7 @@ public class JaxbCreateTest {
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         m.marshal(com, System.out);
-        m.marshal(com, new File("/home/gurjyan/Test/"+com.getName()+".xml"));
+        FileOutputStream fos = new FileOutputStream(new File("/home/gurjyan/Test/"+com.getName()+".xml"));
+        m.marshal(com, fos);
     }
 }
