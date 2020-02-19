@@ -37,7 +37,6 @@ public class JaxbCreateTest {
 
         JCGComponent com = new JCGComponent();
         com.setName("simon");
-
         JAXBContext context = JAXBContext.newInstance(JCGComponent.class);
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
