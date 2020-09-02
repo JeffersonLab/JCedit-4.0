@@ -911,6 +911,7 @@ public class LLConfigWriter {
                                             break;
                                         case "None":
                                         case "Debug":
+                                            out.write("output                = " + tt.getTransClass() + "\n");
                                             break;
                                     }
                                     breakFlag = true;
