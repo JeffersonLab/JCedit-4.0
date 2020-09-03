@@ -204,6 +204,12 @@
         </condition>
     </target>
 
+    <target name="istack.check">
+        <condition property="istack.exists">
+            <available file="${jar_dir}/istack-commons-runtime-3.0.11.jar" type="file"/>
+        </condition>
+    </target>
+
     <!-- creating directories -->
     <target name="jar_dir.create" depends="jar_dir.check" unless="jar_dir.exists">
         <echo>... creating missing ${jar_dir}"</echo>
@@ -234,6 +240,11 @@
         <copy file="${module.JCedit.basedir}/lib/jaxb-xjc.jar" todir="${build_dir}/common/jar"/>
     </target>
 
+    <target name="istack.install" depends="istack.check" unless="istack.exists">
+        <echo>... installing ${module.afecs.basedir}/lib/istack-commons-runtime-3.0.11.jar"</echo>
+        <copy file="${module.JCedit.basedir}/lib/istack-commons-runtime-3.0.11.jar" todir="${build_dir}/common/jar"/>
+    </target>
+
 
     <target name="common_bin_dir.create" depends="common_bin_dir.check" unless="common_bin_dir.exists">
         <echo>... creating missing ${common_bin_dir}"</echo>
@@ -248,7 +259,7 @@
         <mkdir dir = "${bin64_dir}"/>
     </target>
 
-    <target name="check_config" depends="jar_dir.create, jena_jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, jaxb-api.install, jaxb-runtime.install, jaxb-xjc.install, jena_jar.install" description="Check configuration"/>
+    <target name="check_config" depends="jar_dir.create, jena_jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, jaxb-api.install, jaxb-runtime.install, jaxb-xjc.install, istack.install, jena_jar.install" description="Check configuration"/>
 
     <property name="module.jdk.home.JCedit" value="${project.jdk.home}"/>
     <property name="module.jdk.bin.JCedit" value="${project.jdk.bin}"/>
