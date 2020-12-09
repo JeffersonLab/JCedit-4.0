@@ -308,7 +308,6 @@ public class ProcessForm extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner non-commercial license
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         label1 = new JLabel();
@@ -397,7 +396,8 @@ public class ProcessForm extends JFrame {
                     "prestart",
                     "go",
                     "end",
-                    "reset"
+                    "reset",
+                    "pause"
                 }));
 
                 //======== panel1 ========
@@ -681,7 +681,6 @@ public class ProcessForm extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner non-commercial license
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel label1;
@@ -729,7 +728,6 @@ public class ProcessForm extends JFrame {
     private class SaveAction extends AbstractAction {
         private SaveAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Save");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -805,7 +803,6 @@ public class ProcessForm extends JFrame {
     private class CancelAction extends AbstractAction {
         private CancelAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Cancel");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -818,7 +815,6 @@ public class ProcessForm extends JFrame {
     private class PeriodicCheckAction extends AbstractAction {
         private PeriodicCheckAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "periodic");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -839,7 +835,6 @@ public class ProcessForm extends JFrame {
     private class RemoveAction extends AbstractAction {
         private RemoveAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Remove");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -891,7 +886,6 @@ public class ProcessForm extends JFrame {
     private class ClearAction extends AbstractAction {
         private ClearAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Clear");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -927,7 +921,6 @@ public class ProcessForm extends JFrame {
     private class SyncCheckBoxAction extends AbstractAction {
         private SyncCheckBoxAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "sync");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -946,7 +939,6 @@ public class ProcessForm extends JFrame {
     private class ForceEndScriptAction extends AbstractAction {
         private ForceEndScriptAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Force End Script");
             setEnabled(false);
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
