@@ -338,6 +338,7 @@ public class CoolDatabaseBrowser {
                                 prc.setAfter(false);
                                 break;
                         }
+
                         if (tmpState != null) {
                             if (prc.isBefore()) {
                                 opout.write("   <cool:before>" + tmpState + "</cool:before>\n");
