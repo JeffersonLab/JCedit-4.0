@@ -333,7 +333,7 @@ public class CoolDatabaseBrowser {
                                 prc.setAfter(false);
                                 break;
                             case "resume":
-                                tmpState = "active";
+                                tmpState = "resumed";
                                 prc.setBefore(true);
                                 prc.setAfter(false);
                                 break;
