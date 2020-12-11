@@ -200,6 +200,15 @@
               <void method="addElement">
                <string>end</string>
               </void>
+              <void method="addElement">
+               <string>reset</string>
+              </void>
+              <void method="addElement">
+               <string>pause</string>
+              </void>
+              <void method="addElement">
+               <string>resume</string>
+              </void>
              </object>
             </void>
             <void property="name">
@@ -223,8 +232,9 @@
             </object>
             <void method="setProperty">
              <string>border</string>
-             <object class="javax.swing.border.TitledBorder">
+             <object class="javax.swing.border.TitledBorder" id="TitledBorder0">
               <string>Script</string>
+              <void id="Integer1" property="titlePosition"/>
              </object>
             </void>
             <void property="name">
@@ -508,9 +518,9 @@
            <string>border</string>
            <object class="javax.swing.border.EmptyBorder">
             <int>12</int>
-            <int>0</int>
-            <int>0</int>
-            <int>0</int>
+            <object idref="Integer1"/>
+            <object idref="Integer1"/>
+            <object idref="Integer1"/>
            </object>
           </void>
           <void property="name">
@@ -612,7 +622,7 @@
        <string>location</string>
        <object class="java.awt.Point">
         <int>5</int>
-        <int>0</int>
+        <object idref="Integer1"/>
        </object>
       </void>
       <void method="setProperty">
@@ -818,7 +828,7 @@
       <void method="setProperty">
        <string>location</string>
        <object class="java.awt.Point">
-        <int>0</int>
+        <object idref="Integer1"/>
         <int>520</int>
        </object>
       </void>

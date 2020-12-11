@@ -285,7 +285,7 @@ public class SupervisorForm extends JFrame {
                 gp.setName(tmpName);
 
                 // start a process form
-                ProcessForm pf = new ProcessForm(sForm, parentCanvas,gp, superv);
+                ProcessFormS pf = new ProcessFormS(sForm, parentCanvas,gp, superv);
                 pf.setVisible(true);
             } else {
 
@@ -294,7 +294,7 @@ public class SupervisorForm extends JFrame {
                     if((processComboBox.getSelectedItem()).equals(gp.getName())){
 
                         // start a process form
-                        ProcessForm pf = new ProcessForm(sForm, parentCanvas,gp, superv);
+                        ProcessFormS pf = new ProcessFormS(sForm, parentCanvas,gp, superv);
                         pf.setVisible(true);
                         break;
                     }

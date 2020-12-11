@@ -34,7 +34,7 @@ import org.jlab.coda.cedit.system.JCGComponent;
 import org.jlab.coda.cedit.system.JCGProcess;
 
 
-public class ProcessForm extends JFrame {
+public class ProcessFormS extends JFrame {
 
     private JCGComponent spv;
     private SupervisorForm sForm = null;
@@ -44,7 +44,7 @@ public class ProcessForm extends JFrame {
     private Pattern ptr = Pattern.compile("\\w+");
 
 
-    public ProcessForm(SupervisorForm sForm, DrawingCanvas canvas,JCGProcess gp, JCGComponent s) {
+    public ProcessFormS(SupervisorForm sForm, DrawingCanvas canvas,JCGProcess gp, JCGComponent s) {
         this.gp = gp;
         this.canvas = canvas;
         this.sForm = sForm;
@@ -56,7 +56,7 @@ public class ProcessForm extends JFrame {
         update();
     }
 
-    public ProcessForm(SComponentForm compForm, DrawingCanvas canvas, JCGProcess gp, boolean isNew) {
+    public ProcessFormS(SComponentForm compForm, DrawingCanvas canvas, JCGProcess gp, boolean isNew) {
         this.sCompForm = compForm;
         this.gp        = gp;
         this.canvas    = canvas;
@@ -395,7 +395,10 @@ public class ProcessForm extends JFrame {
                     "download",
                     "prestart",
                     "go",
-                    "end"
+                    "end",
+                    "reset",
+                    "pause",
+                    "resume"
                 }));
 
                 //======== panel1 ========

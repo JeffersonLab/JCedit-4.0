@@ -327,6 +327,16 @@ public class CoolDatabaseBrowser {
                                 prc.setBefore(true);
                                 prc.setAfter(false);
                                 break;
+                            case "pause":
+                                tmpState = "paused";
+                                prc.setBefore(true);
+                                prc.setAfter(false);
+                                break;
+                            case "resume":
+                                tmpState = "active";
+                                prc.setBefore(true);
+                                prc.setAfter(false);
+                                break;
                         }
                         if (tmpState != null) {
                             if (prc.isBefore()) {
