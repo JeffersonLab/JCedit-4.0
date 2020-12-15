@@ -309,7 +309,8 @@ public class SComponentForm extends JFrame {
         }else {
             Rol1TextField.setText("");
         }
-        if(comp.getRol1UsrString()!=null){
+        if(comp.getRol1UsrString()!=null &&
+                !comp.getRol1UsrString().equals("")){
             Rol1UserStrTextField.setText(comp.getRol1UsrString());
             p_rol1String = comp.getRol1UsrString();
         }else {
@@ -321,7 +322,8 @@ public class SComponentForm extends JFrame {
         }else {
             Rol2TextField.setText("");
         }
-        if(comp.getRol2UsrString()!=null){
+        if(comp.getRol2UsrString()!=null &&
+                !comp.getRol2UsrString().equals("")){
             Rol2UserStrTextField.setText(comp.getRol2UsrString());
             p_rol2String = comp.getRol2UsrString();
         }else {
