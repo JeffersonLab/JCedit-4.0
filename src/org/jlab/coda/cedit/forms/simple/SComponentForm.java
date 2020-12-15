@@ -313,7 +313,7 @@ public class SComponentForm extends JFrame {
             Rol1UserStrTextField.setText(comp.getRol1UsrString());
             p_rol1String = comp.getRol1UsrString();
         }else {
-            Rol1UserStrTextField.setText("");
+            Rol1UserStrTextField.setText("undefined");
         }
         if(comp.getRol2()!=null){
             Rol2TextField.setText(comp.getRol2());
@@ -325,7 +325,7 @@ public class SComponentForm extends JFrame {
             Rol2UserStrTextField.setText(comp.getRol2UsrString());
             p_rol2String = comp.getRol2UsrString();
         }else {
-            Rol2UserStrTextField.setText("");
+            Rol2UserStrTextField.setText("undefined");
         }
 
         if(comp.isMaster()){
@@ -674,6 +674,7 @@ public class SComponentForm extends JFrame {
                 Rol2UsrStringLabel.setText("User String");
 
                 //---- Rol2UserStrTextField ----
+                Rol2UserStrTextField.setText("undefined");
                 Rol2UserStrTextField.addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
@@ -697,6 +698,7 @@ public class SComponentForm extends JFrame {
                 Rol1usrStringLabel.setText("User String");
 
                 //---- Rol1UserStrTextField ----
+                Rol1UserStrTextField.setText("undefined");
                 Rol1UserStrTextField.addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
@@ -891,7 +893,7 @@ public class SComponentForm extends JFrame {
                                             .addComponent(label4)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(endianCheckBox)
-                                            .addContainerGap(18, Short.MAX_VALUE))
+                                            .addContainerGap(22, Short.MAX_VALUE))
                                         .addGroup(contentPanelLayout.createSequentialGroup()
                                             .addComponent(tsCheckBox, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                                             .addGap(18, 18, 18)
@@ -1177,9 +1179,9 @@ public class SComponentForm extends JFrame {
                 prioritySpinner.setValue(ACodaType.FILE.priority());
             }
             Rol1TextField.setText("");
-            Rol1UserStrTextField.setText("");
+            Rol1UserStrTextField.setText("undefined");
             Rol2TextField.setText("");
-            Rol2UserStrTextField.setText("");
+            Rol2UserStrTextField.setText("undefined");
             configFileTextField.setText("");
             runDataCheckBox.setSelected(false);
             tsCheckBox.setSelected(true);
