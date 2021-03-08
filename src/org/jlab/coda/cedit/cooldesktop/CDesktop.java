@@ -456,7 +456,6 @@ public class CDesktop extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner non-commercial license
         createUIComponents();
 
         menuBar1 = new JMenuBar();
@@ -952,7 +951,6 @@ public class CDesktop extends JFrame {
 
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner non-commercial license
     private JMenuBar menuBar1;
     private JMenu menu1;
     private JMenuItem menuItem15;
@@ -2246,7 +2244,6 @@ public class CDesktop extends JFrame {
     private class ExitAction extends AbstractAction {
         private ExitAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Exit");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -2283,7 +2280,6 @@ public class CDesktop extends JFrame {
     private class GridOnAction extends AbstractAction {
         private GridOnAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "On");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2297,7 +2293,6 @@ public class CDesktop extends JFrame {
     private class GridOffAction extends AbstractAction {
         private GridOffAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Off");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2312,7 +2307,6 @@ public class CDesktop extends JFrame {
     private class ZoomInAction extends AbstractAction {
         private ZoomInAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Zoom In");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2326,7 +2320,6 @@ public class CDesktop extends JFrame {
     private class LinkModeOnAction extends AbstractAction {
         private LinkModeOnAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Link On");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_L, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2341,7 +2334,6 @@ public class CDesktop extends JFrame {
     private class LinkModeOffAction extends AbstractAction {
         private LinkModeOffAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Link Off");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_K, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2360,7 +2352,6 @@ public class CDesktop extends JFrame {
     private class DrawBoxesAction extends AbstractAction {
         private DrawBoxesAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Draw Boxes");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2374,7 +2365,6 @@ public class CDesktop extends JFrame {
     private class RemoveBoxesAction extends AbstractAction {
         private RemoveBoxesAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Remove Boxes");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_B, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2388,7 +2378,6 @@ public class CDesktop extends JFrame {
     private class DeleteAction extends AbstractAction {
         private DeleteAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Delete...");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2436,7 +2425,6 @@ public class CDesktop extends JFrame {
     private class DeleteLinkAction extends AbstractAction {
         private DeleteLinkAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Delete Output Link");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2463,7 +2451,6 @@ public class CDesktop extends JFrame {
     private class SaveAction extends AbstractAction {
         private SaveAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Save");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2569,7 +2556,6 @@ public class CDesktop extends JFrame {
     private class SaveAsAction extends AbstractAction {
         private SaveAsAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Save As...");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -2653,7 +2639,6 @@ public class CDesktop extends JFrame {
     private class OpenAction extends AbstractAction {
         private OpenAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Open...");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2734,7 +2719,6 @@ public class CDesktop extends JFrame {
     private class ClearAllAction extends AbstractAction {
         private ClearAllAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Clear All");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2752,7 +2736,6 @@ public class CDesktop extends JFrame {
     private class NewAction extends AbstractAction {
         private NewAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "New...");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2801,7 +2784,6 @@ public class CDesktop extends JFrame {
     private class DynArrOnAction extends AbstractAction {
         private DynArrOnAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Dynamic On");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2819,7 +2801,6 @@ public class CDesktop extends JFrame {
     private class SynArrOffAction extends AbstractAction {
         private SynArrOffAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Dynamic Off");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2841,7 +2822,6 @@ public class CDesktop extends JFrame {
     private class GridAlignAction extends AbstractAction {
         private GridAlignAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Align");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2856,7 +2836,6 @@ public class CDesktop extends JFrame {
     private class GVisibleOnAction extends AbstractAction {
         private GVisibleOnAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Visible On");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2870,7 +2849,6 @@ public class CDesktop extends JFrame {
     private class GVisibleOffAction extends AbstractAction {
         private GVisibleOffAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Visible Off");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             putValue(ACTION_COMMAND_KEY, "Visible Off");
@@ -2885,7 +2863,6 @@ public class CDesktop extends JFrame {
     private class ZoomOutAction extends AbstractAction {
         private ZoomOutAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Zoom Out");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2899,7 +2876,6 @@ public class CDesktop extends JFrame {
     private class DeleteComponentAction extends AbstractAction {
         private DeleteComponentAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Delete Component");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -2916,7 +2892,6 @@ public class CDesktop extends JFrame {
     private class LinkOffAction extends AbstractAction {
         private LinkOffAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Link Off");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -2931,7 +2906,6 @@ public class CDesktop extends JFrame {
     private class LinkModeAction extends AbstractAction {
         private LinkModeAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Link Mode");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -2957,7 +2931,6 @@ public class CDesktop extends JFrame {
     private class NewExperimentAction extends AbstractAction {
         private NewExperimentAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "New...");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -2984,7 +2957,6 @@ public class CDesktop extends JFrame {
     private class OpenExperimentAction extends AbstractAction {
         private OpenExperimentAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Open");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3007,7 +2979,6 @@ public class CDesktop extends JFrame {
     private class DeleteExperimentAction extends AbstractAction {
         private DeleteExperimentAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Delete");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3035,7 +3006,6 @@ public class CDesktop extends JFrame {
     private class NewSessionAction extends AbstractAction {
         private NewSessionAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "New...");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3057,7 +3027,6 @@ public class CDesktop extends JFrame {
     private class ListSessionsAction extends AbstractAction {
         private ListSessionsAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "List");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3070,7 +3039,6 @@ public class CDesktop extends JFrame {
     private class DeleteSessionAction extends AbstractAction {
         private DeleteSessionAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Delete");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3096,7 +3064,6 @@ public class CDesktop extends JFrame {
     private class CoolHomeAction extends AbstractAction {
         private CoolHomeAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Cool Database");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3109,7 +3076,6 @@ public class CDesktop extends JFrame {
     private class UpdateJCeditDB extends AbstractAction {
         private UpdateJCeditDB() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Import...");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3170,7 +3136,6 @@ public class CDesktop extends JFrame {
     private class Db2Xml extends AbstractAction {
         private Db2Xml() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Export");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3237,7 +3202,6 @@ public class CDesktop extends JFrame {
     private class ForceUpdate extends AbstractAction {
         private ForceUpdate() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Force Update ...");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3250,7 +3214,6 @@ public class CDesktop extends JFrame {
     private class GroupOnAction extends AbstractAction {
         private GroupOnAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Group On");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, KeyEvent.ALT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -3264,7 +3227,6 @@ public class CDesktop extends JFrame {
     private class GroupOffAction extends AbstractAction {
         private GroupOffAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Group Off");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_G, KeyEvent.ALT_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -3278,7 +3240,6 @@ public class CDesktop extends JFrame {
     private class RemoveFromGroupAction extends AbstractAction {
         private RemoveFromGroupAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Remove From The Group");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.ALT_MASK|KeyEvent.SHIFT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -3292,7 +3253,6 @@ public class CDesktop extends JFrame {
     private class GroupResetAction extends AbstractAction {
         private GroupResetAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Group Reset");
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.ALT_MASK));
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
@@ -3306,7 +3266,6 @@ public class CDesktop extends JFrame {
     private class GroupModeCBAction extends AbstractAction {
         private GroupModeCBAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Group Mode");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -3329,7 +3288,6 @@ public class CDesktop extends JFrame {
     private class SupervisorProcess extends AbstractAction {
         private SupervisorProcess() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Supervisor Process");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }

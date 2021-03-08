@@ -186,24 +186,6 @@
         </condition>
     </target>
 
-    <target name="jaxb-api.check">
-        <condition property="jaxb-api.exists">
-            <available file="${jar_dir}/jaxb-api.jar" type="file"/>
-        </condition>
-    </target>
-
-    <target name="jaxb-runtime.check">
-        <condition property="jaxb-runtime.exists">
-            <available file="${jar_dir}/jaxb-runtime.jar" type="file"/>
-        </condition>
-    </target>
-
-    <target name="jaxb-xjc.check">
-        <condition property="jaxb-xjc.exists">
-            <available file="${jar_dir}/jaxb-xjc.jar" type="file"/>
-        </condition>
-    </target>
-
     <target name="istack.check">
         <condition property="istack.exists">
             <available file="${jar_dir}/istack-commons-runtime-3.0.11.jar" type="file"/>
@@ -225,21 +207,6 @@
         <copy file = "${module.JCedit.basedir}/lib/jena.jar" todir="${build_dir}/common/jar/jena"/>
     </target>
 
-    <target name="jaxb-api.install" depends="jaxb-api.check" unless="jaxb-api.exists">
-        <echo>... installing ${module.afecs.basedir}/lib/jaxb-api.jar"</echo>
-        <copy file="${module.JCedit.basedir}/lib/jaxb-api.jar" todir="${build_dir}/common/jar"/>
-    </target>
-
-    <target name="jaxb-runtime.install" depends="jaxb-runtime.check" unless="jaxb-runtime.exists">
-        <echo>... installing ${module.afecs.basedir}/lib/jaxb-runtime.jar"</echo>
-        <copy file="${module.JCedit.basedir}/lib/jaxb-runtime.jar" todir="${build_dir}/common/jar"/>
-    </target>
-
-    <target name="jaxb-xjc.install" depends="jaxb-xjc.check" unless="jaxb-xjc.exists">
-        <echo>... installing ${module.afecs.basedir}/lib/jaxb-xjc.jar"</echo>
-        <copy file="${module.JCedit.basedir}/lib/jaxb-xjc.jar" todir="${build_dir}/common/jar"/>
-    </target>
-
     <target name="istack.install" depends="istack.check" unless="istack.exists">
         <echo>... installing ${module.afecs.basedir}/lib/istack-commons-runtime-3.0.11.jar"</echo>
         <copy file="${module.JCedit.basedir}/lib/istack-commons-runtime-3.0.11.jar" todir="${build_dir}/common/jar"/>
@@ -259,7 +226,7 @@
         <mkdir dir = "${bin64_dir}"/>
     </target>
 
-    <target name="check_config" depends="jar_dir.create, jena_jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, jaxb-api.install, jaxb-runtime.install, jaxb-xjc.install, istack.install, jena_jar.install" description="Check configuration"/>
+    <target name="check_config" depends="jar_dir.create, jena_jar_dir.create, common_bin_dir.create,bin_dir.create,bin64_dir.create, istack.install, jena_jar.install" description="Check configuration"/>
 
     <property name="module.jdk.home.JCedit" value="${project.jdk.home}"/>
     <property name="module.jdk.bin.JCedit" value="${project.jdk.bin}"/>
@@ -370,9 +337,10 @@
     <target name="targ" depends="build.tar, build.zip, delete.tar" description="build tar distribution"/>
 
     <target name="jaxb_cp" description="jaxb_copy">
-    <copy file = "${module.JCedit.basedir}/lib/jaxb-api.jar" todir="${build_dir}/common/jar" overwrite="true"/>
-    <copy file = "${module.JCedit.basedir}/lib/jaxb-runtime.jar" todir="${build_dir}/common/jar" overwrite="true"/>
-    <copy file = "${module.JCedit.basedir}/lib/jaxb-xjc.jar" todir="${build_dir}/common/jar" overwrite="true"/>
+    <copy file = "${module.JCedit.basedir}/lib/javax.activation-1.2.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
+    <copy file = "${module.JCedit.basedir}/lib/jaxb-api-2.3.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
+    <copy file = "${module.JCedit.basedir}/lib/jaxb-core-2.3.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
+    <copy file = "${module.JCedit.basedir}/lib/jaxb-impl-2.3.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
     </target>
 
     <target name="cp" description="install">
