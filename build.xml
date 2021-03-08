@@ -341,6 +341,7 @@
     <copy file = "${module.JCedit.basedir}/lib/jaxb-api-2.3.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
     <copy file = "${module.JCedit.basedir}/lib/jaxb-core-2.3.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
     <copy file = "${module.JCedit.basedir}/lib/jaxb-impl-2.3.0.jar" todir="${build_dir}/common/jar" overwrite="true"/>
+    <copy file = "${module.JCedit.basedir}/lib/jaxb-runtime-2.3.1.jar" todir="${build_dir}/common/jar" overwrite="true"/>
     </target>
 
     <target name="cp" description="install">
