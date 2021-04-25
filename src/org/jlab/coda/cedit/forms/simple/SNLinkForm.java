@@ -63,16 +63,19 @@ public class SNLinkForm extends JFrame {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket+Et",
                     "EmuSocket",
+                    "FPGASocket",
             });
         } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
+                    "FPGASocket",
                     "Et",
                     "cMsg"
             });
         } else {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
+                    "FPGASocket",
                     "Et",
                     "cMsg"
             });
@@ -441,7 +444,6 @@ public class SNLinkForm extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner non-commercial license
         menuBar2 = new JMenuBar();
         etCustomizationMenue = new JMenu();
         menuItem1 = new JMenuItem();
@@ -515,6 +517,12 @@ public class SNLinkForm extends JFrame {
         cMsgSubjectTextField = new JTextField();
         label16 = new JLabel();
         cMsgTypeTextField = new JTextField();
+        panel6 = new JPanel();
+        hostNameLabel2 = new JLabel();
+        fpgaHostTextField = new JTextField();
+        label18 = new JLabel();
+        fpgaPortSpinner = new JSpinner();
+        label21 = new JLabel();
         action1 = new CancelAction();
         action2 = new ClearAction();
         action3 = new OkAction();
@@ -777,7 +785,7 @@ public class SNLinkForm extends JFrame {
                                                         .addComponent(checkBoxEtCreate)
                                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(label9)))
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                                 .addComponent(etWait, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
                                     .addComponent(etNameLabel))
                                 .addContainerGap())
@@ -957,7 +965,7 @@ public class SNLinkForm extends JFrame {
                         .addGroup(panel4Layout.createParallelGroup()
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addComponent(emuFatPipeCheckBox)
-                                .addGap(0, 562, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -1077,6 +1085,53 @@ public class SNLinkForm extends JFrame {
             );
         }
 
+        //======== panel6 ========
+        {
+            panel6.setBorder(new TitledBorder("FPGA Socket"));
+
+            //---- hostNameLabel2 ----
+            hostNameLabel2.setText("Host");
+
+            //---- label18 ----
+            label18.setText("( IP address )");
+            label18.setEnabled(false);
+
+            //---- fpgaPortSpinner ----
+            fpgaPortSpinner.setModel(new SpinnerNumberModel(46100, 1, 99999, 1));
+
+            //---- label21 ----
+            label21.setText("Port");
+
+            GroupLayout panel6Layout = new GroupLayout(panel6);
+            panel6.setLayout(panel6Layout);
+            panel6Layout.setHorizontalGroup(
+                panel6Layout.createParallelGroup()
+                    .addGroup(panel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(hostNameLabel2)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fpgaHostTextField, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label18)
+                        .addGap(12, 12, 12)
+                        .addComponent(label21)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fpgaPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(246, Short.MAX_VALUE))
+            );
+            panel6Layout.setVerticalGroup(
+                panel6Layout.createParallelGroup()
+                    .addGroup(panel6Layout.createSequentialGroup()
+                        .addGroup(panel6Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(hostNameLabel2)
+                            .addComponent(fpgaHostTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label18)
+                            .addComponent(fpgaPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label21))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            );
+        }
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -1085,20 +1140,22 @@ public class SNLinkForm extends JFrame {
                     .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup()
                         .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(okButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(removeButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(clearButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cancelButton))
                         .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panel5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panel4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap())
+                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                    .addContainerGap(350, Short.MAX_VALUE)
+                    .addComponent(okButton)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(removeButton)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(clearButton)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cancelButton)
+                    .addGap(14, 14, 14))
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
@@ -1106,7 +1163,7 @@ public class SNLinkForm extends JFrame {
                     .addContainerGap()
                     .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel4, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -1114,12 +1171,14 @@ public class SNLinkForm extends JFrame {
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(panel6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(cancelButton)
-                        .addComponent(clearButton)
+                        .addComponent(okButton)
                         .addComponent(removeButton)
-                        .addComponent(okButton))
-                    .addContainerGap())
+                        .addComponent(clearButton)
+                        .addComponent(cancelButton))
+                    .addContainerGap(3, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -1131,7 +1190,6 @@ public class SNLinkForm extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner non-commercial license
     private JMenuBar menuBar2;
     private JMenu etCustomizationMenue;
     private JMenuItem menuItem1;
@@ -1205,6 +1263,12 @@ public class SNLinkForm extends JFrame {
     private JTextField cMsgSubjectTextField;
     private JLabel label16;
     private JTextField cMsgTypeTextField;
+    private JPanel panel6;
+    private JLabel hostNameLabel2;
+    private JTextField fpgaHostTextField;
+    private JLabel label18;
+    private JSpinner fpgaPortSpinner;
+    private JLabel label21;
     private CancelAction action1;
     private ClearAction action2;
     private OkAction action3;
@@ -1219,7 +1283,6 @@ public class SNLinkForm extends JFrame {
     private class DirectMcastAction extends AbstractAction {
         private DirectMcastAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "dm");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1256,7 +1319,6 @@ public class SNLinkForm extends JFrame {
     private class TransportClassChanged extends AbstractAction {
         private TransportClassChanged() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "transport");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1269,7 +1331,6 @@ public class SNLinkForm extends JFrame {
     private class RemoveAction extends AbstractAction {
         private RemoveAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Remove");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1299,7 +1360,6 @@ public class SNLinkForm extends JFrame {
     private class OkAction extends AbstractAction {
         private OkAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Ok");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1384,7 +1444,6 @@ public class SNLinkForm extends JFrame {
     private class ClearAction extends AbstractAction {
         private ClearAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Clear");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1434,7 +1493,6 @@ public class SNLinkForm extends JFrame {
     private class CancelAction extends AbstractAction {
         private CancelAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Cancel");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1447,7 +1505,6 @@ public class SNLinkForm extends JFrame {
     private class EtCustomizeAction extends AbstractAction {
         private EtCustomizeAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Enable");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1460,7 +1517,6 @@ public class SNLinkForm extends JFrame {
     private class EtDefaultAction extends AbstractAction {
         private EtDefaultAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Set Defaults");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1478,7 +1534,6 @@ public class SNLinkForm extends JFrame {
     private class EtCustomizationDisableAction extends AbstractAction {
         private EtCustomizationDisableAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Disable");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
