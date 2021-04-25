@@ -61,7 +61,7 @@ public class JCGTransport {
 
     private String  fileName    = "undefined";
     private String  fileType    = "coda";
-    private long    fileSplit   = 20000000000l;
+    private long    fileSplit   = 20000000000L;
     private int fileInternalBuffer = 100;
 
     private boolean noLink = false;
@@ -69,6 +69,9 @@ public class JCGTransport {
     // this can break backwards compatibility
     private int compression = 1; //lz4 0-no compression, 1-lz4, 2-lz4_best, 3-gzip
     private int compressionThreads = 2;
+
+    private String fpgaHost = "undefined";
+    private int fpgaPort = 46100;
 
     public JCGTransport() {
     }
@@ -80,7 +83,7 @@ public class JCGTransport {
                         int emuMaxBuffer, int emuWait, String emuSubNet, boolean emuFatPipe, String cMsgHost, int cMsgPort,
                         String cMsgNameSpace, String cMsgSubject, String cMsgType, String fileName,
                         String fileType, long fileSplit, int fileInternalBuffer, boolean noLink,
-                        int compression, int compressionThreads) {
+                        int compression, int compressionThreads, String fpgaHost, int fpgaPort) {
         this.name = name;
         this.transClass = transClass;
         this.etName = etName;
@@ -118,6 +121,8 @@ public class JCGTransport {
         this.noLink = noLink;
         this.compression = compression;
         this.compressionThreads = compressionThreads;
+        this.fpgaHost = fpgaHost;
+        this.fpgaPort = fpgaPort;
     }
 
     public String getName() {
@@ -416,6 +421,22 @@ public class JCGTransport {
         this.compressionThreads = compressionThreads;
     }
 
+    public String getFpgaHost() {
+        return fpgaHost;
+    }
+
+    public void setFpgaHost(String fpgaHost) {
+        this.fpgaHost = fpgaHost;
+    }
+
+    public int getFpgaPort() {
+        return fpgaPort;
+    }
+
+    public void setFpgaPort(int fpgaPort) {
+        this.fpgaPort = fpgaPort;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -462,6 +483,9 @@ public class JCGTransport {
         if (transClass != null ? !transClass.equals(that.getTransClass()) : that.getTransClass() != null) return false;
         if (compression != that.getCompression()) return false;
         if (compressionThreads != that.getCompressionThreads()) return false;
+
+        if(fpgaHost.equals(that.getFpgaHost())) return false;
+        if(fpgaPort != that.fpgaPort) return false;
         return single.equals(that.getSingle());
 
     }
@@ -493,6 +517,8 @@ public class JCGTransport {
                 ", \nnoLink=" + noLink +
                 ", \ncompression=" + compression +
                 ", \ncompressionThreads=" + compressionThreads +
+                ", \nfpgaHost=" + fpgaHost +
+                ", \nfpgaPort=" + fpgaPort +
                 '}';
     }
 }

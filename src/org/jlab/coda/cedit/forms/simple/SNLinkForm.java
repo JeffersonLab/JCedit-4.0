@@ -258,6 +258,10 @@ public class SNLinkForm extends JFrame {
         cMsgNameSpaceTextField.setText(destinationTransport.getcMsgNameSpace());
         cMsgPortSpinner.setValue(destinationTransport.getcMsgPort());
         checkTrClass();
+
+        //FPGASocket
+        fpgaHostTextField.setText(destinationTransport.getFpgaHost());
+        fpgaPortSpinner.setValue(destinationTransport.getFpgaPort());
     }
 
     private void enableEt() {
@@ -323,6 +327,16 @@ public class SNLinkForm extends JFrame {
 
     }
 
+    private void disableFpga() {
+        fpgaHostTextField.setEnabled(false);
+        fpgaPortSpinner.setEnabled(false);
+    }
+
+    private void enableFpga() {
+        fpgaHostTextField.setEnabled(true);
+        fpgaPortSpinner.setEnabled(true);
+    }
+
     private void enableEmu() {
         emuMaxBufferSpinner.setEnabled(true);
         emuSocketWaitSpinner.setEnabled(true);
@@ -386,38 +400,45 @@ public class SNLinkForm extends JFrame {
         // control access to the form
         if (transportClassComboBox.getSelectedItem().equals("Et")) {
             enableEt();
-
             disableEmu();
             disableCMsg();
             disableFile();
+            disableFpga();
 
         } else if (transportClassComboBox.getSelectedItem().equals("File")) {
             enableFile();
-
             disableEt();
             disableEmu();
             disableCMsg();
+            disableFpga();
 
         } else if (transportClassComboBox.getSelectedItem().equals("EmuSocket")) {
             enableEmu();
-
             disableEt();
             disableCMsg();
             disableFile();
+            disableFpga();
 
-        }else if (transportClassComboBox.getSelectedItem().equals("EmuSocket+Et")) {
+        } else if (transportClassComboBox.getSelectedItem().equals("EmuSocket+Et")) {
             enableEmu();
             enableEt();
+            disableCMsg();
+            disableFile();
+            disableFpga();
 
+        } else if (transportClassComboBox.getSelectedItem().equals("FPGASocket")) {
+            enableFpga();
+            disableEmu();
+            disableEt();
             disableCMsg();
             disableFile();
 
         } else if (transportClassComboBox.getSelectedItem().equals("cMsg")) {
             enableCMsg();
-
             disableEt();
             disableEmu();
             disableFile();
+            disableFpga();
 
         } else if (transportClassComboBox.getSelectedItem().equals("None") ||
                 transportClassComboBox.getSelectedItem().equals("Debug")) {
@@ -425,6 +446,7 @@ public class SNLinkForm extends JFrame {
             disableEmu();
             disableCMsg();
             disableFile();
+            disableFpga();
         }
     }
 
@@ -1423,6 +1445,10 @@ public class SNLinkForm extends JFrame {
             destinationTransport.setcMsgSubject(cMsgSubjectTextField.getText());
             destinationTransport.setcMsgType(cMsgTypeTextField.getText());
 
+            //fpga
+            destinationTransport.setFpgaHost(fpgaHostTextField.getText());
+            destinationTransport.setFpgaPort((Integer)fpgaPortSpinner.getValue());
+
             // update subtype of the destination component if it is of type File
             JCGComponent tc = canvas.getGCMPs().get(link.getDestinationComponentName());
             if (tc.getType().equals(ACodaType.FILE.name())) {
@@ -1486,6 +1512,10 @@ public class SNLinkForm extends JFrame {
             cMsgHostTextField.setText("");
             cMsgNameSpaceTextField.setText("");
             cMsgPortSpinner.setValue(0);
+
+            // fpga
+            fpgaHostTextField.setText("");
+            fpgaPortSpinner.setValue(46100);
 
         }
     }
