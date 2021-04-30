@@ -63,18 +63,21 @@ public class SNLinkForm extends JFrame {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket+Et",
                     "EmuSocket",
+                    "FPGASocket",
             });
         } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
                     "Et",
-                    "cMsg"
+                    "cMsg",
+                    "FPGASocket"
             });
         } else {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
                     "Et",
-                    "cMsg"
+                    "cMsg",
+                    "FPGASocket"
             });
 
         }
@@ -402,7 +405,14 @@ public class SNLinkForm extends JFrame {
             disableCMsg();
             disableFile();
 
-        }else if (transportClassComboBox.getSelectedItem().equals("EmuSocket+Et")) {
+        } else if (transportClassComboBox.getSelectedItem().equals("FPGASocket")) {
+            enableEmu();
+
+            disableEt();
+            disableCMsg();
+            disableFile();
+
+        } else if (transportClassComboBox.getSelectedItem().equals("EmuSocket+Et")) {
             enableEmu();
             enableEt();
 
@@ -441,7 +451,6 @@ public class SNLinkForm extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner non-commercial license
         menuBar2 = new JMenuBar();
         etCustomizationMenue = new JMenu();
         menuItem1 = new JMenuItem();
@@ -1131,7 +1140,6 @@ public class SNLinkForm extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner non-commercial license
     private JMenuBar menuBar2;
     private JMenu etCustomizationMenue;
     private JMenuItem menuItem1;
@@ -1219,7 +1227,6 @@ public class SNLinkForm extends JFrame {
     private class DirectMcastAction extends AbstractAction {
         private DirectMcastAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "dm");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1256,7 +1263,6 @@ public class SNLinkForm extends JFrame {
     private class TransportClassChanged extends AbstractAction {
         private TransportClassChanged() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "transport");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1269,7 +1275,6 @@ public class SNLinkForm extends JFrame {
     private class RemoveAction extends AbstractAction {
         private RemoveAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Remove");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1299,7 +1304,6 @@ public class SNLinkForm extends JFrame {
     private class OkAction extends AbstractAction {
         private OkAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Ok");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1384,7 +1388,6 @@ public class SNLinkForm extends JFrame {
     private class ClearAction extends AbstractAction {
         private ClearAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Clear");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1434,7 +1437,6 @@ public class SNLinkForm extends JFrame {
     private class CancelAction extends AbstractAction {
         private CancelAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Cancel");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1447,7 +1449,6 @@ public class SNLinkForm extends JFrame {
     private class EtCustomizeAction extends AbstractAction {
         private EtCustomizeAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Enable");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1460,7 +1461,6 @@ public class SNLinkForm extends JFrame {
     private class EtDefaultAction extends AbstractAction {
         private EtDefaultAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Set Defaults");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
@@ -1478,7 +1478,6 @@ public class SNLinkForm extends JFrame {
     private class EtCustomizationDisableAction extends AbstractAction {
         private EtCustomizationDisableAction() {
             // JFormDesigner - Action initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-            // Generated using JFormDesigner non-commercial license
             putValue(NAME, "Disable");
             // JFormDesigner - End of action initialization  //GEN-END:initComponents
         }
