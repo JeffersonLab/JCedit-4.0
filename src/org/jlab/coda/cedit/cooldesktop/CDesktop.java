@@ -934,8 +934,8 @@ public class CDesktop extends JFrame {
                         .addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(toolBar1, GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
-                        .addComponent(scrollPane2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE))
+                        .addComponent(toolBar1, GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
+                        .addComponent(scrollPane2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE))
                     .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
@@ -949,12 +949,12 @@ public class CDesktop extends JFrame {
                             .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(contentPaneLayout.createParallelGroup()
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
                                 .addComponent(componentlabelPanel)))
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addComponent(toolBar1, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                            .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
                             .addGap(6, 6, 6)))
                     .addContainerGap())
         );

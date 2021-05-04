@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.7.0_60" class="java.beans.XMLDecoder">
+<java version="11.0.9.1" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -13,15 +13,15 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {par l:::p {seq {space :p:5:p, comp componentlabelPanel:::p:124:p, space :::p, comp scrollPane1:::p:108:p}, comp panel2::l:::x:1, comp panel3::l:::x:1}, space :::p, par l {comp toolBar1::::895:x, comp scrollPane2::t::895:x}, space :::p}}</string>
+        <string>par l {seq {par l:::p {seq {space :p:5:p, comp componentlabelPanel:::p:124:p, space :::p, comp scrollPane1:::p:108:p}, comp panel2::l:::x:1, comp panel3::l:::x:1}, space :::p, par l {comp toolBar1::::903:x, comp scrollPane2::t::903:x}, space :::p}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq t {space :p:6:p, par l {seq {comp panel2:::p::p, space :::p, comp panel3:::p::p, space :::p, par l {comp scrollPane1::::686:x, comp componentlabelPanel:::::x}}, seq {comp toolBar1:::p:22:p, space :::p, comp scrollPane2::::742:x:2, space :p:6:p}}, space :p::p}}</string>
+        <string>par l {seq t {space :p:6:p, par l {seq {comp panel2:::p::p, space :::p, comp panel3:::p::p, space :::p, par l {comp scrollPane1::::749:x, comp componentlabelPanel:::::x}}, seq {comp toolBar1:::p:22:p, space :::p, comp scrollPane2::::813:x:2, space :p:6:p}}, space :p::p}}</string>
        </void>
       </object>
       <void method="add">
-       <object class="com.jformdesigner.model.FormContainer">
+       <object class="com.jformdesigner.model.FormContainer" id="FormContainer0">
         <string>javax.swing.JScrollPane</string>
         <object class="com.jformdesigner.model.FormLayoutManager">
          <class>javax.swing.JScrollPane</class>
@@ -189,7 +189,7 @@ scrollPane2.setViewportView(drawingCanvas);
          <string>componentlabelPanel</string>
         </void>
         <void method="add">
-         <object class="com.jformdesigner.model.FormComponent">
+         <object class="com.jformdesigner.model.FormComponent" id="FormComponent0">
           <string>javax.swing.JList</string>
           <void method="setProperty">
            <string>font</string>
@@ -255,7 +255,7 @@ scrollPane2.setViewportView(drawingCanvas);
          <string>scrollPane1</string>
         </void>
         <void method="add">
-         <object class="com.jformdesigner.model.FormComponent">
+         <object class="com.jformdesigner.model.FormComponent" id="FormComponent1">
           <string>javax.swing.JList</string>
           <void method="setProperty">
            <string>foreground</string>
@@ -1345,13 +1345,13 @@ scrollPane2.setViewportView(drawingCanvas);
        <string>size</string>
        <object class="java.awt.Dimension">
         <int>1165</int>
-        <int>835</int>
+        <int>905</int>
        </object>
       </void>
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual0">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1379,7 +1379,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual1">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1415,7 +1415,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual2">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1447,7 +1447,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual3">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1479,7 +1479,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual4">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1511,7 +1511,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual5">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1547,7 +1547,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual6">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1583,7 +1583,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual7">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1615,7 +1615,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual8">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1647,7 +1647,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual9">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1675,7 +1675,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual10">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1707,7 +1707,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual11">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1739,7 +1739,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual12">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1775,7 +1775,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual13">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1811,7 +1811,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual14">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1847,7 +1847,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual15">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1879,7 +1879,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual16">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1915,7 +1915,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual17">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1955,7 +1955,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual18">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -1987,7 +1987,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual19">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2019,7 +2019,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual20">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2047,7 +2047,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual21">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2075,7 +2075,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual22">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2111,7 +2111,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual23">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2143,7 +2143,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual24">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2171,7 +2171,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual25">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2199,7 +2199,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual26">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2227,7 +2227,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual27">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2255,7 +2255,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual28">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2283,7 +2283,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual29">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2311,7 +2311,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual30">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2339,7 +2339,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual31">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2367,7 +2367,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual32">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2395,7 +2395,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual33">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2423,7 +2423,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual34">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2459,7 +2459,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual35">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2495,7 +2495,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual36">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2527,7 +2527,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual37">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2563,7 +2563,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual38">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
@@ -2591,7 +2591,7 @@ scrollPane2.setViewportView(drawingCanvas);
      </object>
     </void>
     <void method="add">
-     <object class="com.jformdesigner.model.FormNonVisual">
+     <object class="com.jformdesigner.model.FormNonVisual" id="FormNonVisual39">
       <string>javax.swing.AbstractAction</string>
       <void method="setProperty">
        <string>$action.Name</string>
