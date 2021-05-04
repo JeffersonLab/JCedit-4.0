@@ -899,12 +899,12 @@ public class LLConfigWriter {
                                             out.write("emuName               = " + l.getDestinationComponentName() + "\n");
                                             out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
                                             if(cmp.getType().equals(ACodaType.FPGA.name())) {
-                                                out.write("fpgaNet                = " + tt.getFpgaLinkIp() + "\n");
-                                                out.write("emuNet                 = NA" + "\n");
+                                                out.write("fpgaNet               = " + tt.getFpgaLinkIp() + "\n");
+                                                out.write("emuNet                = NA" + "\n");
 
                                             } else {
-                                                out.write("fpgaNet                = NA" + "\n");
-                                                out.write("emuNet                 = " + tt.getEmuSubNet() + "\n");
+                                                out.write("fpgaNet               = NA" + "\n");
+                                                out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
                                             }
                                             out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
                                             out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
