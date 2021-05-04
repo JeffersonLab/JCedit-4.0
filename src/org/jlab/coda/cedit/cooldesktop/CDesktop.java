@@ -66,6 +66,7 @@ public class CDesktop extends JFrame {
 
     private ImageIcon[] images;
     private String[] componentStrings = {
+            ACodaType.FPGA.name(),
             ACodaType.TS.name(),
             ACodaType.GT.name(),
             ACodaType.ROC.name(),
@@ -139,6 +140,7 @@ public class CDesktop extends JFrame {
         if(drawingCanvas.getGCMPs().isEmpty()){
             if(type.equals(ACodaType.TS.name()) ||
                     type.equals(ACodaType.GT.name())||
+                    type.equals(ACodaType.FPGA.name())||
                     type.equals(ACodaType.ROC.name())){
                 gc.setMaster(true);
             }
@@ -173,6 +175,14 @@ public class CDesktop extends JFrame {
                     }
                 }
             } else if(type.equals(ACodaType.ROC.name())){
+                if(CDesktop.containsTs(drawingCanvas)!=null || CDesktop.containsGt(drawingCanvas)!=null){
+                    gc.setMaster(false);
+                } else if(CDesktop.getNumberOfRocs(drawingCanvas)==0){
+                    gc.setMaster(true);
+                } else {
+                    gc.setMaster(false);
+                }
+            } else if(type.equals(ACodaType.FPGA.name())){
                 if(CDesktop.containsTs(drawingCanvas)!=null || CDesktop.containsGt(drawingCanvas)!=null){
                     gc.setMaster(false);
                 } else if(CDesktop.getNumberOfRocs(drawingCanvas)==0){
@@ -386,46 +396,50 @@ public class CDesktop extends JFrame {
                             Integer selectedTypeIndex = (Integer)o;
                             switch(selectedTypeIndex) {
                                 case 0:
+                                    cbt(ACodaType.FPGA.name());
+                                    selectedType = ACodaType.FPGA.name();
+                                    break;
+                                case 1:
                                     cbt(ACodaType.TS.name());
                                     selectedType = ACodaType.TS.name();
                                     break;
-                                case 1:
+                                case 2:
                                     cbt(ACodaType.GT.name());
                                     selectedType = ACodaType.GT.name();
                                     break;
-                                case 2:
+                                case 3:
                                     cbt(ACodaType.ROC.name());
                                     selectedType = ACodaType.ROC.name();
                                     break;
-                                case 3:
+                                case 4:
                                     cbt(ACodaType.DC.name());
                                     selectedType = ACodaType.DC.name();
                                     break;
-                                case 4:
+                                case 5:
                                     cbt(ACodaType.PEB.name());
                                     selectedType = ACodaType.PEB.name();
                                     break;
-                                case 5:
+                                case 6:
                                     cbt(ACodaType.SEB.name());
                                     selectedType = ACodaType.SEB.name();
                                     break;
-                                case 6:
+                                case 7:
                                     cbt(ACodaType.EBER.name());
                                     selectedType = ACodaType.EBER.name();
                                     break;
-                                case 7:
+                                case 8:
                                     cbt(ACodaType.ER.name());
                                     selectedType = ACodaType.ER.name();
                                     break;
-                                case 8:
+                                case 9:
                                     cbt(ACodaType.SLC.name());
                                     selectedType = ACodaType.SLC.name();
                                     break;
-                                case 9:
+                                case 10:
                                     cbt(ACodaType.USR.name());
                                     selectedType = ACodaType.USR.name();
                                     break;
-                                case 10:
+                                case 11:
                                     cbt(ACodaType.FILE.name());
                                     selectedType = ACodaType.FILE.name();
                                     break;
@@ -1891,6 +1905,7 @@ public class CDesktop extends JFrame {
         if(type.equals(ACodaType.ROC.name()) ||
                 type.equals(ACodaType.USR.name()) ||
                 type.equals(ACodaType.TS.name()) ||
+                type.equals(ACodaType.FPGA.name()) ||
                 type.equals(ACodaType.GT.name())){
             RocConfigReader rd = new RocConfigReader(runType, com.getName());
             if(rd.isConfigExists()){
@@ -1968,6 +1983,7 @@ public class CDesktop extends JFrame {
         for(JCGComponent tCmp: drawingCanvas.getGCMPs().values()){
             if(tCmp.getType().equals(ACodaType.ROC.name()) ||
                     tCmp.getType().equals(ACodaType.TS.name()) ||
+                    tCmp.getType().equals(ACodaType.FPGA.name()) ||
                     tCmp.getType().equals(ACodaType.GT.name())){
                 return true;
             }
@@ -2234,6 +2250,13 @@ public class CDesktop extends JFrame {
                 if(gc.getPriority() == ACodaType.TS.priority()){
                     gc.setPriority(ACodaType.ROC.priority());
                 }
+            } else if(gc.getType().equals(ACodaType.FPGA.name())){
+                gc.setMaster(false);
+                // set default ROC priority in case it was previously bumped to TS priority. Keep the rest of ROCs
+                // with user specified priorities within the ROC priority range.
+                if(gc.getPriority() == ACodaType.TS.priority()){
+                    gc.setPriority(ACodaType.FPGA.priority());
+                }
             } else if (gc.getType().equals(ACodaType.TS.name()) || gc.getType().equals(ACodaType.GT.name())) {
                 gc.setMaster(false);
                 gc.setPriority(ACodaType.getEnum(gc.getType()).priority());
@@ -2475,6 +2498,7 @@ public class CDesktop extends JFrame {
                     }
                     if((c.getType().equals(ACodaType.ROC.name()) ||
                             c.getType().equals(ACodaType.GT.name()) ||
+                            c.getType().equals(ACodaType.FPGA.name()) ||
                             c.getType().equals(ACodaType.TS.name()))
                             && c.getRol1().equals("undefined")){
                         noRolCmps.append(c.getName()).append(", ");
@@ -2569,6 +2593,7 @@ public class CDesktop extends JFrame {
                 for(JCGComponent c:drawingCanvas.getGCMPs().values()){
                     if((c.getType().equals(ACodaType.ROC.name()) ||
                             c.getType().equals(ACodaType.GT.name()) ||
+                            c.getType().equals(ACodaType.FPGA.name()) ||
                             c.getType().equals(ACodaType.TS.name())
                     )
                             && c.getRol1().equals("undefined")){

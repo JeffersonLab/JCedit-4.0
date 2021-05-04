@@ -92,7 +92,9 @@ public class JCGModule {
 
     public String getModuleClass(String componentType) {
         if(componentType.equals(ACodaType.ROC.name()) ||
-                componentType.equals(ACodaType.GT.name())){
+                componentType.equals(ACodaType.GT.name()) ||
+                componentType.equals(ACodaType.FPGA.name()
+                )){
             return rocModuleClass;
         } else if (componentType.equals(ACodaType.TS.name())) {
             return tsModuleClass;

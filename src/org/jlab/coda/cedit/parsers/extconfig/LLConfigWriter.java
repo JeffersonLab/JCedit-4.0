@@ -172,6 +172,7 @@ public class LLConfigWriter {
                 if (ec.getType().equals(ACodaType.ROC.name()) ||
                         ec.getType().equals(ACodaType.USR.name()) ||
                         ec.getType().equals(ACodaType.GT.name()) ||
+                        ec.getType().equals(ACodaType.FPGA.name()) ||
                         ec.getType().equals(ACodaType.TS.name())) {
                     createRocConfigFile(ec.getName());
                 }
@@ -229,6 +230,8 @@ public class LLConfigWriter {
                             out.write("     </RocModule>\n\n");
                         } else if (ec.getType().equals(ACodaType.GT.name())) {
                             out.write("     </GTriggerModule>\n\n");
+                        } else if (ec.getType().equals(ACodaType.FPGA.name())) {
+                            out.write("     </FPGATriggerModule>\n\n");
                         } else if (ec.getType().equals(ACodaType.USR.name())) {
                             out.write("     </UsrModule>\n\n");
                         } else if (ec.getType().equals(ACodaType.TS.name())) {
@@ -602,6 +605,11 @@ public class LLConfigWriter {
                         "id=\"" + md.getId() + "\" " +
                         "timeStats=\"off\" " +
                         "> \n\n");
+            } else if (cmp.getType().equals(ACodaType.FPGA.name())) {
+                out.append("     <FPGATriggerModule class=\"" + md.getModuleClass(ACodaType.FPGA.name()) + "\" " +
+                        "id=\"" + md.getId() + "\" " +
+                        "timeStats=\"off\" " +
+                        "> \n\n");
             } else if (cmp.getType().equals(ACodaType.USR.name())) {
                 out.append("     <UsrModule class=\"" + cmp.getUserConfig() + "\" " +
                         "id=\"" + md.getId() + "\" " +
@@ -865,6 +873,7 @@ public class LLConfigWriter {
 
             if (cmp.getType().equals(ACodaType.ROC.name()) ||
                     cmp.getType().equals(ACodaType.TS.name()) ||
+                    cmp.getType().equals(ACodaType.FPGA.name()) ||
                     cmp.getType().equals(ACodaType.GT.name())
             ) {
 

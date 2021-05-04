@@ -512,6 +512,7 @@ public class CoolDatabaseBrowser {
                     if (gc.getType().equals(ACodaType.ROC.name()) ||
                             gc.getType().equals(ACodaType.USR.name()) ||
                             gc.getType().equals(ACodaType.GT.name()) ||
+                            gc.getType().equals(ACodaType.FPGA.name()) ||
                             gc.getType().equals(ACodaType.TS.name())) {
                         opout.write("   <cool:hasConfigFile>" + gc.getName() + ".dat</cool:hasConfigFile>\n");
 

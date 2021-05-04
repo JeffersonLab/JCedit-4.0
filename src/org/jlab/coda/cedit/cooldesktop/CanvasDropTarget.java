@@ -178,36 +178,39 @@ public abstract class CanvasDropTarget implements DropTargetListener {
                 Integer ind = Integer.parseInt(s);
                 switch(ind) {
                     case 0:
+                        dropAction(ACodaType.FPGA.name());
+                        break;
+                     case 1:
                         dropAction(ACodaType.TS.name());
                         break;
                     case 2:
-                        dropAction(ACodaType.ROC.name());
-                        break;
-                    case 1:
                         dropAction(ACodaType.GT.name());
                         break;
                     case 3:
-                        dropAction(ACodaType.DC.name());
+                        dropAction(ACodaType.ROC.name());
                         break;
                     case 4:
-                        dropAction(ACodaType.PEB.name());
+                        dropAction(ACodaType.DC.name());
                         break;
                     case 5:
-                        dropAction(ACodaType.SEB.name());
+                        dropAction(ACodaType.PEB.name());
                         break;
                     case 6:
-                        dropAction(ACodaType.EBER.name());
+                        dropAction(ACodaType.SEB.name());
                         break;
                     case 7:
-                        dropAction(ACodaType.ER.name());
+                        dropAction(ACodaType.EBER.name());
                         break;
                     case 8:
-                        dropAction(ACodaType.SLC.name());
+                        dropAction(ACodaType.ER.name());
                         break;
                     case 9:
-                        dropAction(ACodaType.USR.name());
+                        dropAction(ACodaType.SLC.name());
                         break;
                     case 10:
+                        dropAction(ACodaType.USR.name());
+                        break;
+                    case 11:
                         dropAction(ACodaType.FILE.name());
                         break;
                 }

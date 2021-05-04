@@ -123,6 +123,7 @@ public class CDesktopLimited extends JFrame {
         if(type.equals(ACodaType.ROC.name()) ||
                 type.equals(ACodaType.USR.name()) ||
                 type.equals(ACodaType.TS.name()) ||
+                type.equals(ACodaType.FPGA.name()) ||
                 type.equals(ACodaType.GT.name())){
             RocConfigReader rd = new RocConfigReader(runType, com.getName());
             if(rd.isConfigExists()){

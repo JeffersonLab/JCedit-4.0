@@ -597,6 +597,7 @@ public class DrawingCanvas extends JPanel {
         switch (ACodaType.getEnum(startType)) {
             case ROC:
             case GT:
+            case FPGA:
             case TS:
                 res = endType.equals(ACodaType.PEB.name()) ||
                         endType.equals(ACodaType.DC.name()) ||

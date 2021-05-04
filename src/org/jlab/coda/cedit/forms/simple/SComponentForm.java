@@ -131,6 +131,8 @@ public class SComponentForm extends JFrame {
             priorityModel = new SpinnerNumberModel(ACodaType.GT.priority(), ACodaType.GT.priority(), ACodaType.GT.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.TS.name())){
             priorityModel = new SpinnerNumberModel(ACodaType.TS.priority(), ACodaType.TS.priority(), ACodaType.TS.priority()+100, 1);
+        } else if(comp.getType().equals(ACodaType.FPGA.name())){
+            priorityModel = new SpinnerNumberModel(ACodaType.FPGA.priority(), ACodaType.FPGA.priority(), ACodaType.FPGA.priority()+50, 1);
         } else if(comp.getType().equals(ACodaType.SMS.name())){
             priorityModel = new SpinnerNumberModel(ACodaType.SMS.priority(), ACodaType.SMS.priority(), ACodaType.SMS.priority()+100, 1);
         } else if(comp.getType().equals(ACodaType.RCS.name())){
@@ -234,6 +236,7 @@ public class SComponentForm extends JFrame {
                 break;
             case ROC:
             case GT:
+            case FPGA:
             case TS:
                 runDataCheckBox.setEnabled(false);
                 tsCheckBox.setEnabled(false);
@@ -1171,6 +1174,8 @@ public class SComponentForm extends JFrame {
                 prioritySpinner.setValue(ACodaType.ROC.priority());
             } else if(component.getType().equals(ACodaType.GT.name())){
                 prioritySpinner.setValue(ACodaType.GT.priority());
+            } else if(component.getType().equals(ACodaType.FPGA.name())){
+                prioritySpinner.setValue(ACodaType.FPGA.priority());
             } else if(component.getType().equals(ACodaType.TS.name())){
                 prioritySpinner.setValue(ACodaType.TS.priority());
             } else if(component.getType().equals(ACodaType.SMS.name())){

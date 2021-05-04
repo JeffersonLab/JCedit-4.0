@@ -289,6 +289,7 @@ public class JCTools {
             String t = p.getType();
             if(t.equals(ACodaType.ROC.name()) ||
                     t.equals(ACodaType.GT.name()) ||
+                    t.equals(ACodaType.FPGA.name()) ||
                     t.equals(ACodaType.TS.name())){
                 rtgIds.add(p.getId());
             } else if(t.equals(ACodaType.DC.name())){
@@ -459,6 +460,7 @@ public class JCTools {
         HashMap<String,Integer> res = new HashMap<>();
         if(t.equals(ACodaType.ROC.name()) ||
                 t.equals(ACodaType.GT.name()) ||
+                t.equals(ACodaType.FPGA.name()) ||
                 t.equals(ACodaType.TS.name())
                 ){
             if(new File(stp.getCoolHome()+
@@ -513,6 +515,51 @@ public class JCTools {
                     //gt
                     BufferedReader  br = new BufferedReader(new FileReader(stp.getCoolHome()+
                             File.separator+ stp.getExpid()+File.separator+"jcedit"+File.separator+ACodaType.GT.name()+".txt"));
+
+                    // read entire file
+                    while((s = br.readLine())!=null){
+                        sb.append(s);
+                        if(!s.endsWith("@@")){
+                            sb.append("\n");
+                        }
+                    }
+                    // get single component record
+                    st1 = new StringTokenizer(sb.toString(),"@@");
+                    while(st1.hasMoreTokens()){
+                        // get data
+                        st2 = new StringTokenizer(st1.nextToken(),"$");
+                        if(st2.hasMoreTokens()) name  = st2.nextToken();
+                        if(st2.hasMoreTokens()) type  = st2.nextToken();
+                        if(st2.hasMoreTokens()) sType = st2.nextToken();
+
+                        try{
+                            if(st2.hasMoreTokens()) {
+                                id    = Integer.parseInt(st2.nextToken());
+                                res.put(name,id);
+                            }
+                        } catch (NumberFormatException e){
+                            System.out.println(e.getMessage());
+                        }
+
+                        if(st2.hasMoreTokens()) desc  = st2.nextToken();
+
+                    }
+                    br.close();
+                } catch (FileNotFoundException e) {
+
+                    System.out.println(e.getMessage());
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+            if(new File(stp.getCoolHome()+
+                    File.separator+ stp.getExpid()+File.separator+"jcedit"+File.separator+ACodaType.FPGA.name()+".txt").exists()){
+                try {
+
+                    //fpga
+                    BufferedReader  br = new BufferedReader(new FileReader(stp.getCoolHome()+
+                            File.separator+ stp.getExpid()+File.separator+"jcedit"+File.separator+ACodaType.FPGA.name()+".txt"));
 
                     // read entire file
                     while((s = br.readLine())!=null){
