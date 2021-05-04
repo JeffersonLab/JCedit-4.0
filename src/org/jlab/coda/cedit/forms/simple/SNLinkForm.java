@@ -62,22 +62,19 @@ public class SNLinkForm extends JFrame {
         } else if (gl.getDestinationComponentType().equals(ACodaType.EBER.name()))   {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket+Et",
-                    "EmuSocket",
-                    "FPGASocket",
+                    "EmuSocket"
             });
         } else if (gl.getDestinationComponentType().equals(ACodaType.ER.name())) {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
                     "Et",
-                    "cMsg",
-                    "FPGASocket"
+                    "cMsg"
             });
         } else {
             comboModel = new DefaultComboBoxModel(new String[]{
                     "EmuSocket",
                     "Et",
-                    "cMsg",
-                    "FPGASocket"
+                    "cMsg"
             });
 
         }
@@ -248,6 +245,7 @@ public class SNLinkForm extends JFrame {
         emuSocketWaitSpinner.setValue(destinationTransport.getEmuWait());
         emuMaxBufferSpinner.setValue(destinationTransport.getEmuMaxBuffer() / 1000);
         emuSubnetTextField.setText(destinationTransport.getEmuSubNet());
+        fpgaLinkIpTextField.setText(destinationTransport.getFpgaLinkIp());
 
         emuFatPipeCheckBox.setSelected(sourceTransport.isEmuFatPipe());
 
@@ -328,6 +326,7 @@ public class SNLinkForm extends JFrame {
         emuSocketWaitSpinner.setEnabled(true);
         emuPortSpinner.setEnabled(true);
         emuSubnetTextField.setEnabled(true);
+        fpgaLinkIpTextField.setEnabled(true);
         emuFatPipeCheckBox.setEnabled(true);
     }
 
@@ -336,6 +335,7 @@ public class SNLinkForm extends JFrame {
         emuSocketWaitSpinner.setEnabled(false);
         emuPortSpinner.setEnabled(false);
         emuSubnetTextField.setEnabled(false);
+        fpgaLinkIpTextField.setEnabled(false);
         emuFatPipeCheckBox.setEnabled(false);
     }
 
@@ -399,13 +399,6 @@ public class SNLinkForm extends JFrame {
             disableCMsg();
 
         } else if (transportClassComboBox.getSelectedItem().equals("EmuSocket")) {
-            enableEmu();
-
-            disableEt();
-            disableCMsg();
-            disableFile();
-
-        } else if (transportClassComboBox.getSelectedItem().equals("FPGASocket")) {
             enableEmu();
 
             disableEt();
@@ -512,6 +505,8 @@ public class SNLinkForm extends JFrame {
         label17 = new JLabel();
         emuSubnetTextField = new JTextField();
         emuFatPipeCheckBox = new JCheckBox();
+        label18 = new JLabel();
+        fpgaLinkIpTextField = new JTextField();
         panel5 = new JPanel();
         label11 = new JLabel();
         cMsgHostTextField = new JTextField();
@@ -786,7 +781,7 @@ public class SNLinkForm extends JFrame {
                                                         .addComponent(checkBoxEtCreate)
                                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(label9)))
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                                 .addComponent(etWait, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
                                     .addComponent(etNameLabel))
                                 .addContainerGap())
@@ -909,8 +904,7 @@ public class SNLinkForm extends JFrame {
                                 .addGap(8, 8, 8)
                                 .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                     .addComponent(fileTypeComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FileTypeLabel))))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(FileTypeLabel)))))
             );
         }
 
@@ -955,6 +949,9 @@ public class SNLinkForm extends JFrame {
             //---- emuFatPipeCheckBox ----
             emuFatPipeCheckBox.setText("FatPipe");
 
+            //---- label18 ----
+            label18.setText("FPGA Link IP");
+
             GroupLayout panel4Layout = new GroupLayout(panel4);
             panel4.setLayout(panel4Layout);
             panel4Layout.setHorizontalGroup(
@@ -966,7 +963,10 @@ public class SNLinkForm extends JFrame {
                         .addGroup(panel4Layout.createParallelGroup()
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addComponent(emuFatPipeCheckBox)
-                                .addGap(0, 562, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
+                                .addComponent(label18)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fpgaLinkIpTextField, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel4Layout.createSequentialGroup()
                                 .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -980,7 +980,7 @@ public class SNLinkForm extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(label17)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emuSubnetTextField)))
+                                .addComponent(emuSubnetTextField, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
                         .addContainerGap())
             );
             panel4Layout.setVerticalGroup(
@@ -995,8 +995,12 @@ public class SNLinkForm extends JFrame {
                             .addComponent(emuPortSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addComponent(label17)
                             .addComponent(emuSubnetTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(emuFatPipeCheckBox))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel4Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(emuFatPipeCheckBox)
+                            .addComponent(fpgaLinkIpTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label18))
+                        .addContainerGap(7, Short.MAX_VALUE))
             );
         }
 
@@ -1103,10 +1107,10 @@ public class SNLinkForm extends JFrame {
                             .addComponent(clearButton)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cancelButton))
-                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panel5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
@@ -1115,12 +1119,12 @@ public class SNLinkForm extends JFrame {
                     .addContainerGap()
                     .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel4, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(panel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -1201,6 +1205,8 @@ public class SNLinkForm extends JFrame {
     private JLabel label17;
     private JTextField emuSubnetTextField;
     private JCheckBox emuFatPipeCheckBox;
+    private JLabel label18;
+    private JTextField fpgaLinkIpTextField;
     private JPanel panel5;
     private JLabel label11;
     private JTextField cMsgHostTextField;
@@ -1357,6 +1363,7 @@ public class SNLinkForm extends JFrame {
             destinationTransport.setEmuMaxBuffer((int) emuMaxBufferSpinner.getValue() * 1000);
             destinationTransport.setEmuWait((Integer) emuSocketWaitSpinner.getValue());
             destinationTransport.setEmuSubNet(emuSubnetTextField.getText());
+            destinationTransport.setFpgaLinkIp(fpgaLinkIpTextField.getText());
 
             sourceTransport.setEmuFatPipe(emuFatPipeCheckBox.isSelected());
 
@@ -1422,6 +1429,7 @@ public class SNLinkForm extends JFrame {
             emuSocketWaitSpinner.setValue(0);
             emuMaxBufferSpinner.setValue(2100);
             emuSubnetTextField.setText("undefined");
+            fpgaLinkIpTextField.setText("undefined");
             emuFatPipeCheckBox.setSelected(false);
 
             // cMsg

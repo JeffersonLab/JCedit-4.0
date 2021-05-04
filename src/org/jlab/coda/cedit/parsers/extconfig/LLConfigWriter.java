@@ -717,30 +717,6 @@ public class LLConfigWriter {
                         "sockets=\"" + socketCount + "\" " +
                         "/>\n\n");
             }
-        } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("FPGASocket")) {
-            int socketCount = 1;
-//            if (ch.getTransport().isEmuFatPipe()) socketCount = 2;
-            if (isFat) socketCount = 2;
-            if (ch.getTransport().getEmuSubNet().equals("undefined") || ch.getTransport().getEmuSubNet().equals("")) {
-                out.append("         <outchannel id=\"" + id + "\" " +
-                        "name=\"" + ch.getName() + "\" " +
-                        "transp=\"" + ch.getTransport().getName() + "\" " +
-                        "timeout=\"" + ch.getTransport().getEmuWait() + "\" " +
-                        "port=\"" + ch.getTransport().getEmuDirectPort() + "\" " +
-                        "maxBuf=\"" + ch.getTransport().getEmuMaxBuffer() + "\" " +
-                        "sockets=\"" + socketCount + "\" " +
-                        "/>\n\n");
-            } else {
-                out.append("         <outchannel id=\"" + id + "\" " +
-                        "name=\"" + ch.getName() + "\" " +
-                        "transp=\"" + ch.getTransport().getName() + "\" " +
-                        "timeout=\"" + ch.getTransport().getEmuWait() + "\" " +
-                        "port=\"" + ch.getTransport().getEmuDirectPort() + "\" " +
-                        "subnet=\"" + ch.getTransport().getEmuSubNet() + "\" " +
-                        "maxBuf=\"" + ch.getTransport().getEmuMaxBuffer() + "\" " +
-                        "sockets=\"" + socketCount + "\" " +
-                        "/>\n\n");
-            }
         } else if (ch.getTransport() != null && ch.getTransport().getTransClass().equals("EmuSocket+Et")) {
             int socketCount = 1;
 //            if (ch.getTransport().isEmuFatPipe()) socketCount = 2;
@@ -919,11 +895,17 @@ public class LLConfigWriter {
 
                                             break;
                                         case "EmuSocket":
-                                        case "FPGASocket":
                                             out.write("output                = " + tt.getTransClass() + "\n");
                                             out.write("emuName               = " + l.getDestinationComponentName() + "\n");
                                             out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
-                                            out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
+                                            if(cmp.getType().equals(ACodaType.FPGA.name())) {
+                                                out.write("fpgaNet                = " + tt.getFpgaLinkIp() + "\n");
+                                                out.write("emuNet                 = NA" + "\n");
+
+                                            } else {
+                                                out.write("fpgaNet                = NA" + "\n");
+                                                out.write("emuNet                 = " + tt.getEmuSubNet() + "\n");
+                                            }
                                             out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
                                             out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
 
@@ -933,7 +915,11 @@ public class LLConfigWriter {
                                             out.write("output                = EmuSocket\n");
                                             out.write("emuName               = " + l.getDestinationComponentName() + "\n");
                                             out.write("emuPort               = " + tt.getEmuDirectPort() + "\n");
-                                            out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
+                                            if(cmp.getType().equals(ACodaType.FPGA.name())) {
+                                                out.write("fpgaNet                = " + tt.getFpgaLinkIp() + "\n");
+                                            } else {
+                                                out.write("emuNet                = " + tt.getEmuSubNet() + "\n");
+                                            }
                                             out.write("emuMaxBufferSize      = " + tt.getEmuMaxBuffer() + "\n");
                                             out.write("emuTimeOut            = " + tt.getEmuWait() + "\n");
 
@@ -987,7 +973,6 @@ public class LLConfigWriter {
                                         out.write("wait                  = " + tr.getEtWait() + "\n");
                                         break;
                                     case "EmuSocket":
-                                    case "FPGASocket":
                                         out.write(io + " transportClass = " + tr.getTransClass() + "\n");
                                         out.write("emuPort               = " + tr.getEmuDirectPort() + "\n");
                                         out.write("emuNet                = " + tr.getEmuSubNet() + "\n");

@@ -51,6 +51,7 @@ public class JCGTransport {
     private int     emuMaxBuffer   = 1000000; // in Bytes
     private int     emuWait        = 5;
     private String  emuSubNet      = "undefined";
+    private String  fpgaLinkIp     = "undefined";
     private boolean emuFatPipe     = false;
 
     private String  cMsgHost       = "platform";
@@ -77,9 +78,9 @@ public class JCGTransport {
                         int etUdpPort, int etWait, String mAddress, int etEventNum, int etEventSize,
                         int etChunkSize, int inputEtChunkSize, String single, int etGroups, int etRecvBuf, int etSendBuf,
                         String etMethodCon, String etHostName, String etSubNet, String destinationEtCreate, int emuDirectPort,
-                        int emuMaxBuffer, int emuWait, String emuSubNet, boolean emuFatPipe, String cMsgHost, int cMsgPort,
-                        String cMsgNameSpace, String cMsgSubject, String cMsgType, String fileName,
-                        String fileType, long fileSplit, int fileInternalBuffer, boolean noLink,
+                        int emuMaxBuffer, int emuWait, String emuSubNet, String fpgaLinkIp, boolean emuFatPipe,
+                        String cMsgHost, int cMsgPort, String cMsgNameSpace, String cMsgSubject, String cMsgType,
+                        String fileName, String fileType, long fileSplit, int fileInternalBuffer, boolean noLink,
                         int compression, int compressionThreads) {
         this.name = name;
         this.transClass = transClass;
@@ -105,6 +106,7 @@ public class JCGTransport {
         this.emuMaxBuffer = emuMaxBuffer;
         this.emuWait = emuWait;
         this.emuSubNet = emuSubNet;
+        this.fpgaLinkIp = fpgaLinkIp;
         this.emuFatPipe = emuFatPipe;
         this.cMsgHost = cMsgHost;
         this.cMsgPort = cMsgPort;
@@ -262,6 +264,14 @@ public class JCGTransport {
 
     public void setEmuSubNet(String emuSubNet) {
         this.emuSubNet = emuSubNet;
+    }
+
+    public String getFpgaLinkIp() {
+        return fpgaLinkIp;
+    }
+
+    public void setFpgaLinkIp(String fpgaLinkIp) {
+        this.fpgaLinkIp = fpgaLinkIp;
     }
 
     public boolean isEmuFatPipe() {
@@ -445,6 +455,7 @@ public class JCGTransport {
         if (emuDirectPort != that.getEmuDirectPort()) return false;
         if (emuMaxBuffer != that.getEmuMaxBuffer()) return false;
         if (emuSubNet != null ? !emuSubNet.equals(that.getEmuSubNet()) : that.getEmuSubNet() != null) return false;
+        if (fpgaLinkIp != null ? !fpgaLinkIp.equals(that.getFpgaLinkIp()) : that.getFpgaLinkIp() != null) return false;
         if (emuFatPipe != that.isEmuFatPipe()) return false;
 
         if (!cMsgHost.equals(getcMsgHost())) return false;

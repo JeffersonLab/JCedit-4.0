@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_152-release" class="java.beans.XMLDecoder">
+<java version="11.0.9.1" class="java.beans.XMLDecoder">
  <object class="com.jformdesigner.model.FormModel">
   <void property="contentType">
    <string>form/swing</string>
@@ -13,11 +13,11 @@
        <class>org.jdesktop.layout.GroupLayout</class>
        <void method="setProperty">
         <string>$horizontalGroup</string>
-        <string>par l {seq {space :::p, par l {comp panel1::l:::x, seq t {space :0:0:x, comp okButton:::p::p, space :::p, comp removeButton:::p::p, space :::p, comp clearButton:::p::p, space :::p, comp cancelButton:::p::p}, comp panel3::t:::x, comp panel5::t:::x, comp panel4::t:::x, comp panel2::l:::x}, space :::p}}</string>
+        <string>par l {seq {space :::p, par l {comp panel1::l:::x, seq t {space :0:0:x, comp okButton:::p::p, space :::p, comp removeButton:::p::p, space :::p, comp clearButton:::p::p, space :::p, comp cancelButton:::p::p}, comp panel5::t:::x, comp panel3::t:::x, comp panel2::l:::x, comp panel4::t:::x}, space :::p}}</string>
        </void>
        <void method="setProperty">
         <string>$verticalGroup</string>
-        <string>par l {seq l {space :::p, comp panel1:::p:80:p, space :::p, comp panel2:::::x, space :::p, comp panel4:::p:74:p, space :::p, comp panel5:::p::p, space :::p, comp panel3:::p::p, space :::p, par b {comp cancelButton::b:p::p, comp clearButton::b:p::p, comp removeButton::b:p::p, comp okButton::b:p::p}, space :::p}}</string>
+        <string>par l {seq l {space :::p, comp panel1:::p:80:p, space :::p, comp panel2:::p::p, space u:::p, comp panel4:::::x, space :::p, comp panel5:::p::p, space u:::p, comp panel3:::p::p, space :::p, par b {comp cancelButton::b:p::p, comp clearButton::b:p::p, comp removeButton::b:p::p, comp okButton::b:p::p}, space :::p}}</string>
        </void>
       </object>
       <void method="setProperty">
@@ -156,7 +156,7 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq {space :::p, par l {seq {par l {seq l {par l {comp etTcpPortLabel:::p::p, comp etHostLabel::l:p::p}, space :::p, par l {seq l {par t:::p {comp etHostTextField::::230:x:3, comp etNameTextField::::230:x}, space :::p, par l {seq l {space :0:0:x, comp etConnectionMethodLabel:::p::p, space :::p, comp connectionMethodComboBox:::p::p}, seq l {comp label4:::p::p, space s:::p, comp etSubnetLabel:::p::p, space :::p, comp etSubnetTextField:::::x}}}, seq l {par t {seq t {comp label6:::p::p, space :::p, comp etEventSize:::p:93:p}, seq l {comp etTcpPortSpinner:::p:76:p, space :p:34:p, comp etUdpPortLabel:::p::p, space :::p, comp etUdpPortSpinner:::p:75:p, space u:::p, comp etMAddressLabel:::p::p}}, par t:::p {seq t {space :p:46:p, comp mAddressTextField:::p:124:p}, seq t {space s:::p, comp checkBoxEtCreate:::p::p, space :::x, comp label9:::p::p}}, space :::x, comp etWait:::p::p}}}, comp etNameLabel:::p::p}, space :::p}, seq {par l:::p {seq l {comp label5:::p::p, space :::x, comp etNumberEvents:::p:78:p, space :p:202:p}, seq l {comp label19:::p::p, space :::p, comp inputEtChunkSize:::p:71:p, space s:::p, comp label20:::p::p, space :::p, comp etChunkSize:::p:69:p}}, space :0:0:x}}}}</string>
+          <string>par l {seq {space :::p, par l {seq {par l {seq l {par l {comp etTcpPortLabel:::p::p, comp etHostLabel::l:p::p}, space :::p, par l {seq l {par t:::p {comp etHostTextField::::230:x:3, comp etNameTextField::::230:x}, space :::p, par l {seq l {space :0:0:x, comp etConnectionMethodLabel:::p::p, space :::p, comp connectionMethodComboBox:::p::p}, seq l {comp label4:::p::p, space s:::p, comp etSubnetLabel:::p::p, space :::p, comp etSubnetTextField:::::x}}}, seq l {par t {seq t {comp label6:::p::p, space :::p, comp etEventSize:::p:93:p}, seq l {comp etTcpPortSpinner:::p:76:p, space :p:34:p, comp etUdpPortLabel:::p::p, space :::p, comp etUdpPortSpinner:::p:75:p, space u:::p, comp etMAddressLabel:::p::p}}, par t:::p {seq t {space :p:46:p, comp mAddressTextField:::p:124:p}, seq t {space s:::p, comp checkBoxEtCreate:::p::p, space :::x, comp label9:::p::p}}, space ::31:x, comp etWait:::p::p}}}, comp etNameLabel:::p::p}, space :::p}, seq {par l:::p {seq l {comp label5:::p::p, space :::x, comp etNumberEvents:::p:78:p, space :p:202:p}, seq l {comp label19:::p::p, space :::p, comp inputEtChunkSize:::p:71:p, space s:::p, comp label20:::p::p, space :::p, comp etChunkSize:::p:69:p}}, space :0:0:x}}}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
@@ -580,7 +580,7 @@
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq l {par b {comp fileNameLabel::b:p::p, comp fileNameTextField::b:p::p}, par l {seq {space s:::p, par b {comp fileSplitSpinner::b:p::p, comp fileSplitLabel::b:p::p}}, seq l {space :p:8:p, par b {comp fileTypeComboBox::b:p::p, comp FileTypeLabel::b:p::p}}}, space :::x}}</string>
+          <string>par l {seq l {par b {comp fileNameLabel::b:p::p, comp fileNameTextField::b:p::p}, par l {seq {space s:::p, par b {comp fileSplitSpinner::b:p::p, comp fileSplitLabel::b:p::p}}, seq l {space :p:8:p, par b {comp fileTypeComboBox::b:p::p, comp FileTypeLabel::b:p::p}}}}}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -747,11 +747,11 @@
          <class>org.jdesktop.layout.GroupLayout</class>
          <void method="setProperty">
           <string>$horizontalGroup</string>
-          <string>par l {seq l {space :::p, comp etTcpPortLabel2:::p::p, space :::p, par l {seq {comp emuFatPipeCheckBox:::p::p, space :0:562:x}, seq {comp emuPortSpinner:::p:76:p, space :p:18:p, comp label7:::p::p, space :::p, comp emuMaxBufferSpinner:::p:93:p, space s:::p, comp label10:::p::p, space :::p, comp emuSocketWaitSpinner:::p::p, space :::p, comp label17:::p::p, space :::p, comp emuSubnetTextField:::::x}}, space :::p}}</string>
+          <string>par l {seq l {space :::p, comp etTcpPortLabel2:::p::p, space :::p, par l {seq {comp emuFatPipeCheckBox:::p::p, space ::341:x, comp label18:::p::p, space :::p, comp fpgaLinkIpTextField:::p:134:p}, seq {comp emuPortSpinner:::p:76:p, space :p:18:p, comp label7:::p::p, space :::p, comp emuMaxBufferSpinner:::p:93:p, space s:::p, comp label10:::p::p, space :::p, comp emuSocketWaitSpinner:::p::p, space :::p, comp label17:::p::p, space :::p, comp emuSubnetTextField::::134:x}}, space :::p}}</string>
          </void>
          <void method="setProperty">
           <string>$verticalGroup</string>
-          <string>par l {seq {par b {comp etTcpPortLabel2::b:p::p, comp label7::b:p::p, comp emuMaxBufferSpinner::b:p::p, comp label10::b:p::p, comp emuSocketWaitSpinner::b:p::p, comp emuPortSpinner::b:p::p, comp label17::b:p::p, comp emuSubnetTextField::b:p::p}, space :::x, comp emuFatPipeCheckBox:::p::p}}</string>
+          <string>par l {seq {par b {comp etTcpPortLabel2::b:p::p, comp label7::b:p::p, comp emuMaxBufferSpinner::b:p::p, comp label10::b:p::p, comp emuSocketWaitSpinner::b:p::p, comp emuPortSpinner::b:p::p, comp label17::b:p::p, comp emuSubnetTextField::b:p::p}, space :::p, par b {comp emuFatPipeCheckBox::b:p::p, comp fpgaLinkIpTextField::b:p::p, comp label18::b:p::p}, space ::7:x}}</string>
          </void>
         </object>
         <void method="setProperty">
@@ -879,6 +879,26 @@
           </void>
           <void property="name">
            <string>emuFatPipeCheckBox</string>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JLabel</string>
+          <void method="setProperty">
+           <string>text</string>
+           <string>FPGA Link IP</string>
+          </void>
+          <void property="name">
+           <string>label18</string>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="com.jformdesigner.model.FormComponent">
+          <string>javax.swing.JTextField</string>
+          <void property="name">
+           <string>fpgaLinkIpTextField</string>
           </void>
          </object>
         </void>
@@ -1151,7 +1171,7 @@
        <string>size</string>
        <object class="java.awt.Dimension">
         <int>700</int>
-        <int>715</int>
+        <int>740</int>
        </object>
       </void>
      </object>
