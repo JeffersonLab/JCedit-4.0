@@ -35,7 +35,7 @@ public class LLConfigWriter {
     private Collection<JCGComponent> components;
     private HashMap<String, ExternalConfig>
             _compDat = new HashMap<>();
-    private HashMap<String, JCGComponent> _compMap = new HashMap<String, JCGComponent>();
+    private HashMap<String, JCGComponent> _compMap = new HashMap<>();
     private JCGSetup stp = JCGSetup.getInstance();
 
 
@@ -84,6 +84,7 @@ public class LLConfigWriter {
         for (JCGComponent component : components) {
             processComponent(component);
         }
+        System.out.println("DDDD size = " + _compDat.size());
         flush2file();
     }
 
