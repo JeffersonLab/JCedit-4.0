@@ -2047,12 +2047,12 @@ public class CDesktop extends JFrame {
             serCompMap.put(tmp.getName(), tmp);
             cmps.add(tmp.getName());
         }
-        System.out.println("DDDD KOKO 1"+serCompMap.size());
+        System.out.println("DDDD KOKO 1 "+serCompMap.size());
 
         // supervisor component is added to the serialization map
         JCGComponent sup = JCTools.deepCpComp(drawingCanvas.getSupervisor());
         serCompMap.put(sup.getName(), sup);
-        System.out.println("DDDD KOKO 2"+serCompMap.size());
+        System.out.println("DDDD KOKO 2 "+sup.getName());
 
         // now dump jaxb as well as cool files
         try {
