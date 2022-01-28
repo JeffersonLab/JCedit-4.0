@@ -259,6 +259,7 @@ public class LLConfigWriter {
         String cName = ec.getName();
         StringBuilder out = new StringBuilder();
         System.out.println("DDDD ========= "+isStreaming +" "+ec.getName());
+
         switch (tr.getTransClass()) {
             case "Et":
                 if ((tr.getName().equals((cName + "_transport"))) && (tr.getDestinationEtCreate().equals("true"))) {
