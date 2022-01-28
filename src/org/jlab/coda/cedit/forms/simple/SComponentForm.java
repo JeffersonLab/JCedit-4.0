@@ -835,7 +835,6 @@ public class SComponentForm extends JFrame {
 
                 //---- streamingCheckBox ----
                 streamingCheckBox.setText("Streaming");
-                streamingCheckBox.setEnabled(false);
 
                 GroupLayout contentPanelLayout = new GroupLayout(contentPanel);
                 contentPanel.setLayout(contentPanelLayout);
