@@ -2052,11 +2052,9 @@ public class CDesktop extends JFrame {
         // supervisor component is added to the serialization map
         JCGComponent sup = JCTools.deepCpComp(drawingCanvas.getSupervisor());
         serCompMap.put(sup.getName(), sup);
-        System.out.println("DDDD KOKO 2 "+sup.getName());
 
         // now dump jaxb as well as cool files
         try {
-            System.out.println("DDDD AMAN size = " + serCompMap.size());
             coolDbBrowser.JLX(name, new ArrayList(serCompMap.values()), removeFirst);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
