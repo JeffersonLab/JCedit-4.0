@@ -85,6 +85,7 @@ public class LLConfigWriter {
             processComponent(component);
         }
         System.out.println("DDDD size = " + _compDat.size());
+        System.out.println("DDDD size = " + _compMap.size());
         flush2file();
     }
 
