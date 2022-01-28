@@ -198,6 +198,7 @@ public class LLConfigWriter {
                             System.out.println("DDDD  => "+tName);
                             out.write(writeTransport(ec, tr, nl, ec.isStreaming()));
                             tpNames.add(tName);
+                            System.out.println("YYYY  => "+tName +" "+tpNames.contains(tName));
                         }
                     }
                     out.write("   </transports>\n\n");
