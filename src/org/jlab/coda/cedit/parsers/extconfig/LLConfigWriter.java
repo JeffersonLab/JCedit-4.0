@@ -258,7 +258,7 @@ public class LLConfigWriter {
     private String writeTransport(ExternalConfig ec, JCGTransport tr, int nl, boolean isStreaming) {
         String cName = ec.getName();
         StringBuilder out = new StringBuilder();
-
+        System.out.println("DDDD ========= "+isStreaming);
         switch (tr.getTransClass()) {
             case "Et":
                 if ((tr.getName().equals((cName + "_transport"))) && (tr.getDestinationEtCreate().equals("true"))) {
@@ -393,7 +393,6 @@ public class LLConfigWriter {
                 }
                 break;
             case "EmuSocket+Et":
-
                 if (ec.getType().equals(ACodaType.ER.name()) ||
                         ec.getType().equals(ACodaType.EBER.name())) {
                     // ET
