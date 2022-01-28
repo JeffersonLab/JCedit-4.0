@@ -187,7 +187,8 @@ public class LLConfigWriter {
                     // transports
                     out.write("   <transports>\n\n");
                     int nl = ec.getiChannels().size();
-                    ArrayList<String> tpNames = new ArrayList<>();
+//                    ArrayList<String> tpNames = new ArrayList<>();
+                    Set<String> tpNames = new HashSet<>(); // vg 01.28.22
                     for (JCGTransport tr : ec.getTransports()) {
                         // avoid writing the same transport twice.
                         String tName = tr.getName();
