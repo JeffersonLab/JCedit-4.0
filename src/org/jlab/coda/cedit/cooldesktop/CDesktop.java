@@ -1253,6 +1253,7 @@ public class CDesktop extends JFrame {
 
                  // dump JAXB sand cool files
                 try {
+                    System.out.println("DDDD dump JAXB");
                     coolDbBrowser.JLX(f_runType, new ArrayList(fc.values()),false);
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();  //Exception handling
@@ -2054,6 +2055,7 @@ public class CDesktop extends JFrame {
 
         // now dump jaxb as well as cool files
         try {
+            System.out.println("DDDD VAI MAMA JAN");
             coolDbBrowser.JLX(name, new ArrayList(serCompMap.values()), removeFirst);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
