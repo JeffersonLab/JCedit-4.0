@@ -2053,6 +2053,7 @@ public class CDesktop extends JFrame {
 
         // now dump jaxb as well as cool files
         try {
+            System.out.println("DDDD size = " + serCompMap.size());
             coolDbBrowser.JLX(name, new ArrayList(serCompMap.values()), removeFirst);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

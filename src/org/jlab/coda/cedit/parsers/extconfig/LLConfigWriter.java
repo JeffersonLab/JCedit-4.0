@@ -86,7 +86,6 @@ public class LLConfigWriter {
         for (JCGComponent component : components) {
             processComponent(component);
         }
-        System.out.println("DDDD size = " + _compDat.size());
         flush2file();
     }
 
