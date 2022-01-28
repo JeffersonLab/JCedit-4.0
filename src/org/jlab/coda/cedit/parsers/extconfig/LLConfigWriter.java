@@ -192,6 +192,8 @@ public class LLConfigWriter {
                     for (JCGTransport tr : ec.getTransports()) {
                         // avoid writing the same transport twice.
                         String tName = tr.getName();
+                        System.out.println("XXXX  => "+tName +" "+tpNames.contains(tName));
+
                         if (!tpNames.contains(tName)) {
                             System.out.println("DDDD  => "+tName);
                             out.write(writeTransport(ec, tr, nl, ec.isStreaming()));
