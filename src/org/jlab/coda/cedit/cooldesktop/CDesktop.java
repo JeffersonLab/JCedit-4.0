@@ -2042,15 +2042,17 @@ public class CDesktop extends JFrame {
         Set<String> cmps = new HashSet<>();
         // deep copy into serialized component map. This is done to
         // avoid deserialization from the disk after we save the config
-        System.out.println("DDDD KOKO "+drawingCanvas.getGCMPs().size());
         for(JCGComponent c: drawingCanvas.getGCMPs().values()){
             JCGComponent tmp = JCTools.deepCpComp(c);
             serCompMap.put(tmp.getName(), tmp);
             cmps.add(tmp.getName());
         }
+        System.out.println("DDDD KOKO 1"+serCompMap.size());
+
         // supervisor component is added to the serialization map
         JCGComponent sup = JCTools.deepCpComp(drawingCanvas.getSupervisor());
         serCompMap.put(sup.getName(), sup);
+        System.out.println("DDDD KOKO 2"+serCompMap.size());
 
         // now dump jaxb as well as cool files
         try {
