@@ -2042,6 +2042,7 @@ public class CDesktop extends JFrame {
         Set<String> cmps = new HashSet<>();
         // deep copy into serialized component map. This is done to
         // avoid deserialization from the disk after we save the config
+        System.out.println("DDDD KOKO "+drawingCanvas.getGCMPs().size());
         for(JCGComponent c: drawingCanvas.getGCMPs().values()){
             JCGComponent tmp = JCTools.deepCpComp(c);
             serCompMap.put(tmp.getName(), tmp);
@@ -2053,7 +2054,7 @@ public class CDesktop extends JFrame {
 
         // now dump jaxb as well as cool files
         try {
-            System.out.println("DDDD size = " + serCompMap.size());
+            System.out.println("DDDD AMAN size = " + serCompMap.size());
             coolDbBrowser.JLX(name, new ArrayList(serCompMap.values()), removeFirst);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

@@ -53,8 +53,6 @@ public class LLConfigWriter {
                 "Control" + File.separator +
                 runType + File.separator +
                 "Options" + File.separator;
-        System.out.println("DDDD size = " + components.size());
-
         for (JCGComponent c : components) {
             _compMap.put(c.getName(), c);
         }
