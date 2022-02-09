@@ -249,7 +249,7 @@ public class LLConfigWriter {
 
                     out.write("</component>\n\n");
                     out.close();
-
+                    System.out.println("ZZZ closed the file === " + fileName);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
