@@ -2055,7 +2055,6 @@ public class CDesktop extends JFrame {
 
         // now dump jaxb as well as cool files
         try {
-            System.out.println("DDDD VAI MAMA JAN");
             coolDbBrowser.JLX(name, new ArrayList(serCompMap.values()), removeFirst);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

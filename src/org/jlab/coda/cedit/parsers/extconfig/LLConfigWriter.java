@@ -192,13 +192,10 @@ public class LLConfigWriter {
                     for (JCGTransport tr : ec.getTransports()) {
                         // avoid writing the same transport twice.
                         String tName = tr.getName();
-                        System.out.println("XXXX  => "+tName +" "+tpNames.contains(tName));
 
                         if (!tpNames.contains(tName)) {
-                            System.out.println("DDDD  => "+tName);
                             out.write(writeTransport(ec, tr, nl, ec.isStreaming()));
                             tpNames.add(tName);
-                            System.out.println("YYYY  => "+tName +" "+tpNames.contains(tName));
                         }
                     }
                     out.write("   </transports>\n\n");
@@ -249,7 +246,6 @@ public class LLConfigWriter {
 
                     out.write("</component>\n\n");
                     out.close();
-                    System.out.println("ZZZ closed the file === " + fileName);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
