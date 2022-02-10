@@ -258,7 +258,7 @@ public class LLConfigWriter {
     private String writeTransport(ExternalConfig ec, JCGTransport tr, int nl, boolean isStreaming) {
         String cName = ec.getName();
         StringBuilder out = new StringBuilder();
-//        System.out.println("DDDD ========= "+isStreaming +" "+ec.getName());
+        System.out.println("DDDD ========= "+isStreaming +" "+ec.getName());
 
         switch (tr.getTransClass()) {
             case "Et":
@@ -382,15 +382,31 @@ public class LLConfigWriter {
 
                 break;
             case "EmuSocket":
-                if (tr.getName().equals((cName + "_transport"))) {
-                    out.append("     <client name=\"" + tr.getName() + "\" " +
-                            "class=\"Emu\" " +
-                            "port=\"" + tr.getEmuDirectPort() + "\" " +
-                            "/>\n\n");
+                if (isStreaming) {
+                    if (tr.getName().equals((cName + "_transport"))) {
+                        out.append("     <client name=\"" + tr.getName() + "\" " +
+                                "streaming=\"" + "on" + "\" " +
+                                "class=\"Emu\" " +
+                                "port=\"" + tr.getEmuDirectPort() + "\" " +
+                                "/>\n\n");
+                    } else {
+                        out.append("     <server name=\"" + tr.getName() + "\" " +
+                                "streaming=\"" + "on" + "\" " +
+                                "class=\"Emu\" " +
+                                "/>\n\n");
+                    }
+
                 } else {
-                    out.append("     <server name=\"" + tr.getName() + "\" " +
-                            "class=\"Emu\" " +
-                            "/>\n\n");
+                    if (tr.getName().equals((cName + "_transport"))) {
+                        out.append("     <client name=\"" + tr.getName() + "\" " +
+                                "class=\"Emu\" " +
+                                "port=\"" + tr.getEmuDirectPort() + "\" " +
+                                "/>\n\n");
+                    } else {
+                        out.append("     <server name=\"" + tr.getName() + "\" " +
+                                "class=\"Emu\" " +
+                                "/>\n\n");
+                    }
                 }
                 break;
             case "EmuSocket+Et":
