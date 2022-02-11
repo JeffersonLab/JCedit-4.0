@@ -258,7 +258,6 @@ public class LLConfigWriter {
     private String writeTransport(ExternalConfig ec, JCGTransport tr, int nl, boolean isStreaming) {
         String cName = ec.getName();
         StringBuilder out = new StringBuilder();
-        System.out.println("DDDD ========= "+isStreaming +" "+ec.getName());
 
         switch (tr.getTransClass()) {
             case "Et":

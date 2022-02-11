@@ -1253,7 +1253,6 @@ public class CDesktop extends JFrame {
 
                  // dump JAXB sand cool files
                 try {
-                    System.out.println("DDDD dump JAXB");
                     coolDbBrowser.JLX(f_runType, new ArrayList(fc.values()),false);
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();  //Exception handling
