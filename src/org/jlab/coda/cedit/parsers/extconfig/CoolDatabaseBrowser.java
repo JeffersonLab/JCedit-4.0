@@ -479,16 +479,16 @@ public class CoolDatabaseBrowser {
                     }
                 }
 
-                // does this component represents Coda2 client
-                if (gc.isCodaVersion2()) {
-//                    out.write("   <cool:representsCoda2Component>true</cool:representsCoda2Component>\n");
-                    out.write("   <cool:streamingComponent>true</cool:streamingComponent>\n"); // vg 01.26.22
-                    // .... component communication plugin
-                    out.write("\n");
-                    out.write("   <cool:include rdf:resource=\"" + JCGSetup.AFECSDB_HTTP_BASE + "Plugin/DPPlugin.rdf\"/>\n");
-                    out.write("   <cool:hasCommunicationPlugin rdf:resource=\"" + JCGSetup.AFECSDB_HTTP_BASE + "Plugin/DPPlugin#DPPlugin\"/>\n");
-                    out.write("\n");
-                }
+                // does this component represents Coda2 client 03.22.22 finally removed coda2 component support
+//                if (gc.isCodaVersion2()) {
+////                    out.write("   <cool:representsCoda2Component>true</cool:representsCoda2Component>\n");
+//                    out.write("   <cool:streamingComponent>true</cool:streamingComponent>\n"); // vg 01.26.22
+//                    // .... component communication plugin
+//                    out.write("\n");
+//                    out.write("   <cool:include rdf:resource=\"" + JCGSetup.AFECSDB_HTTP_BASE + "Plugin/DPPlugin.rdf\"/>\n");
+//                    out.write("   <cool:hasCommunicationPlugin rdf:resource=\"" + JCGSetup.AFECSDB_HTTP_BASE + "Plugin/DPPlugin#DPPlugin\"/>\n");
+//                    out.write("\n");
+//                }
                 if (!gc.getUserConfig().equals("") && !gc.getUserConfig().equals("undefined")) {
                     out.write("   <cool:hasUserConfig>" + gc.getUserConfig() + "</cool:hasUserConfig>\n");
                 }
