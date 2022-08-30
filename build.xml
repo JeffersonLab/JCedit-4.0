@@ -357,9 +357,9 @@
         <copy file = "${bin_source_dir}/jcedit_view" todir="${bin64_dir}"/>
     </target>
 
-    <target name="install" depends="jar, cp, change_permissions" description="build and install"/>
+    <target name="install" depends="clean, jar, cp, change_permissions" description="build and install"/>
 
-    <target name="jar" depends="coda_env.exist, coda_env.not_exist, check_config, clean, jaxb_cp, compile.module.JCedit, build.jar" description="build"/>
+    <target name="jar" depends="coda_env.exist, coda_env.not_exist, check_config, jaxb_cp, compile.module.JCedit, build.jar" description="build"/>
 
     <target name="all" depends="jar" description="build"/>
 </project>
